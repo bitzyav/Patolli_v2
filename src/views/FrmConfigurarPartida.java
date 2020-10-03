@@ -186,76 +186,149 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
         btnCrear.setIcon(new ImageIcon("images\\btn crear 2.png"));
     }//GEN-LAST:event_btnCrearMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
         btnCrear.setIcon(new ImageIcon("images\\btn crear.png"));
     }//GEN-LAST:event_btnCrearMouseExited
 
+    
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnMenosCasillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseEntered
         btnMenosCasillas.setIcon(new ImageIcon("images\\btn menos 2.png"));
     }//GEN-LAST:event_btnMenosCasillasMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnMenosFichasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseEntered
         btnMenosFichas.setIcon(new ImageIcon("images\\btn menos 2.png"));
     }//GEN-LAST:event_btnMenosFichasMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnMenosApuestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseEntered
         btnMenosApuesta.setIcon(new ImageIcon("images\\btn menos 2.png"));
     }//GEN-LAST:event_btnMenosApuestaMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnMasCasillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseEntered
         btnMasCasillas.setIcon(new ImageIcon("images\\btn mas 2.png"));
     }//GEN-LAST:event_btnMasCasillasMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnMasFichasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseEntered
         btnMasFichas.setIcon(new ImageIcon("images\\btn mas 2.png"));
     }//GEN-LAST:event_btnMasFichasMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
+     * @param evt 
+     */
     private void btnMasApuestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseEntered
         btnMasApuesta.setIcon(new ImageIcon("images\\btn mas 2.png"));
     }//GEN-LAST:event_btnMasApuestaMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnMenosCasillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseExited
         btnMenosCasillas.setIcon(new ImageIcon("images\\btn menos.png"));
     }//GEN-LAST:event_btnMenosCasillasMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnMenosFichasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseExited
         btnMenosFichas.setIcon(new ImageIcon("images\\btn menos.png"));
     }//GEN-LAST:event_btnMenosFichasMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnMenosApuestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseExited
         btnMenosApuesta.setIcon(new ImageIcon("images\\btn menos.png"));
     }//GEN-LAST:event_btnMenosApuestaMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnMasCasillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseExited
         btnMasCasillas.setIcon(new ImageIcon("images\\btn mas.png"));
     }//GEN-LAST:event_btnMasCasillasMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnMasFichasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseExited
         btnMasFichas.setIcon(new ImageIcon("images\\btn mas.png"));
     }//GEN-LAST:event_btnMasFichasMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnMasApuestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseExited
         btnMasApuesta.setIcon(new ImageIcon("images\\btn mas.png"));
     }//GEN-LAST:event_btnMasApuestaMouseExited
 
+    /**
+     * Cambia de ventana al frame de inicio.
+     * @param evt 
+     */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         FrmInicio inicio = new FrmInicio();
         this.setVisible(false);
         inicio.setVisible(true);
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    /**
+     * Cambia de ventana al frame de selección.
+     * @param evt 
+     */
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         FrmSeleccion seleccion = new FrmSeleccion();
         this.setVisible(false);

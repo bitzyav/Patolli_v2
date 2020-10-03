@@ -91,42 +91,78 @@ public class FrmInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la aplicación.
+     * @param evt 
+     */
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         this.dispose();
     }//GEN-LAST:event_btnSalirMouseClicked
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
         btnCrear.setIcon(new ImageIcon("images\\btn crear 2.png"));
     }//GEN-LAST:event_btnCrearMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
         btnCrear.setIcon(new ImageIcon("images\\btn crear.png"));
     }//GEN-LAST:event_btnCrearMouseExited
 
+    /**
+     * Cambia de ventana al frame para configurar partida.
+     * @param evt 
+     */
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         FrmConfigurarPartida config = new FrmConfigurarPartida();
         this.setVisible(false);
         config.setVisible(true);
     }//GEN-LAST:event_btnCrearMouseClicked
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnUnirseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseEntered
         btnUnirse.setIcon(new ImageIcon("images\\btn unirse 2.png"));
     }//GEN-LAST:event_btnUnirseMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnUnirseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseExited
         btnUnirse.setIcon(new ImageIcon("images\\btn unirse.png"));
     }//GEN-LAST:event_btnUnirseMouseExited
 
+    /**
+     * Cambia de ventana al frame de direccion partida para unirse a partida.
+     * @param evt 
+     */
     private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
         FrmDireccPartida direcc = new FrmDireccPartida();
         this.setVisible(false);
         direcc.setVisible(true);
     }//GEN-LAST:event_btnUnirseMouseClicked
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
         btnSalir.setIcon(new ImageIcon("images\\btn salir 2.png"));
     }//GEN-LAST:event_btnSalirMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
         btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
     }//GEN-LAST:event_btnSalirMouseExited

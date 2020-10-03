@@ -57,11 +57,6 @@ public class FrmSeleccion extends javax.swing.JFrame {
         txtNombre.setBorder(null);
         txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNombre.setOpaque(false);
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 220, 30));
 
         lblCampoNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
@@ -135,32 +130,52 @@ public class FrmSeleccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
         btnAceptar.setIcon(new ImageIcon("images\\btn aceptar 2.png"));
     }//GEN-LAST:event_btnAceptarMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
         btnAceptar.setIcon(new ImageIcon("images\\btn aceptar.png"));
     }//GEN-LAST:event_btnAceptarMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
+    /**
+     * Cambia de ventana al frame de inicio.
+     * @param evt 
+     */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         FrmInicio inicio = new FrmInicio();
         this.setVisible(false);
         inicio.setVisible(true);
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    /**
+     * Cambia de ventana al tablero.
+     * @param evt 
+     */
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         FrmTablero tablero = new FrmTablero();
         this.setVisible(false);

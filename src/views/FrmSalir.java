@@ -75,28 +75,52 @@ public class FrmSalir extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
         btnSalir.setIcon(new ImageIcon("images\\btn salir 2.png"));
     }//GEN-LAST:event_btnSalirMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
         btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
     }//GEN-LAST:event_btnSalirMouseExited
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
+     * @param evt 
+     */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
+    /**
+     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
+     * @param evt 
+     */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
+    /**
+     * Cambia de ventana al frame de inicio.
+     * @param evt 
+     */
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         FrmInicio inicio = new FrmInicio();
         this.setVisible(false);
         inicio.setVisible(true);
     }//GEN-LAST:event_btnSalirMouseClicked
 
+    /**
+     * Hace invisible este frame y se queda en el inicio.
+     * @param evt 
+     */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarMouseClicked
