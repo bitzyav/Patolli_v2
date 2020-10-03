@@ -76,19 +76,19 @@ public class FrmSalir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        btnSalir.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn salir 2.png"));
+        btnSalir.setIcon(new ImageIcon("images\\btn salir 2.png"));
     }//GEN-LAST:event_btnSalirMouseEntered
 
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
-        btnSalir.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn salir.png"));
+        btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
     }//GEN-LAST:event_btnSalirMouseExited
 
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar 2.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked

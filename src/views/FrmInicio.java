@@ -96,11 +96,11 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
-        btnCrear.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn crear 2.png"));
+        btnCrear.setIcon(new ImageIcon("images\\btn crear 2.png"));
     }//GEN-LAST:event_btnCrearMouseEntered
 
     private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
-        btnCrear.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn crear.png"));
+        btnCrear.setIcon(new ImageIcon("images\\btn crear.png"));
     }//GEN-LAST:event_btnCrearMouseExited
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
@@ -110,11 +110,11 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnUnirseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseEntered
-        btnUnirse.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn unirse 2.png"));
+        btnUnirse.setIcon(new ImageIcon("images\\btn unirse 2.png"));
     }//GEN-LAST:event_btnUnirseMouseEntered
 
     private void btnUnirseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseExited
-        btnUnirse.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn unirse.png"));
+        btnUnirse.setIcon(new ImageIcon("images\\btn unirse.png"));
     }//GEN-LAST:event_btnUnirseMouseExited
 
     private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
@@ -124,11 +124,11 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUnirseMouseClicked
 
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        btnSalir.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn salir 2.png"));
+        btnSalir.setIcon(new ImageIcon("images\\btn salir 2.png"));
     }//GEN-LAST:event_btnSalirMouseEntered
 
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
-        btnSalir.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn salir.png"));
+        btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
     }//GEN-LAST:event_btnSalirMouseExited
 
     /**

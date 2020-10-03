@@ -97,19 +97,19 @@ public class FrmDireccPartida extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDireccionActionPerformed
 
     private void btnUnirseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseEntered
-        btnUnirse.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn unirse 2.png"));
+        btnUnirse.setIcon(new ImageIcon("images\\btn unirse 2.png"));
     }//GEN-LAST:event_btnUnirseMouseEntered
 
     private void btnUnirseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseExited
-        btnUnirse.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn unirse.png"));
+        btnUnirse.setIcon(new ImageIcon("images\\btn unirse.png"));
     }//GEN-LAST:event_btnUnirseMouseExited
 
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar 2.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked

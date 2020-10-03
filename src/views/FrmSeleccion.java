@@ -140,19 +140,19 @@ public class FrmSeleccion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
-        btnAceptar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn aceptar 2.png"));
+        btnAceptar.setIcon(new ImageIcon("images\\btn aceptar 2.png"));
     }//GEN-LAST:event_btnAceptarMouseEntered
 
     private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
-        btnAceptar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn aceptar.png"));
+        btnAceptar.setIcon(new ImageIcon("images\\btn aceptar.png"));
     }//GEN-LAST:event_btnAceptarMouseExited
 
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar 2.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked

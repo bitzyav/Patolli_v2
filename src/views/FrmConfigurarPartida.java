@@ -187,67 +187,67 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar 2.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
     }//GEN-LAST:event_btnCancelarMouseEntered
 
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn cancelar.png"));
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
     }//GEN-LAST:event_btnCancelarMouseExited
 
     private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
-        btnCrear.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn crear 2.png"));
+        btnCrear.setIcon(new ImageIcon("images\\btn crear 2.png"));
     }//GEN-LAST:event_btnCrearMouseEntered
 
     private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
-        btnCrear.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn crear.png"));
+        btnCrear.setIcon(new ImageIcon("images\\btn crear.png"));
     }//GEN-LAST:event_btnCrearMouseExited
 
     private void btnMenosCasillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseEntered
-        btnMenosCasillas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn menos 2.png"));
+        btnMenosCasillas.setIcon(new ImageIcon("images\\btn menos 2.png"));
     }//GEN-LAST:event_btnMenosCasillasMouseEntered
 
     private void btnMenosFichasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseEntered
-        btnMenosFichas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn menos 2.png"));
+        btnMenosFichas.setIcon(new ImageIcon("images\\btn menos 2.png"));
     }//GEN-LAST:event_btnMenosFichasMouseEntered
 
     private void btnMenosApuestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseEntered
-        btnMenosApuesta.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn menos 2.png"));
+        btnMenosApuesta.setIcon(new ImageIcon("images\\btn menos 2.png"));
     }//GEN-LAST:event_btnMenosApuestaMouseEntered
 
     private void btnMasCasillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseEntered
-        btnMasCasillas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn mas 2.png"));
+        btnMasCasillas.setIcon(new ImageIcon("images\\btn mas 2.png"));
     }//GEN-LAST:event_btnMasCasillasMouseEntered
 
     private void btnMasFichasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseEntered
-        btnMasFichas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn mas 2.png"));
+        btnMasFichas.setIcon(new ImageIcon("images\\btn mas 2.png"));
     }//GEN-LAST:event_btnMasFichasMouseEntered
 
     private void btnMasApuestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseEntered
-        btnMasApuesta.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn mas 2.png"));
+        btnMasApuesta.setIcon(new ImageIcon("images\\btn mas 2.png"));
     }//GEN-LAST:event_btnMasApuestaMouseEntered
 
     private void btnMenosCasillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseExited
-        btnMenosCasillas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn menos.png"));
+        btnMenosCasillas.setIcon(new ImageIcon("images\\btn menos.png"));
     }//GEN-LAST:event_btnMenosCasillasMouseExited
 
     private void btnMenosFichasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseExited
-        btnMenosFichas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn menos.png"));
+        btnMenosFichas.setIcon(new ImageIcon("images\\btn menos.png"));
     }//GEN-LAST:event_btnMenosFichasMouseExited
 
     private void btnMenosApuestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseExited
-        btnMenosApuesta.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn menos.png"));
+        btnMenosApuesta.setIcon(new ImageIcon("images\\btn menos.png"));
     }//GEN-LAST:event_btnMenosApuestaMouseExited
 
     private void btnMasCasillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseExited
-        btnMasCasillas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn mas.png"));
+        btnMasCasillas.setIcon(new ImageIcon("images\\btn mas.png"));
     }//GEN-LAST:event_btnMasCasillasMouseExited
 
     private void btnMasFichasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseExited
-        btnMasFichas.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn mas.png"));
+        btnMasFichas.setIcon(new ImageIcon("images\\btn mas.png"));
     }//GEN-LAST:event_btnMasFichasMouseExited
 
     private void btnMasApuestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseExited
-        btnMasApuesta.setIcon(new ImageIcon("C:\\Users\\SPARTAN PC\\Documents\\NetBeansProjects\\Patolli\\images\\btn mas.png"));
+        btnMasApuesta.setIcon(new ImageIcon("images\\btn mas.png"));
     }//GEN-LAST:event_btnMasApuestaMouseExited
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
