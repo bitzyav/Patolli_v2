@@ -14,14 +14,14 @@ import javax.swing.ImageIcon;
  */
 public class FrmConfigurarPartida extends javax.swing.JFrame {
 
-    private int numCasillas;
+    public static int numCasillas;
     private final int MIN_CASILLAS = 8;
     private final int MAX_CASILLAS = 14;
-    private int numFichas;
+    public static int numFichas;
     private final int MIN_FICHAS = 2;
     private final int MAX_FICHAS = 6;
-    private int numFondoApuesta;
-    private final int MIN_FONDO = 1;
+    public static int numFondoApuesta;
+    private final int MIN_FONDO = 10;
     private final int MAX_FONDO = 10000;
 
     /**
@@ -30,6 +30,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
     public FrmConfigurarPartida() {
         setUndecorated(true);
         initComponents();
+//        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+//       int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+//        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
         this.setBackground(new Color(0, 0, 0, 0));
         inicializarValores();
     }
@@ -66,19 +69,19 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         lblNumCasillas.setForeground(new java.awt.Color(139, 89, 10));
         lblNumCasillas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNumCasillas.setText("0");
-        getContentPane().add(lblNumCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 360, 100, 40));
+        getContentPane().add(lblNumCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 100, 40));
 
         lblNumFichas.setFont(new java.awt.Font("Eras Bold ITC", 0, 34)); // NOI18N
         lblNumFichas.setForeground(new java.awt.Color(139, 89, 10));
         lblNumFichas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNumFichas.setText("0");
-        getContentPane().add(lblNumFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 530, 100, 40));
+        getContentPane().add(lblNumFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 100, 40));
 
         lblApuesta.setFont(new java.awt.Font("Eras Bold ITC", 0, 34)); // NOI18N
         lblApuesta.setForeground(new java.awt.Color(139, 89, 10));
         lblApuesta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblApuesta.setText("0");
-        getContentPane().add(lblApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 700, 100, -1));
+        getContentPane().add(lblApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 570, 100, -1));
 
         btnMenosCasillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn menos.png"))); // NOI18N
         btnMenosCasillas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -93,7 +96,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnMenosCasillasMouseExited(evt);
             }
         });
-        getContentPane().add(btnMenosCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 70, -1));
+        getContentPane().add(btnMenosCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 70, -1));
 
         btnMasCasillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn mas.png"))); // NOI18N
         btnMasCasillas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -108,10 +111,10 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnMasCasillasMouseExited(evt);
             }
         });
-        getContentPane().add(btnMasCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 350, 70, -1));
+        getContentPane().add(btnMasCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 70, -1));
 
         lblCampoCasillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto.png"))); // NOI18N
-        getContentPane().add(lblCampoCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, -1, 80));
+        getContentPane().add(lblCampoCasillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, 80));
 
         btnMenosFichas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn menos.png"))); // NOI18N
         btnMenosFichas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -126,10 +129,10 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnMenosFichasMouseExited(evt);
             }
         });
-        getContentPane().add(btnMenosFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 520, 70, -1));
+        getContentPane().add(btnMenosFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 70, -1));
 
         lblCampoFichas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto.png"))); // NOI18N
-        getContentPane().add(lblCampoFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 510, -1, 80));
+        getContentPane().add(lblCampoFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, 80));
 
         btnMasFichas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn mas.png"))); // NOI18N
         btnMasFichas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -144,7 +147,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnMasFichasMouseExited(evt);
             }
         });
-        getContentPane().add(btnMasFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 520, 70, -1));
+        getContentPane().add(btnMasFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 70, -1));
 
         btnMenosApuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn menos.png"))); // NOI18N
         btnMenosApuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -159,10 +162,10 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnMenosApuestaMouseExited(evt);
             }
         });
-        getContentPane().add(btnMenosApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 690, 70, -1));
+        getContentPane().add(btnMenosApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 560, 70, -1));
 
         lblCampoApuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto.png"))); // NOI18N
-        getContentPane().add(lblCampoApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 680, -1, 80));
+        getContentPane().add(lblCampoApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, -1, 80));
 
         btnMasApuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn mas.png"))); // NOI18N
         btnMasApuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -177,7 +180,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnMasApuestaMouseExited(evt);
             }
         });
-        getContentPane().add(btnMasApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 690, 70, -1));
+        getContentPane().add(btnMasApuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, 70, -1));
 
         btnCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn crear.png"))); // NOI18N
         btnCrear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -192,7 +195,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnCrearMouseExited(evt);
             }
         });
-        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 810, -1, -1));
+        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 680, -1, -1));
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -207,10 +210,10 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
                 btnCancelarMouseExited(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 810, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 680, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm config.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -413,7 +416,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
      */
     private void btnMasApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseClicked
         if (numFondoApuesta != MAX_FONDO) {
-            numFondoApuesta++;
+            numFondoApuesta+=10;
             lblApuesta.setText(numFondoApuesta + "");
         }
     }//GEN-LAST:event_btnMasApuestaMouseClicked
@@ -449,7 +452,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
      */
     private void btnMenosApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseClicked
         if (numFondoApuesta != MIN_FONDO) {
-            numFondoApuesta--;
+            numFondoApuesta-=10;
             lblApuesta.setText(numFondoApuesta + "");
         }
     }//GEN-LAST:event_btnMenosApuestaMouseClicked

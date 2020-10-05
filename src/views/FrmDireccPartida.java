@@ -49,7 +49,7 @@ public class FrmDireccPartida extends javax.swing.JFrame {
         txtDireccion.setBorder(null);
         txtDireccion.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtDireccion.setOpaque(false);
-        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 400, 220, 30));
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 220, 30));
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -64,10 +64,10 @@ public class FrmDireccPartida extends javax.swing.JFrame {
                 btnCancelarMouseExited(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 490, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
 
         lblCampoCodigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
-        getContentPane().add(lblCampoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 380, -1, -1));
+        getContentPane().add(lblCampoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
 
         btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn unirse.png"))); // NOI18N
         btnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -79,10 +79,10 @@ public class FrmDireccPartida extends javax.swing.JFrame {
                 btnUnirseMouseExited(evt);
             }
         });
-        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, -1, -1));
+        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm direcc ip.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 740, 380));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

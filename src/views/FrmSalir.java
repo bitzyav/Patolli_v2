@@ -52,7 +52,7 @@ public class FrmSalir extends javax.swing.JFrame {
                 btnCancelarMouseExited(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 490, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn salir.png"))); // NOI18N
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -67,10 +67,10 @@ public class FrmSalir extends javax.swing.JFrame {
                 btnSalirMouseExited(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 490, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm salir.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 740, 440));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

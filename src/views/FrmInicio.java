@@ -6,6 +6,8 @@
 package views;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,6 +22,10 @@ public class FrmInicio extends javax.swing.JFrame {
     public FrmInicio() {
         setUndecorated(true);
         initComponents();
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+       int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+
         this.setBackground(new Color(0,0,0,0));
     }
 
@@ -53,7 +59,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 btnCrearMouseExited(evt);
             }
         });
-        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, -1, -1));
+        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
 
         btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn unirse.png"))); // NOI18N
         btnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -68,7 +74,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 btnUnirseMouseExited(evt);
             }
         });
-        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 500, -1, -1));
+        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn salir.png"))); // NOI18N
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -83,10 +89,10 @@ public class FrmInicio extends javax.swing.JFrame {
                 btnSalirMouseExited(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 500, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm inicio.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 820, 520));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,7 +203,9 @@ public class FrmInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new FrmInicio().setVisible(true);
+                
             }
         });
     }
