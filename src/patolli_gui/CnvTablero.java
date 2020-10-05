@@ -44,7 +44,7 @@ public class CnvTablero extends Canvas {
         g2d.setColor(Color.BLACK);
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(4));
-        int y = 0, ancho = 50, alto = 50;
+        int y = 0, ancho = 40, alto = 40;
         int x = this.getBounds().width / 2 - ancho;
         dibujaVertical(x, y, ancho, alto, this.numCasillas, g2d);
         if (this.numCasillas % 2 != 0) {
