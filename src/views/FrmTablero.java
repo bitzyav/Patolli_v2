@@ -27,6 +27,9 @@ public class FrmTablero extends javax.swing.JFrame {
     public FrmTablero() {
 //        setUndecorated(true);
         initComponents();
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
 //        this.setBackground(new Color(0,0,0,0));
         inicializar();
     }

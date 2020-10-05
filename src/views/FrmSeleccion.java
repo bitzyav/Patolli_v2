@@ -20,6 +20,9 @@ public class FrmSeleccion extends javax.swing.JFrame {
     public FrmSeleccion() {
         setUndecorated(true);
         initComponents();
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
         this.setBackground(new Color(0,0,0,0));
     }
 
@@ -64,35 +67,35 @@ public class FrmSeleccion extends javax.swing.JFrame {
 
         btnColorVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color verde.png"))); // NOI18N
         btnColorVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, -1, -1));
+        getContentPane().add(btnColorVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
 
         btnColorCyan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color cyan.png"))); // NOI18N
         btnColorCyan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorCyan, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
+        getContentPane().add(btnColorCyan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
 
         btnColorNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color naranja.png"))); // NOI18N
         btnColorNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, -1, -1));
+        getContentPane().add(btnColorNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
 
         btnColorAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color azul.png"))); // NOI18N
         btnColorAzul.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 70, -1));
+        getContentPane().add(btnColorAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 70, -1));
 
         btnColorAmarillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color amarillo.png"))); // NOI18N
         btnColorAmarillo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorAmarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, -1, -1));
+        getContentPane().add(btnColorAmarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
 
         btnColorRosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rosa.png"))); // NOI18N
         btnColorRosa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
+        getContentPane().add(btnColorRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
 
         btnColorMorado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color morado.png"))); // NOI18N
         btnColorMorado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorMorado, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, -1, -1));
+        getContentPane().add(btnColorMorado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, -1, -1));
 
         btnColorRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rojo.png"))); // NOI18N
         btnColorRojo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnColorRojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
+        getContentPane().add(btnColorRojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -107,7 +110,7 @@ public class FrmSeleccion extends javax.swing.JFrame {
                 btnCancelarMouseExited(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, -1, -1));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn aceptar.png"))); // NOI18N
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,7 +125,7 @@ public class FrmSeleccion extends javax.swing.JFrame {
                 btnAceptarMouseExited(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, -1, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm seleccion.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 680));
