@@ -21,9 +21,7 @@ public class FrmDireccPartida extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         this.setBackground(new Color(0,0,0,0));
-        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+        adaptarPantalla();
     }
 
     /**
@@ -132,6 +130,15 @@ public class FrmDireccPartida extends javax.swing.JFrame {
         inicio.setVisible(true);
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    /**
+     * Centra la pantalla y ajusta las dimensiones dependiendo de la pantalla en el que se ejecute.
+     */
+    private void adaptarPantalla(){
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+    }
+    
     /**
      * @param args the command line arguments
      */

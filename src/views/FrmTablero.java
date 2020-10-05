@@ -5,7 +5,6 @@
  */
 package views;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import patolli_gui.CnvTablero;
@@ -27,9 +26,7 @@ public class FrmTablero extends javax.swing.JFrame {
     public FrmTablero() {
 //        setUndecorated(true);
         initComponents();
-        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+        adaptarPantalla();
 //        this.setBackground(new Color(0,0,0,0));
         inicializar();
     }
@@ -39,7 +36,7 @@ public class FrmTablero extends javax.swing.JFrame {
      */
     private void inicializar(){
         extenderPantalla();
-        dibujarTablero(14);
+        dibujarTablero(FrmConfigurarPartida.numCasillas);
     }
     
     /**
@@ -55,8 +52,25 @@ public class FrmTablero extends javax.swing.JFrame {
      */
     private void dibujarTablero(int numCasillas){
         tablero=new CnvTablero(numCasillas);
-        tablero.setBounds(Toolkit.getDefaultToolkit().getScreenSize().width/4, 100, 1000, 850);
+        
+        int x, y, width, height;
+        
+        x = 50;
+        y = 50;
+        width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        
+        tablero.setBounds(x, y, width, height);
         this.add(tablero);
+    }
+    
+    /**
+     * Centra la pantalla y ajusta las dimensiones dependiendo de la pantalla en el que se ejecute.
+     */
+    private void adaptarPantalla(){
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
     }
     
     @SuppressWarnings("unchecked")

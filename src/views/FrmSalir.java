@@ -20,9 +20,7 @@ public class FrmSalir extends javax.swing.JFrame {
     public FrmSalir() {
         setUndecorated(true);
         initComponents();
-        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+        adaptarPantalla();
         this.setBackground(new Color(0,0,0,0));
     }
 
@@ -128,6 +126,15 @@ public class FrmSalir extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarMouseClicked
 
+    /**
+     * Centra la pantalla y ajusta las dimensiones dependiendo de la pantalla en el que se ejecute.
+     */
+    private void adaptarPantalla(){
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+    }
+    
     /**
      * @param args the command line arguments
      */

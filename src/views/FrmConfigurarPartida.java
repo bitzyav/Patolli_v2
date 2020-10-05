@@ -30,9 +30,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
     public FrmConfigurarPartida() {
         setUndecorated(true);
         initComponents();
-        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
+        adaptarPantalla();
         this.setBackground(new Color(0, 0, 0, 0));
         inicializarValores();
     }
@@ -392,7 +390,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
      */
     private void btnMasCasillasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseClicked
         if (numCasillas != MAX_CASILLAS) {
-            numCasillas++;
+            numCasillas += 2;
             lblNumCasillas.setText(numCasillas + "");
         }
     }//GEN-LAST:event_btnMasCasillasMouseClicked
@@ -428,7 +426,7 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
      */
     private void btnMenosCasillasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseClicked
         if (numCasillas != MIN_CASILLAS) {
-            numCasillas--;
+            numCasillas-= 2;
             lblNumCasillas.setText(numCasillas + "");
         }
     }//GEN-LAST:event_btnMenosCasillasMouseClicked
@@ -468,6 +466,15 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         lblNumCasillas.setText(numCasillas + "");
         lblNumFichas.setText(numFichas + "");
         lblApuesta.setText(numFondoApuesta + "");
+    }
+    
+    /**
+     * Centra la pantalla y ajusta las dimensiones dependiendo de la pantalla en el que se ejecute.
+     */
+    private void adaptarPantalla(){
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), this.getWidth(),this.getHeight() );
     }
 
     /**
