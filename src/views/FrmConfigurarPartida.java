@@ -14,13 +14,24 @@ import javax.swing.ImageIcon;
  */
 public class FrmConfigurarPartida extends javax.swing.JFrame {
 
+    private int numCasillas;
+    private final int MIN_CASILLAS = 8;
+    private final int MAX_CASILLAS = 14;
+    private int numFichas;
+    private final int MIN_FICHAS = 2;
+    private final int MAX_FICHAS = 6;
+    private int numFondoApuesta;
+    private final int MIN_FONDO = 1;
+    private final int MAX_FONDO = 10000;
+
     /**
      * Creates new form FrmConfigurarSala
      */
     public FrmConfigurarPartida() {
         setUndecorated(true);
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
+        this.setBackground(new Color(0, 0, 0, 0));
+        inicializarValores();
     }
 
     /**
@@ -72,6 +83,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         btnMenosCasillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn menos.png"))); // NOI18N
         btnMenosCasillas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenosCasillas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenosCasillasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMenosCasillasMouseEntered(evt);
             }
@@ -84,6 +98,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         btnMasCasillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn mas.png"))); // NOI18N
         btnMasCasillas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMasCasillas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMasCasillasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMasCasillasMouseEntered(evt);
             }
@@ -99,6 +116,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         btnMenosFichas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn menos.png"))); // NOI18N
         btnMenosFichas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenosFichas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenosFichasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMenosFichasMouseEntered(evt);
             }
@@ -114,6 +134,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         btnMasFichas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn mas.png"))); // NOI18N
         btnMasFichas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMasFichas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMasFichasMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMasFichasMouseEntered(evt);
             }
@@ -126,6 +149,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         btnMenosApuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn menos.png"))); // NOI18N
         btnMenosApuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenosApuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenosApuestaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMenosApuestaMouseEntered(evt);
             }
@@ -141,6 +167,9 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
         btnMasApuesta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn mas.png"))); // NOI18N
         btnMasApuesta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMasApuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMasApuestaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMasApuestaMouseEntered(evt);
             }
@@ -188,7 +217,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
@@ -196,7 +226,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
@@ -204,7 +235,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCrearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseEntered
         btnCrear.setIcon(new ImageIcon("images\\btn crear 2.png"));
@@ -212,7 +244,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCrearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseExited
         btnCrear.setIcon(new ImageIcon("images\\btn crear.png"));
@@ -221,7 +254,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
     
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMenosCasillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseEntered
         btnMenosCasillas.setIcon(new ImageIcon("images\\btn menos 2.png"));
@@ -229,7 +263,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMenosFichasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseEntered
         btnMenosFichas.setIcon(new ImageIcon("images\\btn menos 2.png"));
@@ -237,7 +272,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMenosApuestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseEntered
         btnMenosApuesta.setIcon(new ImageIcon("images\\btn menos 2.png"));
@@ -245,7 +281,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMasCasillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseEntered
         btnMasCasillas.setIcon(new ImageIcon("images\\btn mas 2.png"));
@@ -253,7 +290,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMasFichasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseEntered
         btnMasFichas.setIcon(new ImageIcon("images\\btn mas 2.png"));
@@ -261,7 +299,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMasApuestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseEntered
         btnMasApuesta.setIcon(new ImageIcon("images\\btn mas 2.png"));
@@ -269,7 +308,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMenosCasillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseExited
         btnMenosCasillas.setIcon(new ImageIcon("images\\btn menos.png"));
@@ -277,7 +317,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMenosFichasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseExited
         btnMenosFichas.setIcon(new ImageIcon("images\\btn menos.png"));
@@ -285,7 +326,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMenosApuestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseExited
         btnMenosApuesta.setIcon(new ImageIcon("images\\btn menos.png"));
@@ -293,7 +335,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMasCasillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseExited
         btnMasCasillas.setIcon(new ImageIcon("images\\btn mas.png"));
@@ -301,7 +344,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMasFichasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseExited
         btnMasFichas.setIcon(new ImageIcon("images\\btn mas.png"));
@@ -309,7 +353,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMasApuestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseExited
         btnMasApuesta.setIcon(new ImageIcon("images\\btn mas.png"));
@@ -317,7 +362,8 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Cambia de ventana al frame de inicio.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         FrmInicio inicio = new FrmInicio();
@@ -327,13 +373,99 @@ public class FrmConfigurarPartida extends javax.swing.JFrame {
 
     /**
      * Cambia de ventana al frame de selección.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         FrmSeleccion seleccion = new FrmSeleccion();
         this.setVisible(false);
         seleccion.setVisible(true);
     }//GEN-LAST:event_btnCrearMouseClicked
+
+    /**
+     * Evento que incrementa una casilla en la configuración.
+     *
+     * @param evt
+     */
+    private void btnMasCasillasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasCasillasMouseClicked
+        if (numCasillas != MAX_CASILLAS) {
+            numCasillas++;
+            lblNumCasillas.setText(numCasillas + "");
+        }
+    }//GEN-LAST:event_btnMasCasillasMouseClicked
+
+    /**
+     * Evento que incrementa una ficha en la configuración.
+     *
+     * @param evt
+     */
+    private void btnMasFichasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasFichasMouseClicked
+        if (numFichas != MAX_FICHAS) {
+            numFichas++;
+            lblNumFichas.setText(numFichas + "");
+        }
+    }//GEN-LAST:event_btnMasFichasMouseClicked
+
+    /**
+     * Evento que incrementa el valor de apuesta en la configuración.
+     *
+     * @param evt
+     */
+    private void btnMasApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseClicked
+        if (numFondoApuesta != MAX_FONDO) {
+            numFondoApuesta++;
+            lblApuesta.setText(numFondoApuesta + "");
+        }
+    }//GEN-LAST:event_btnMasApuestaMouseClicked
+
+    /**
+     * Evento que decrementa el valor de las casillas en la configuración.
+     *
+     * @param evt
+     */
+    private void btnMenosCasillasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseClicked
+        if (numCasillas != MIN_CASILLAS) {
+            numCasillas--;
+            lblNumCasillas.setText(numCasillas + "");
+        }
+    }//GEN-LAST:event_btnMenosCasillasMouseClicked
+
+    /**
+     * Evento que decrementa el valor de las fichas en la configuración.
+     *
+     * @param evt
+     */
+    private void btnMenosFichasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosFichasMouseClicked
+        if (numFichas != MIN_FICHAS) {
+            numFichas--;
+            lblNumFichas.setText(numFichas + "");
+        }
+    }//GEN-LAST:event_btnMenosFichasMouseClicked
+
+    /**
+     * Evento que decrementa el valor de apuesta en la configuración.
+     *
+     * @param evt
+     */
+    private void btnMenosApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseClicked
+        if (numFondoApuesta != MIN_FONDO) {
+            numFondoApuesta--;
+            lblApuesta.setText(numFondoApuesta + "");
+        }
+    }//GEN-LAST:event_btnMenosApuestaMouseClicked
+
+    /**
+     * Inicializa los valores de casillas, fichas y fondo con el valor minimo.
+     */
+    private void inicializarValores() {
+        numCasillas = MIN_CASILLAS;
+        numFichas = MIN_FICHAS;
+        numFondoApuesta = MIN_FONDO;
+
+        lblNumCasillas.setText(numCasillas + "");
+        lblNumFichas.setText(numFichas + "");
+        lblApuesta.setText(numFondoApuesta + "");
+    }
 
     /**
      * @param args the command line arguments
