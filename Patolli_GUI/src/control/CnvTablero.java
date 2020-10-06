@@ -15,6 +15,7 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
+import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
 /**
@@ -31,6 +32,7 @@ public class CnvTablero extends Canvas {
     private int alto;
     private int anchoCasilla;
     private int altoCasilla;
+    private float cx, cy; //Coordenada X y Y del tablero. es float por los tableros con casillas impares. 
 
     /**
      * Constructor que inicializa el tablero según el número de casillas
@@ -47,6 +49,8 @@ public class CnvTablero extends Canvas {
         this.altoCasilla = altoCasilla;
         this.ancho = this.numCasillas * anchoCasilla + anchoCasilla*3;
         this.alto = this.numCasillas * altoCasilla + altoCasilla*3;
+        this.cx = 0;
+        this.cy= 0;
     }
 
     /**
@@ -72,6 +76,12 @@ public class CnvTablero extends Canvas {
         }
         dibujaHorizontal(x, y, ancho, alto, this.numCasillas, g2d);
         
+        g2d.setStroke(new BasicStroke(1));
+        g2d.setColor(Color.cyan);
+        Ellipse2D.Double ficha = new Ellipse2D.Double(x+(ancho/7)+((cx)), y+(alto/7)+alto + (cy), ancho-(ancho/4), alto-(alto/4));
+        g2d.fill(ficha);        
+        g2d.setColor(Color.blue);
+        g2d.draw(ficha);
     }
 
     /**
