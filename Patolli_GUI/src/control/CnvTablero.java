@@ -47,10 +47,9 @@ public class CnvTablero extends Canvas {
         this.numCasillas = numCasillas;
         this.anchoCasilla = anchoCasilla;
         this.altoCasilla = altoCasilla;
-        this.ancho = this.numCasillas * anchoCasilla + anchoCasilla*3;
-        this.alto = this.numCasillas * altoCasilla + altoCasilla*3;
-        this.cx = 0;
-        this.cy= 0;
+        this.ancho = this.numCasillas * anchoCasilla + anchoCasilla * 3;
+        this.alto = this.numCasillas * altoCasilla + altoCasilla * 3;
+        iniciarFichaP1();
     }
 
     /**
@@ -75,11 +74,11 @@ public class CnvTablero extends Canvas {
             x = (this.getBounds().width / 2) - ((Math.floorDiv(this.numCasillas, 2) * ancho)) - ancho;
         }
         dibujaHorizontal(x, y, ancho, alto, this.numCasillas, g2d);
-        
+
         g2d.setStroke(new BasicStroke(1));
         g2d.setColor(Color.cyan);
-        Ellipse2D.Double ficha = new Ellipse2D.Double(x+(ancho/7)+((cx)), y+(alto/7)+alto + (cy), ancho-(ancho/4), alto-(alto/4));
-        g2d.fill(ficha);        
+        Ellipse2D.Double ficha = new Ellipse2D.Double(x + (ancho / 7) + ((ancho * cx)), y + (alto / 7) + alto + (ancho * cy), ancho - (ancho / 4), alto - (alto / 4));
+        g2d.fill(ficha);
         g2d.setColor(Color.blue);
         g2d.draw(ficha);
     }
@@ -213,12 +212,26 @@ public class CnvTablero extends Canvas {
     }
 
     public int getAncho() {
-        
+
         return ancho;
     }
 
     public int getAlto() {
-        
+
         return alto;
+    }
+
+    public void iniciarFichaP1() {
+        this.cy = 0;
+
+        if (numCasillas == 8 || numCasillas == 9) {
+            cx = numCasillas - 3;
+        } else if (numCasillas == 10 || numCasillas == 11) {
+            cx = numCasillas - 4;
+        } else if (numCasillas == 12 || numCasillas == 13) {
+            cx = numCasillas - 5;
+        } else if (numCasillas == 14) {
+            cx = numCasillas - 6;
+        }
     }
 }
