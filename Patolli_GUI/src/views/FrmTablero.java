@@ -5,9 +5,12 @@
  */
 package views;
 
+import dominio.CasillaPropia;
+import dominio.ColorFicha;
 import dominio.Host;
 import dominio.Partida;
 import dominio.Tablero;
+import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import java.awt.Component;
@@ -66,6 +69,8 @@ public class FrmTablero extends FrmBase {
         host=new Host(FrmConfigurarPartida.numFichas);
         Partida p=new Partida();
         host.setPartida(p);
+        host.setColor(ColorFicha.ROJO); //Esto es provicional
+        host.setCasillaPropia(new CasillaPropia(0, 0));// Esto es provicional
         p.getJugadores().add(host);
         partida=Fabrica.getFachadaPartida(host);
        
@@ -181,6 +186,7 @@ public class FrmTablero extends FrmBase {
 
     private void btnMeterFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeterFichaActionPerformed
          partida.meterFicha(host);
+         this.repaint();
     }//GEN-LAST:event_btnMeterFichaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
