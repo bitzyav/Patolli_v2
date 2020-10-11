@@ -5,30 +5,32 @@
  */
 package views;
 
+import dominio.Host;
+import dominio.Partida;
+import dominio.Tablero;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-import control.*;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import partida.Fabrica;
+import partida.IPartida;
 
 /**
  *
  * @author Itzel
  */
 public class FrmTablero extends FrmBase {
-
+    private IPartida partida;
     private static FrmSalir frmSalir;
+    Host host;
     
-    /**
-     * Instancia de la clase CnvTablero que configura las medidas del tablero.
-     */
-    CnvTablero tablero;
 
     /**
      * Inicializa y crea la instancia del frame FrmTablero
@@ -61,24 +63,33 @@ public class FrmTablero extends FrmBase {
      * @param numCasillas El número de casillas que tendrá el tablero.
      */
     private void dibujarTablero(int numCasillas) {
-        tablero = new CnvTablero(numCasillas, 40, 40);
+        host=new Host(FrmConfigurarPartida.numFichas);
+        Partida p=new Partida();
+        host.setPartida(p);
+        p.getJugadores().add(host);
+        partida=Fabrica.getFachadaPartida(host);
+       
+        partida.obtenerPartida().setTablero(new Tablero(numCasillas));
+        
         JPanel pnlTablero = new JPanel();
         JPanel pnlBotones = new JPanel();
         this.setLayout(new FlowLayout());
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
         pnlBotones.setLayout(new BoxLayout(pnlBotones, BoxLayout.X_AXIS));
-        pnlTablero.add(tablero);
-        pnlTablero.setPreferredSize(new Dimension(tablero.getAncho(),tablero.getAlto()));
+        pnlTablero.add(partida.obtenerTablero().getCanvasTablero());
+        pnlTablero.setPreferredSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(),partida.obtenerTablero().getCanvasTablero().getAlto()));
         pnlBotones.add(btnTirarCanias);
         pnlBotones.add(btnRetirarse);
         pnlBotones.add(btnAvanzarNormal);
-        pnlTablero.setMaximumSize(new Dimension(tablero.getAncho(),tablero.getAlto()));
+        pnlBotones.add(btnMeterFicha);
+        pnlTablero.setMaximumSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(),partida.obtenerTablero().getCanvasTablero().getAlto()));
         pnlTablero.setBorder(BorderFactory.createEtchedBorder());
         pnlBotones.setBorder(BorderFactory.createEmptyBorder());
         this.getContentPane().add(pnlTablero);
         this.getContentPane().add(pnlBotones);
-
+        
+        
     }
 
     public static FrmSalir getFrmSalir() {
@@ -95,11 +106,17 @@ public class FrmTablero extends FrmBase {
         btnTirarCanias = new javax.swing.JButton();
         btnRetirarse = new javax.swing.JButton();
         btnAvanzarNormal = new javax.swing.JButton();
+        btnMeterFicha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         btnTirarCanias.setText("Tirar cañas");
+        btnTirarCanias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTirarCaniasActionPerformed(evt);
+            }
+        });
 
         btnRetirarse.setText("Retirarse");
         btnRetirarse.addActionListener(new java.awt.event.ActionListener() {
@@ -110,28 +127,45 @@ public class FrmTablero extends FrmBase {
 
         btnAvanzarNormal.setText("Avanzar Ficha del Turno");
 
+        btnMeterFicha.setText("Meter ficha");
+        btnMeterFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMeterFichaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(1057, 1057, 1057)
-                .addComponent(btnRetirarse)
-                .addGap(0, 0, 0)
-                .addComponent(btnAvanzarNormal))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(833, 833, 833)
-                .addComponent(btnTirarCanias))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(280, 280, 280)
+                        .addComponent(btnRetirarse))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(391, 391, 391)
+                        .addComponent(btnTirarCanias))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(486, 486, 486)
+                        .addComponent(btnAvanzarNormal))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(445, 445, 445)
+                        .addComponent(btnMeterFicha)))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(2615, 2615, 2615)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRetirarse)
-                    .addComponent(btnAvanzarNormal))
-                .addGap(5, 5, 5)
-                .addComponent(btnTirarCanias))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRetirarse)
+                .addGap(23, 23, 23)
+                .addComponent(btnTirarCanias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAvanzarNormal)
+                .addGap(51, 51, 51)
+                .addComponent(btnMeterFicha)
+                .addGap(450, 450, 450))
         );
 
         pack();
@@ -141,8 +175,17 @@ public class FrmTablero extends FrmBase {
         getFrmSalir().setVisible(true);
     }//GEN-LAST:event_btnRetirarseActionPerformed
 
+    private void btnTirarCaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTirarCaniasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTirarCaniasActionPerformed
+
+    private void btnMeterFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeterFichaActionPerformed
+         partida.meterFicha(host);
+    }//GEN-LAST:event_btnMeterFichaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvanzarNormal;
+    private javax.swing.JButton btnMeterFicha;
     private javax.swing.JButton btnRetirarse;
     private javax.swing.JButton btnTirarCanias;
     // End of variables declaration//GEN-END:variables
