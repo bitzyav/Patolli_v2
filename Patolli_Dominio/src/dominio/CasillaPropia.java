@@ -11,10 +11,20 @@ package dominio;
  */
 public class CasillaPropia extends Casilla{
 
+    private Jugador jugador;
+    
     public CasillaPropia() {
     }
 
     public CasillaPropia(int coordenadaX, int coordenadaY) {
         super(coordenadaX, coordenadaY);
+    }
+
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    public void setJugador(Jugador jugador) {
+        this.jugador = jugador;
     }
 }

@@ -5,6 +5,8 @@
  */
 package dominio;
 
+import java.awt.geom.Ellipse2D;
+
 /**
  *
  * @author Invitado
@@ -12,6 +14,7 @@ package dominio;
 public class Casilla {
     private int coordenadaX;
     private int coordenadaY;
+    private Ellipse2D dibujoFicha;
     private Ficha ficha;
 
     public Casilla() {
@@ -44,5 +47,13 @@ public class Casilla {
 
     public void setFicha(Ficha ficha) {
         this.ficha = ficha;
+    }
+
+    public Ellipse2D getDibujoFicha() {
+        return dibujoFicha;
+    }
+
+    public void setDibujoFicha(Ellipse2D dibujoFicha) {
+        this.dibujoFicha = dibujoFicha;
     }
 }

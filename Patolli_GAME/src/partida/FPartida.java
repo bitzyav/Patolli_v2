@@ -5,6 +5,8 @@
  */
 package partida;
 
+import dominio.Casilla;
+import dominio.CasillaPropia;
 import dominio.Host;
 import dominio.Jugador;
 import dominio.Partida;
@@ -16,16 +18,16 @@ import java.util.Queue;
  *
  * @author Invitado
  */
-class FPartida implements IPartida{
+class FPartida implements IPartida {
 
     private Host host;
     private Turnos turnos;
 
     public FPartida(Host host) {
         this.host = host;
-        this.turnos=new Turnos();
+        this.turnos = new Turnos();
     }
-    
+
     @Override
     public Partida obtenerPartida() {
         return this.host.getPartida();
@@ -40,5 +42,30 @@ class FPartida implements IPartida{
     public Tablero obtenerTablero() {
         return this.host.getPartida().getTablero();
     }
-   
+
+    private CasillaPropia obtenerCasillaPropiaLibre(Jugador jugador) {
+        for (Casilla casilla : obtenerTablero().getCasillas()) {
+            try {
+                CasillaPropia casillaPropia = (CasillaPropia) casilla;
+                if(casillaPropia.getJugador()==null){
+                    casillaPropia.setJugador(jugador);
+                    return casillaPropia;
+                }
+            }catch(Exception e){
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public void agregarJugador(Jugador jugador) {
+        jugador.setCasillaPropia(obtenerCasillaPropiaLibre(host));
+    }
+
+    @Override
+    public boolean isTableroListo() {
+        return (obtenerTablero().getCasillas()[0]!=null);
+    }
+
 }

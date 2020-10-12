@@ -16,8 +16,8 @@ public class Tablero {
     private final CnvTablero canvasTablero;
 
     public Tablero(int numCasillasAspa) {
-        this.casillas = new Casilla[(numCasillasAspa*4)+4];
-        canvasTablero=new CnvTablero(numCasillasAspa, 40,40, casillas);
+        canvasTablero=new CnvTablero(numCasillasAspa, 40,40);
+        this.casillas=canvasTablero.getCasillas();
     } 
     public Casilla[] getCasillas() {
         return casillas;

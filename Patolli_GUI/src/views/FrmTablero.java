@@ -5,6 +5,7 @@
  */
 package views;
 
+import dominio.Casilla;
 import dominio.CasillaPropia;
 import dominio.ColorFicha;
 import dominio.Host;
@@ -18,6 +19,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
@@ -30,10 +34,10 @@ import partida.IPartida;
  * @author Itzel
  */
 public class FrmTablero extends FrmBase {
+
     private IPartida partida;
     private static FrmSalir frmSalir;
-    Host host;
-    
+    private Host host;
 
     /**
      * Inicializa y crea la instancia del frame FrmTablero
@@ -41,6 +45,8 @@ public class FrmTablero extends FrmBase {
     public FrmTablero() {
         initComponents();
         inicializar();
+
+        
     }
 
     /**
@@ -51,6 +57,23 @@ public class FrmTablero extends FrmBase {
         adaptarPantalla();
         extenderPantalla();
         dibujarTablero(FrmConfigurarPartida.numCasillas);
+        btnMeterFicha.setEnabled(false);
+        new Thread(new Runnable() {
+            public void run() {
+                while (!partida.isTableroListo()) {
+                    System.out.println("no");
+                }
+                System.out.println("hola");
+                btnMeterFicha.setEnabled(true);
+                partida.agregarJugador(host);
+                try {
+                    this.finalize();
+                } catch (Throwable ex) {
+                    Logger.getLogger(FrmTablero.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }).start();
     }
 
     /**
@@ -66,16 +89,16 @@ public class FrmTablero extends FrmBase {
      * @param numCasillas El número de casillas que tendrá el tablero.
      */
     private void dibujarTablero(int numCasillas) {
-        host=new Host(FrmConfigurarPartida.numFichas);
-        Partida p=new Partida();
+        host = new Host(FrmConfigurarPartida.numFichas);
+        Partida p = new Partida();
         host.setPartida(p);
         host.setColor(ColorFicha.ROJO); //Esto es provicional
-        host.setCasillaPropia(new CasillaPropia(0, 0));// Esto es provicional
+
         p.getJugadores().add(host);
-        partida=Fabrica.getFachadaPartida(host);
-       
+        partida = Fabrica.getFachadaPartida(host);
+
         partida.obtenerPartida().setTablero(new Tablero(numCasillas));
-        
+
         JPanel pnlTablero = new JPanel();
         JPanel pnlBotones = new JPanel();
         this.setLayout(new FlowLayout());
@@ -83,27 +106,25 @@ public class FrmTablero extends FrmBase {
         pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
         pnlBotones.setLayout(new BoxLayout(pnlBotones, BoxLayout.X_AXIS));
         pnlTablero.add(partida.obtenerTablero().getCanvasTablero());
-        pnlTablero.setPreferredSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(),partida.obtenerTablero().getCanvasTablero().getAlto()));
+        pnlTablero.setPreferredSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(), partida.obtenerTablero().getCanvasTablero().getAlto()));
         pnlBotones.add(btnTirarCanias);
         pnlBotones.add(btnRetirarse);
         pnlBotones.add(btnAvanzarNormal);
         pnlBotones.add(btnMeterFicha);
-        pnlTablero.setMaximumSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(),partida.obtenerTablero().getCanvasTablero().getAlto()));
+        pnlTablero.setMaximumSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(), partida.obtenerTablero().getCanvasTablero().getAlto()));
         pnlTablero.setBorder(BorderFactory.createEtchedBorder());
         pnlBotones.setBorder(BorderFactory.createEmptyBorder());
         this.getContentPane().add(pnlTablero);
         this.getContentPane().add(pnlBotones);
-        
-        
     }
 
     public static FrmSalir getFrmSalir() {
-        if(frmSalir==null){
-            frmSalir=new FrmSalir();
+        if (frmSalir == null) {
+            frmSalir = new FrmSalir();
         }
         return frmSalir;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -131,6 +152,11 @@ public class FrmTablero extends FrmBase {
         });
 
         btnAvanzarNormal.setText("Avanzar Ficha del Turno");
+        btnAvanzarNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarNormalActionPerformed(evt);
+            }
+        });
 
         btnMeterFicha.setText("Meter ficha");
         btnMeterFicha.addActionListener(new java.awt.event.ActionListener() {
@@ -181,13 +207,18 @@ public class FrmTablero extends FrmBase {
     }//GEN-LAST:event_btnRetirarseActionPerformed
 
     private void btnTirarCaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTirarCaniasActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnTirarCaniasActionPerformed
 
     private void btnMeterFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeterFichaActionPerformed
-         partida.meterFicha(host);
-         this.repaint();
+        partida.meterFicha(host);
+        this.repaint();
     }//GEN-LAST:event_btnMeterFichaActionPerformed
+
+    private void btnAvanzarNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarNormalActionPerformed
+
+
+    }//GEN-LAST:event_btnAvanzarNormalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvanzarNormal;

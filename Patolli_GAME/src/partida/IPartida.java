@@ -1,5 +1,6 @@
 package partida;
 
+import dominio.CasillaPropia;
 import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
@@ -16,6 +17,8 @@ import dominio.Tablero;
  */
 public interface IPartida {
     public Partida obtenerPartida();
+    public void agregarJugador(Jugador jugador);
     public void meterFicha(Jugador jugador);
     public Tablero obtenerTablero();
+    public boolean isTableroListo();
 }

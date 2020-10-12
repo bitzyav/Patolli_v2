@@ -19,7 +19,7 @@ class Turnos{
     public void meterFicha(Jugador jugador, Tablero tablero) {
         for (Ficha ficha : jugador.getFichas()) {
             if(!ficha.isEnJuego()){
-                tablero.getCanvasTablero().dibujarFicha(ficha, ficha.getJugador().getCasillaPropia());
+                tablero.getCanvasTablero().dibujarFicha(ficha, ficha.getJugador().getCasillaPropia(), tablero.getCanvasTablero().getGraphics());
                 ficha.getJugador().getCasillaPropia().setFicha(ficha);
             }
         }

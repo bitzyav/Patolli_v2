@@ -47,14 +47,15 @@ public class CnvTablero extends Canvas {
      * tablero.
      * @param anchoCasilla El ancho de las casillas a utilizar.
      * @param altoCasilla El alto de las casillas a utilizar.
+     * @param casillas El arreglo de casillas del tablero.
      */
-    public CnvTablero(int numCasillas, int anchoCasilla, int altoCasilla, Casilla[] casillas) {
+    public CnvTablero(int numCasillas, int anchoCasilla, int altoCasilla) {
         this.numCasillas = numCasillas;
         this.anchoCasilla = anchoCasilla;
         this.altoCasilla = altoCasilla;
         this.ancho = this.numCasillas * anchoCasilla + anchoCasilla * 3;
         this.alto = this.numCasillas * altoCasilla + altoCasilla * 3;
-        this.casillas = casillas;
+        this.casillas = new Casilla[(numCasillas*4)+4];
     }
 
     /**
@@ -65,13 +66,13 @@ public class CnvTablero extends Canvas {
     @Override
     public void paint(Graphics g) {
         this.g2d = (Graphics2D) g;
-        Integer index = 0;
+        int index = 0;
         g2d.setColor(Color.BLACK);
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(4));
         int y = 0, ancho = anchoCasilla, alto = altoCasilla;
         int x = this.getBounds().width / 2 - ancho;
-        dibujaVertical(x, y, ancho, alto, this.numCasillas, g2d, index);
+        index=dibujaVertical(x, y, ancho, alto, this.numCasillas, g2d, index);
         if (this.numCasillas % 2 != 0) {
             y = ((Math.floorDiv(this.numCasillas, 2) + 1) * alto);
             x = (this.getBounds().width / 2) - ((Math.floorDiv(this.numCasillas, 2) * ancho)) - 2 * ancho;
@@ -92,7 +93,7 @@ public class CnvTablero extends Canvas {
      * @param cuantos Las repeticiones
      * @param g Componente Graphics2D
      */
-    void dibujaHorizontal(int x, int y, int ancho, int alto, int cuantos, Graphics2D g, Integer index) {
+    void dibujaHorizontal(int x, int y, int ancho, int alto, int cuantos, Graphics2D g, int index) {
         Rectangle rect = new Rectangle();
         cuantos += 2;
         if (this.numCasillas % 2 == 0) {
@@ -131,13 +132,12 @@ public class CnvTablero extends Canvas {
                 if(i==(cuantos/2)){
                     g.setColor(Color.YELLOW);
                     g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
+                    casillas[index]=new CasillaPropia(x,y+alto);
                     index++;
                     g.setColor(Color.BLACK);
                 }
                 g.draw(rect);
                 x += ancho;
-
             }
             x -= ancho;
             punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 270, 180, Arc2D.OPEN);
@@ -178,7 +178,7 @@ public class CnvTablero extends Canvas {
                 if(i==(cuantos/2+1)){
                     g.setColor(Color.YELLOW);
                     g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
+                    casillas[index]=new CasillaPropia(x,y+alto);
                     index++;
                     g.setColor(Color.BLACK);
                 }
@@ -204,7 +204,7 @@ public class CnvTablero extends Canvas {
      * @param cuantos Las repeticiones
      * @param g Componente Graphics2D
      */
-    void dibujaVertical(int x, int y, int ancho, int alto, int cuantos, Graphics2D g, Integer index) {
+    int dibujaVertical(int x, int y, int ancho, int alto, int cuantos, Graphics2D g, int index) {
         Rectangle rect = new Rectangle();
         cuantos += 2;
 
@@ -245,7 +245,7 @@ public class CnvTablero extends Canvas {
                 if(i==((cuantos/2)-3)){
                     g.setColor(Color.YELLOW);
                     g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
+                    casillas[index]=new CasillaPropia(x+ancho,y);
                     index++;
                     g.setColor(Color.BLACK);
                 }
@@ -295,7 +295,7 @@ public class CnvTablero extends Canvas {
                 if(i==((cuantos/2)-2)){
                     g.setColor(Color.YELLOW);
                     g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
+                    casillas[index]=new CasillaPropia(x+ancho,y);
                     index++;
                     g.setColor(Color.BLACK);
                 }
@@ -308,6 +308,7 @@ public class CnvTablero extends Canvas {
             index++;
             g.draw(punta);
         }
+        return index;
     }
 
     public int getAncho() {
@@ -320,19 +321,8 @@ public class CnvTablero extends Canvas {
         return alto;
     }
 
-    public void dibujarFicha(Ficha ficha, Casilla casilla) {
-        /*this.cy = 0;
-
-        /*if (numCasillas == 8 || numCasillas == 9) {
-            cx = numCasillas - 3;
-        } else if (numCasillas == 10 || numCasillas == 11) {
-            cx = numCasillas - 4;
-        } else if (numCasillas == 12 || numCasillas == 13) {
-            cx = numCasillas - 5;
-        } else if (numCasillas == 14) {
-            cx = numCasillas - 6;
-        }*/
-
+    public void dibujarFicha(Ficha ficha, Casilla casilla, Graphics g) {
+        g2d=(Graphics2D)g;
         g2d.setStroke(new BasicStroke(1));
         switch (ficha.getJugador().getColor()) {
             case ROJO:
@@ -360,12 +350,19 @@ public class CnvTablero extends Canvas {
                 g2d.setColor(Color.PINK);
                 break;
         }
-        Ellipse2D.Double ellipseFicha = new Ellipse2D.Double(Double.parseDouble(String.valueOf(casilla.getCoordenadaX())),
-                Double.parseDouble(String.valueOf(casilla.getCoordenadaY())),
-                Double.parseDouble(String.valueOf(casilla.getCoordenadaX() + ancho)),
-                Double.parseDouble(String.valueOf(casilla.getCoordenadaY() + alto)));
+        double x=Double.parseDouble(String.valueOf(casilla.getCoordenadaX()));
+        double y=Double.parseDouble(String.valueOf(casilla.getCoordenadaY()));
+        double w=Double.parseDouble(String.valueOf(anchoCasilla));
+        double h=Double.parseDouble(String.valueOf(altoCasilla));
+        //Ellipse2D.Double ellipseFicha = new Ellipse2D.Double(x,y,w,h);
+        Ellipse2D.Double ellipseFicha = new Ellipse2D.Double(x, y, w,h);
         g2d.fill(ellipseFicha);
         g2d.setColor(Color.blue);
         g2d.draw(ellipseFicha);
+        casilla.setDibujoFicha(ellipseFicha);
+    }
+
+    public Casilla[] getCasillas() {
+        return casillas;
     }
 }
