@@ -14,7 +14,7 @@ public class CasillaTriangulo extends Casilla{
     public CasillaTriangulo() {
     }
 
-    public CasillaTriangulo(int coordenadaX, int coordenadaY) {
-        super(coordenadaX, coordenadaY);
+    public CasillaTriangulo(int coordenadaX, int coordenadaY, int numero) {
+        super(coordenadaX, coordenadaY, numero);
     }
 }

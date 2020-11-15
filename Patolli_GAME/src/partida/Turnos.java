@@ -16,14 +16,14 @@ import java.util.Queue;
  */
 class Turnos{
     private Queue<Jugador> colaTurnos;
-    public void meterFicha(Jugador jugador, Tablero tablero) {
+    /*public void meterFicha(Jugador jugador, Tablero tablero) {
         for (Ficha ficha : jugador.getFichas()) {
             if(!ficha.isEnJuego()){
                 tablero.getCanvasTablero().dibujarFicha(ficha, ficha.getJugador().getCasillaPropia(), tablero.getCanvasTablero().getGraphics());
                 ficha.getJugador().getCasillaPropia().setFicha(ficha);
             }
         }
-    }
+    }*/
 
     public Queue<Jugador> getColaTurnos() {
         return colaTurnos;

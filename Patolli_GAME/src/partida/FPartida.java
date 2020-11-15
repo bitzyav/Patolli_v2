@@ -22,6 +22,7 @@ class FPartida implements IPartida {
 
     private Host host;
     private Turnos turnos;
+    private Partida partida;
 
     public FPartida(Host host) {
         this.host = host;
@@ -35,7 +36,7 @@ class FPartida implements IPartida {
 
     @Override
     public void meterFicha(Jugador jugador) {
-        turnos.meterFicha(jugador, obtenerTablero());
+        //turnos.meterFicha(jugador, obtenerTablero());
     }
 
     @Override
@@ -61,11 +62,6 @@ class FPartida implements IPartida {
     @Override
     public void agregarJugador(Jugador jugador) {
         jugador.setCasillaPropia(obtenerCasillaPropiaLibre(host));
-    }
-
-    @Override
-    public boolean isTableroListo() {
-        return (obtenerTablero().getCasillas()[0]!=null);
     }
 
 }

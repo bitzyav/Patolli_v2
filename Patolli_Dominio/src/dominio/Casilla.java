@@ -14,15 +14,16 @@ import java.awt.geom.Ellipse2D;
 public class Casilla {
     private int coordenadaX;
     private int coordenadaY;
-    private Ellipse2D dibujoFicha;
+    private int numero;
     private Ficha ficha;
 
     public Casilla() {
     }
 
-    public Casilla(int coordenadaX, int coordenadaY) {
+    public Casilla(int coordenadaX, int coordenadaY, int numero) {
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
+        this.numero=numero;
     }
     
     public int getCoordenadaX() {
@@ -49,11 +50,11 @@ public class Casilla {
         this.ficha = ficha;
     }
 
-    public Ellipse2D getDibujoFicha() {
-        return dibujoFicha;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setDibujoFicha(Ellipse2D dibujoFicha) {
-        this.dibujoFicha = dibujoFicha;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 }

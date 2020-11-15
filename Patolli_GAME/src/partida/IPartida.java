@@ -20,5 +20,4 @@ public interface IPartida {
     public void agregarJugador(Jugador jugador);
     public void meterFicha(Jugador jugador);
     public Tablero obtenerTablero();
-    public boolean isTableroListo();
 }

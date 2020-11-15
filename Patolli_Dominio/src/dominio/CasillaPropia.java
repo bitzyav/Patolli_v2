@@ -16,8 +16,8 @@ public class CasillaPropia extends Casilla{
     public CasillaPropia() {
     }
 
-    public CasillaPropia(int coordenadaX, int coordenadaY) {
-        super(coordenadaX, coordenadaY);
+    public CasillaPropia(int coordenadaX, int coordenadaY, int numero) {
+        super(coordenadaX, coordenadaY, numero);
     }
 
     public Jugador getJugador() {

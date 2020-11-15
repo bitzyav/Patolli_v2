@@ -14,7 +14,7 @@ public class CasillaSemicirculo extends Casilla{
     public CasillaSemicirculo() {
     }
 
-    public CasillaSemicirculo(int coordenadaX, int coordenadaY) {
-        super(coordenadaX, coordenadaY);
-    }
+    public CasillaSemicirculo(int coordenadaX, int coordenadaY, int numero) {
+        super(coordenadaX, coordenadaY, numero);
+    }    
 }

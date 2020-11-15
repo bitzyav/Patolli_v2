@@ -14,7 +14,7 @@ public class CasillaCentro extends Casilla{
     public CasillaCentro() {
     }
 
-    public CasillaCentro(int coordenadaX, int coordenadaY) {
-        super(coordenadaX, coordenadaY);
+    public CasillaCentro(int coordenadaX, int coordenadaY, int numero) {
+        super(coordenadaX, coordenadaY, numero);
     }
 }
