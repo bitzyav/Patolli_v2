@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Host extends Jugador{
     private Partida partida; 

@@ -9,7 +9,7 @@ import java.awt.geom.Ellipse2D;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Casilla {
     private int coordenadaX;

@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package partida;
+package game;
 
 import dominio.Host;
+import dominio.Partida;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Fabrica {
     private static IPartida partida;
     
-    public static IPartida getFachadaPartida(Host host){
+    public static IPartida getFachadaPartida(Partida partidaP){
         if(partida==null){
-            partida=new FPartida(host);
+            partida=new FPartida(partidaP);
         }
         return partida;
     }

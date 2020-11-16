@@ -10,7 +10,7 @@ import java.util.Queue;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Jugador {
     private byte numJugador;

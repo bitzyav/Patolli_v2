@@ -1,4 +1,4 @@
-package partida;
+package game;
 
 import dominio.CasillaPropia;
 import dominio.Jugador;
@@ -13,11 +13,10 @@ import dominio.Tablero;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public interface IPartida {
     public Partida obtenerPartida();
-    public void agregarJugador(Jugador jugador);
     public void meterFicha(Jugador jugador);
     public Tablero obtenerTablero();
 }

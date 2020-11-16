@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/partida/Turnos.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/partida/FPartida.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/partida/IPartida.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/main/SocketServer.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/game/FPartida.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/game/IPartida.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/main/PatolliServerInitializer.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GAME/src/game/Fabrica.java</file>
         </group>
     </open-files>
 </project-private>

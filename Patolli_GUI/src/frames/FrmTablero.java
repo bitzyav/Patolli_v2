@@ -8,25 +8,18 @@ package frames;
 import dominio.Casilla;
 import dominio.CasillaPropia;
 import dominio.ColorFicha;
+import dominio.Ficha;
 import dominio.Host;
 import dominio.Partida;
 import dominio.Tablero;
 import grafico.CnvTablero;
-import java.awt.Color;
-import java.awt.Toolkit;
 import javax.swing.JFrame;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
+import socketCliente.SocketCliente;
 
 /**
  *
@@ -35,8 +28,11 @@ import javax.swing.JPanel;
 public class FrmTablero extends FrmBase {
 
     private static FrmSalir frmSalir;
+    private JPanel pnlTablero;
     private CnvTablero cnvTablero;
-    private Host host;
+    private SocketCliente cliente;
+    private Host jugador;
+    private Partida partida;
 
     /**
      * Inicializa y crea la instancia del frame FrmTablero
@@ -44,8 +40,7 @@ public class FrmTablero extends FrmBase {
     public FrmTablero() {
         initComponents();
         inicializar();
-        
-        
+
     }
 
     /**
@@ -55,21 +50,34 @@ public class FrmTablero extends FrmBase {
     private void inicializar() {
         adaptarPantalla();
         extenderPantalla();
-        
-        Partida partida=new Partida();
-        Tablero tablero=new Tablero();
+
+        partida = new Partida();
+        Tablero tablero = new Tablero();
         tablero.generarCasillas(FrmConfigurarPartida.numCasillas, this.getBounds().width, 50);
-        cnvTablero=new CnvTablero(tablero.getCasillas(),50);
-        cnvTablero.paint(this.getGraphics());
-        JPanel pnlTablero = new JPanel();
+
+        jugador = new Host(FrmConfigurarPartida.numFichas);
+        jugador.setColor(ColorFicha.ROJO);
+
+        for (Casilla casilla : tablero.getCasillas()) {
+            if (casilla.getClass().getName().contains("CasillaPropia")) {
+                CasillaPropia cas = (CasillaPropia) casilla;
+                if (cas.getJugador() == null) {
+                    cas.setJugador(jugador);
+                    jugador.setCasillaPropia(cas);
+                    cas.setFicha(jugador.getFichas().get(0));
+                    break;
+                }
+            }
+        }
+        pnlTablero = new JPanel();
+        cnvTablero = new CnvTablero(tablero.getCasillas(), 50, FrmConfigurarPartida.numCasillas);
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
-        pnlTablero.add(cnvTablero);
         pnlTablero.setPreferredSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
         pnlTablero.setMaximumSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
         pnlTablero.setBorder(BorderFactory.createEtchedBorder());
-        this.getContentPane().add(pnlTablero);
-        
+        pintarTablero(tablero);
+
         /*dibujarTablero(FrmConfigurarPartida.numCasillas);
         btnMeterFicha.setEnabled(false);
         new Thread(new Runnable() {
@@ -229,6 +237,26 @@ public class FrmTablero extends FrmBase {
     }//GEN-LAST:event_btnMeterFichaActionPerformed
 
     private void btnAvanzarNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarNormalActionPerformed
+        Ficha ficha = jugador.getFichas().get(0);
+
+        Iterator<Casilla> cIterator = partida.getTablero().getCasillas().listIterator();
+
+        while (cIterator.hasNext()) {
+            Casilla c = cIterator.next();
+            if (c.getFicha() != null) {
+                if (c.getFicha().equals(ficha)) {
+                    c.setFicha(null);
+                    if (cIterator.hasNext()) {
+                        cIterator.next().setFicha(ficha);
+
+                    } else {
+                        partida.getTablero().getCasillas().getFirst().setFicha(ficha);
+                    }
+                    pintarTablero(partida.getTablero());
+                    break;
+                }
+            }
+        }
 
 
     }//GEN-LAST:event_btnAvanzarNormalActionPerformed
@@ -239,4 +267,13 @@ public class FrmTablero extends FrmBase {
     private javax.swing.JButton btnRetirarse;
     private javax.swing.JButton btnTirarCanias;
     // End of variables declaration//GEN-END:variables
+
+    private void pintarTablero(Tablero tablero) {
+        cnvTablero.paint(this.getGraphics());
+
+        pnlTablero.add(cnvTablero);
+
+        partida.setTablero(tablero);
+        this.getContentPane().add(pnlTablero);
+    }
 }

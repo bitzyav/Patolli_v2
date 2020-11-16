@@ -7,7 +7,7 @@ package dominio;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public enum ColorFicha {
     ROJO, NARANJA, AMARILLO, VERDE, CYAN, AZUL, MORADO, ROSA

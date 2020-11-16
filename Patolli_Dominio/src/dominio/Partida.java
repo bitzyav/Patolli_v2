@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Partida {
     private Tablero tablero;

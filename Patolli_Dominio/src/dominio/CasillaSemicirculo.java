@@ -7,7 +7,7 @@ package dominio;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class CasillaSemicirculo extends Casilla{
 

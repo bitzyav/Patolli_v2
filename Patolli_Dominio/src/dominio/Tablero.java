@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Tablero {
 
@@ -28,7 +28,6 @@ public class Tablero {
     }
 
     public void generarCasillas(int numCasillasAspa, int anchoPantalla, int tamanioCasilla) {
-        int total = numCasillasAspa * 4 + 4;
         int casilla=0;
         int x=anchoPantalla/2;
         int y=0;
@@ -193,6 +192,23 @@ public class Tablero {
             //PARA NUM CASILLAS IMPARES
             
             //Verticales arriba izquierda
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             casillas.add(new CasillaSemicirculo(x,y,casilla));
             casilla++;
             y+=tamanioCasilla;
@@ -202,7 +218,7 @@ public class Tablero {
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             y+=tamanioCasilla;
-            for (int i = 0; i < (numCasillasAspa/2)-3; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-2); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 y+=tamanioCasilla;
@@ -214,7 +230,7 @@ public class Tablero {
             casillas.add(new CasillaPropia(x,y,casilla));
             casilla++;
             x-=tamanioCasilla;
-            for (int i = 0; i < (numCasillasAspa/2)-4; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-3); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 x-=tamanioCasilla;
@@ -228,17 +244,15 @@ public class Tablero {
             casillas.add(new CasillaSemicirculo(x,y,casilla));
             casilla++;
             y+=tamanioCasilla;
+            x+=tamanioCasilla;
             //Horizontal izquierda abajo
-            casillas.add(new CasillaSemicirculo(x,y,casilla));
-            casilla++;
-            x+=tamanioCasilla;
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             x+=tamanioCasilla;
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             x+=tamanioCasilla;
-            for (int i = 0; i < (numCasillasAspa/2)-3; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-2); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 x+=tamanioCasilla;
@@ -251,8 +265,7 @@ public class Tablero {
             casillas.add(new CasillaPropia(x,y,casilla));
             casilla++;
             y+=tamanioCasilla;
-            
-            for (int i = 0; i < (numCasillasAspa/2)-4; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-3); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 y+=tamanioCasilla;
@@ -268,13 +281,9 @@ public class Tablero {
             casillas.add(new CasillaSemicirculo(x,y,casilla));
             casilla++;
             x+=tamanioCasilla;
-            
+            y-=tamanioCasilla;
             //Vertical abajo derecha
             
-            casillas.add(new CasillaSemicirculo(x,y,casilla));
-            casilla++;
-            y-=tamanioCasilla;
-            
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             y-=tamanioCasilla;
@@ -282,7 +291,7 @@ public class Tablero {
             casilla++;
             y-=tamanioCasilla;
             
-            for (int i = 0; i < (numCasillasAspa/2)-3; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-2); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 y-=tamanioCasilla;
@@ -296,7 +305,7 @@ public class Tablero {
             casillas.add(new CasillaPropia(x,y,casilla));
             casilla++;
             x+=tamanioCasilla;
-            for (int i = 0; i < (numCasillasAspa/2)-4; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-3); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 x+=tamanioCasilla;
@@ -308,22 +317,21 @@ public class Tablero {
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             x+=tamanioCasilla;
-            
+           
             casillas.add(new CasillaSemicirculo(x,y,casilla));
             casilla++;
+            x-=tamanioCasilla;
             y-=tamanioCasilla;
             
             //Horizontal derecha arriba
-            casillas.add(new CasillaSemicirculo(x,y,casilla));
-            casilla++;
-            x-=tamanioCasilla;
+            
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             x-=tamanioCasilla;
             casillas.add(new CasillaTriangulo(x,y,casilla));
             casilla++;
             x-=tamanioCasilla;
-            for (int i = 0; i < (numCasillasAspa/2)-3; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-2); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 x-=tamanioCasilla;
@@ -335,7 +343,7 @@ public class Tablero {
             casillas.add(new CasillaPropia(x,y,casilla));
             casilla++;
             y-=tamanioCasilla;
-            for (int i = 0; i < (numCasillasAspa/2)-4; i++) {
+            for (int i = 0; i < (Math.floorDiv(numCasillasAspa, 2)-3); i++) {
                 casillas.add(new Casilla(x,y,casilla));
                 casilla++;
                 y-=tamanioCasilla;
@@ -344,9 +352,6 @@ public class Tablero {
             casilla++;
             y-=tamanioCasilla;
             casillas.add(new CasillaTriangulo(x,y,casilla));
-            casilla++;
-            y-=tamanioCasilla;
-            casillas.add(new CasillaSemicirculo(x,y,casilla));
         }
 
     }

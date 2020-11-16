@@ -28,47 +28,21 @@ import java.util.LinkedList;
  */
 public class CnvTablero extends Canvas {
 
-    /**
-     * Atributo para el número de casillas que va a tener el tablero.
-     */
-   /* private final int numCasillas;
-    
-    private int anchoCasilla;
-    private int altoCasilla;
-    private float cx, cy; //Coordenada X y Y del tablero. es float por los tableros con casillas impares.
-    private Casilla[] casillas;*/
     private LinkedList<Casilla> casillas;
+    private int numCasillasAspa;
     private int tamanioCasilla;
     private int ancho;
     private int alto;
     Graphics2D g2d;
 
-    /**
-     * Constructor que inicializa el tablero según el número de casillas
-     * introducidas.
-     *
-     * @param numCasillas El número de casillas en diámetro que tendrá el
-     * tablero.
-     * @param anchoCasilla El ancho de las casillas a utilizar.
-     * @param altoCasilla El alto de las casillas a utilizar.
-     * @param casillas El arreglo de casillas del tablero.
-     */
-    public CnvTablero(int numCasillas, int anchoCasilla, int altoCasilla) {
-       /* this.numCasillas = numCasillas;
-        this.anchoCasilla = anchoCasilla;
-        this.altoCasilla = altoCasilla;
-        this.ancho = this.numCasillas * anchoCasilla + anchoCasilla * 3;
-        this.alto = this.numCasillas * altoCasilla + altoCasilla * 3;
-        this.casillas = new Casilla[(numCasillas*4)+4];*/
-    }
-
-    public CnvTablero(LinkedList<Casilla> casillas, int tamanioCasilla) {
+    public CnvTablero(LinkedList<Casilla> casillas, int tamanioCasilla, int numCasillasAspa) {
         this.casillas = casillas;
         this.tamanioCasilla = tamanioCasilla;
         this.ancho = casillas.size() * tamanioCasilla + tamanioCasilla * 3;
         this.alto = ancho;
+        this.numCasillasAspa = numCasillasAspa;
     }
-    
+
     /**
      * Método estético para el tablero
      *
@@ -77,278 +51,125 @@ public class CnvTablero extends Canvas {
     @Override
     public void paint(Graphics g) {
         this.g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(4));
+        byte numTriangulo = 1;
+        byte numSemicirculo = 1;
+
+        g2d.setStroke(new BasicStroke(2));
         Rectangle rect = new Rectangle();
         g2d.setColor(Color.BLACK);
         for (Casilla casilla : casillas) {
-            System.out.println("dibujada "+casilla.getNumero());
+            int x = casilla.getCoordenadaX(), y = casilla.getCoordenadaY();
+            int ancho = tamanioCasilla, alto = tamanioCasilla;
             rect.setBounds(casilla.getCoordenadaX(), casilla.getCoordenadaY(), tamanioCasilla, tamanioCasilla);
-            if(casilla.getClass().getName().contains("Triangulo")){
-                g2d.setColor(Color.red);
+
+            if (casilla.getClass().getName().contains("Triangulo")) {
+                Polygon triangulo = null;
+                g2d.setColor(Color.RED);
+
+                switch (numTriangulo) {
+                    case 2:
+                        triangulo = new Polygon(new int[]{x, x + ancho, x}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
+                        break;
+                    case 3:
+                        triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y, y + alto, y}, 3);
+                        break;
+                    case 6:
+                        triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y + alto, y, y + (alto)}, 3);
+                        break;
+                    case 8:
+                        triangulo = new Polygon(new int[]{x, x + ancho, x}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
+                        break;
+                    case 9:
+                        triangulo = new Polygon(new int[]{x + ancho, x, x + ancho}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
+                        break;
+                    case 12:
+                        triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y + (alto), y, y + (alto)}, 3);
+                        break;
+                    case 13:
+                        triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y, y + alto, y}, 3);
+                        break;
+                    case 15:
+                        triangulo = new Polygon(new int[]{x + (ancho), x, x + (ancho)}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
+                        break;
+                }
+
+                if (triangulo != null) {
+                    g2d.fill(triangulo);
+                    g2d.drawPolygon(triangulo);
+                }
+                numTriangulo++;
+            } else if (casilla.getClass().getName().contains("Propia")) {
+                g2d.setColor(Color.ORANGE);
                 g2d.fill(rect);
-            }else if(casilla.getClass().getName().contains("Propia")){
-                g2d.setColor(Color.yellow);
-                g2d.fill(rect);
-            }else if(casilla.getClass().getName().contains("Semicirculo")){
-                g2d.setColor(Color.BLUE);
-                g2d.fill(rect);
-            }else if(casilla.getClass().getName().contains("Centro")){
+            } else if (casilla.getClass().getName().contains("Centro")) {
+                g2d.setColor(Color.LIGHT_GRAY);
                 g2d.fill(rect);
             }
-            g2d.setColor(Color.BLACK);
-            g2d.draw(rect);
-        }
-        /*
-        int index = 0;
-        g2d.setColor(Color.BLACK);
-        g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(4));
-        int y = 0, ancho = anchoCasilla, alto = altoCasilla;
-        int x = this.getBounds().width / 2 - ancho;
-        index=dibujaVertical(x, y, ancho, alto, this.numCasillas, g2d, index);
-        if (this.numCasillas % 2 != 0) {
-            y = ((Math.floorDiv(this.numCasillas, 2) + 1) * alto);
-            x = (this.getBounds().width / 2) - ((Math.floorDiv(this.numCasillas, 2) * ancho)) - 2 * ancho;
-        } else {
-            y = (Math.floorDiv(this.numCasillas, 2) * alto);
-            x = (this.getBounds().width / 2) - ((Math.floorDiv(this.numCasillas, 2) * ancho)) - ancho;
-        }
-        dibujaHorizontal(x, y, ancho, alto, this.numCasillas, g2d, index);*/
-    }
+            if (casilla.getClass().getName().contains("Semicirculo")) {
+                Shape punta = null;
+                if (this.numCasillasAspa % 2 == 0) {
+                    switch (numSemicirculo) {
+                        case 1:
+                            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 0, 180, Arc2D.OPEN);
+                            g.drawLine(x + ancho, y, x + ancho, y + alto);
 
-    /**
-     * Para crear una línea de casillas horizontal
-     *
-     * @param x Horizontal
-     * @param y Vertical
-     * @param ancho La anchura de las casillas
-     * @param alto La altura de las casillas
-     * @param cuantos Las repeticiones
-     * @param g Componente Graphics2D
-     *
-    void dibujaHorizontal(int x, int y, int ancho, int alto, int cuantos, Graphics2D g, int index) {
-        Rectangle rect = new Rectangle();
-        cuantos += 2;
-        if (this.numCasillas % 2 == 0) {
-            Shape punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 90, 180, Arc2D.OPEN);
-            g.draw(punta);
-            g.drawLine(x, y + alto, x + ancho, y + alto);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
-            x += ancho;
-            for (int i = 0; i < cuantos - 2; i++) {
-                rect.setBounds(x, y, ancho, alto);
-                g.draw(rect);
-                if(i==((cuantos/2)-3)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }else if (i == (cuantos - 3) || i == 1) {
-                    Polygon triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y, y + alto, y}, 3);
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x, y);
-                    index++;
-                    triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y + (alto * 2), y + alto, y + (alto * 2)}, 3);
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x + ancho, y);
-                    index++;
+                            break;
+                        case 2:
+                            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 90, 180, Arc2D.OPEN);
+                            g.drawLine(x, y + alto, x + ancho, y + alto);
+
+                            break;
+                        case 4:
+                            punta = new Arc2D.Double(x, y - alto, ancho * 2, alto * 2, 180, 180, Arc2D.OPEN);
+                            g.drawLine(x + ancho, y, x + ancho, y + alto);
+                            break;
+                        case 7:
+                            punta = new Arc2D.Double(x - ancho, y, ancho * 2, alto * 2, 270, 180, Arc2D.OPEN);
+                            g.drawLine(x, y + alto, x + ancho, y + alto);
+                            break;
+                    }
                 } else {
-                    casillas[index] = new Casilla(x, y);
-                    index++;
+                    switch (numSemicirculo) {
+                        case 1:
+                            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 0, 180, Arc2D.OPEN);
+                            break;
+                        case 2:
+                            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 90, 180, Arc2D.OPEN);
+                            break;
+                        case 3:
+                            punta = new Arc2D.Double(x, y - alto, ancho * 2, alto * 2, 180, 180, Arc2D.OPEN);
+                            break;
+                        case 4:
+                            punta = new Arc2D.Double(x - ancho, y - alto, ancho * 2, alto * 2, 270, 180, Arc2D.OPEN);
+                            break;
+                    }
                 }
-
-                rect.setBounds(x, y + alto, ancho, alto);
-                if(i==(cuantos/2)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y+alto);
-                    index++;
-                    g.setColor(Color.BLACK);
+                if (punta != null) {
+                    g2d.setColor(Color.BLACK);
+                    g2d.draw(punta);
                 }
-                g.draw(rect);
-                x += ancho;
+                numSemicirculo++;
+            } else {
+                g2d.setColor(Color.BLACK);
+                g2d.draw(rect);
             }
-            x -= ancho;
-            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 270, 180, Arc2D.OPEN);
-            g.draw(punta);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
-            x += ancho;
-            g.drawLine(x, y + alto, x + ancho, y + alto);
-        } else {
-            Shape punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 90, 180, Arc2D.OPEN);
-            g.draw(punta);
-            x += ancho;
-            for (int i = 0; i < cuantos - 1; i++) {
-                rect.setBounds(x, y, ancho, alto);
-                g.draw(rect);
-                if(i==(cuantos/2-2)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }else if (i == (cuantos - 2) || i == 1) {
-                    Polygon triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y, y + alto, y}, 3);
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x, y);
-                    index++;
-                    triangulo = new Polygon(new int[]{x - (ancho / 2), x, x + (ancho / 2)}, new int[]{y + (alto * 2), y + alto, y + (alto * 2)}, 3);
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x + ancho, y);
-                    index++;
-                } else {
-                    casillas[index] = new Casilla(x, y);
-                    index++;
-                }
-                rect.setBounds(x, y + alto, ancho, alto);
-                if(i==(cuantos/2+1)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y+alto);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }
-                g.draw(rect);
-
-                x += ancho;
+            if (casilla.getFicha() != null) {
+                dibujarFicha(casilla.getFicha(), casilla);
             }
-            x -= ancho;
-            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 270, 180, Arc2D.OPEN);
-            g.draw(punta);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
         }
     }
 
-    /**
-     * Para crear una línea de casillas vertical
-     *
-     * @param x Horizontal
-     * @param y Vertical
-     * @param ancho La anchura de las casillas
-     * @param alto La altura de las casillas
-     * @param cuantos Las repeticiones
-     * @param g Componente Graphics2D
-     *
-    int dibujaVertical(int x, int y, int ancho, int alto, int cuantos, Graphics2D g, int index) {
-        Rectangle rect = new Rectangle();
-        cuantos += 2;
+    public int getAncho() {
 
-        if (this.numCasillas % 2 == 0) {
-            Shape punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 0, 180, Arc2D.OPEN);
-            g.draw(punta);
-            g.drawLine(x + ancho, y, x + ancho, y + alto);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
-            y += alto;
-            for (int i = 0; i < cuantos - 2; i++) {
-                rect.setBounds(x, y, ancho, alto);
-                g.draw(rect);
-                if(i==(cuantos/2)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }else if (i == (cuantos - 3) || i == 1) {
-                    Polygon triangulo = new Polygon(new int[]{x + (ancho * 2), x + ancho, x + (ancho * 2)}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x, y);
-                    index++;
-                    triangulo = new Polygon(new int[]{x, x + ancho, x}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
-
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x, y + alto);
-                    index++;
-                } else {
-                    casillas[index] = new Casilla(x, y);
-                    index++;
-                }
-                
-                rect.setBounds(x + ancho, y, ancho, alto);
-                if(i==((cuantos/2)-3)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x+ancho,y);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }
-                g.draw(rect);
-                y += alto;
-            }
-            y -= alto;
-            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 180, 180, Arc2D.OPEN);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
-            g.draw(punta);
-            y += alto;
-            g.drawLine(x + ancho, y, x + ancho, y + alto);
-        } else {
-            Shape punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 0, 180, Arc2D.OPEN);
-            g.draw(punta);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
-            y += alto;
-            
-            for (int i = 0; i < cuantos - 1; i++) {
-                rect.setBounds(x, y, ancho, alto);
-                g.draw(rect);
-                if(i==(cuantos/2+1)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x,y);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }else if (i == (cuantos - 2) || i == 1) {
-                    Polygon triangulo = new Polygon(new int[]{x + (ancho * 2), x + ancho, x + (ancho * 2)}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x, y);
-                    index++;
-                    triangulo = new Polygon(new int[]{x, x + ancho, x}, new int[]{y - (alto / 2), y, y + (alto / 2)}, 3);
-
-                    g.fill(triangulo);
-                    g.drawPolygon(triangulo);
-                    casillas[index] = new CasillaTriangulo(x, y + alto);
-                    index++;
-                } else {
-                    casillas[index] = new Casilla(x, y);
-                    index++;
-                }
-                rect.setBounds(x + ancho, y, ancho, alto);
-                if(i==((cuantos/2)-2)){
-                    g.setColor(Color.YELLOW);
-                    g.fill(rect);
-                    casillas[index]=new CasillaPropia(x+ancho,y);
-                    index++;
-                    g.setColor(Color.BLACK);
-                }
-                g.draw(rect);
-                y += alto;
-            }
-            y -= alto;
-            punta = new Arc2D.Double(x, y, ancho * 2, alto * 2, 180, 180, Arc2D.OPEN);
-            casillas[index] = new CasillaSemicirculo(x, y);
-            index++;
-            g.draw(punta);
-        }
-        return index;
+        return ancho;
     }
 
-    
+    public int getAlto() {
 
-    public void dibujarFicha(Ficha ficha, Casilla casilla, Graphics g) {
-        g2d=(Graphics2D)g;
-        g2d.setStroke(new BasicStroke(1));
+        return alto;
+    }
+
+    public void dibujarFicha(Ficha ficha, Casilla casilla) {
         switch (ficha.getJugador().getColor()) {
             case ROJO:
                 g2d.setColor(Color.RED);
@@ -375,29 +196,14 @@ public class CnvTablero extends Canvas {
                 g2d.setColor(Color.PINK);
                 break;
         }
-        double x=Double.parseDouble(String.valueOf(casilla.getCoordenadaX()));
-        double y=Double.parseDouble(String.valueOf(casilla.getCoordenadaY()));
-        double w=Double.parseDouble(String.valueOf(anchoCasilla));
-        double h=Double.parseDouble(String.valueOf(altoCasilla));
+        double x = Double.parseDouble(String.valueOf(casilla.getCoordenadaX()));
+        double y = Double.parseDouble(String.valueOf(casilla.getCoordenadaY()));
+        double w = Double.parseDouble(String.valueOf(tamanioCasilla));
+        double h = Double.parseDouble(String.valueOf(tamanioCasilla));
         //Ellipse2D.Double ellipseFicha = new Ellipse2D.Double(x,y,w,h);
-        Ellipse2D.Double ellipseFicha = new Ellipse2D.Double(x, y, w,h);
+        Ellipse2D.Double ellipseFicha = new Ellipse2D.Double(x, y, w, h);
         g2d.fill(ellipseFicha);
         g2d.setColor(Color.blue);
         g2d.draw(ellipseFicha);
-        casilla.setDibujoFicha(ellipseFicha);
-    }
-
-    public Casilla[] getCasillas() {
-        return casillas;
-    }*/
-    
-    public int getAncho() {
-
-        return ancho;
-    }
-
-    public int getAlto() {
-
-        return alto;
     }
 }
