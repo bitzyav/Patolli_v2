@@ -21,6 +21,13 @@ public class Jugador {
     private ArrayList<Apuesta> apuestas;
     private CasillaPropia casillaPropia;
 
+    public Jugador(String nombre, ColorFicha color) {
+        this.fichas=new ArrayList<>();
+        this.apuestas=new ArrayList<>();
+        this.nombre = nombre;
+        this.color = color;
+    }
+
     public byte getNumJugador() {
         return numJugador;
     }

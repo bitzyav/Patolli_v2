@@ -11,10 +11,17 @@ package dominio;
  */
 public class CasillaTriangulo extends Casilla{
 
+    private LugarTriangulo lugar;
+    
     public CasillaTriangulo() {
     }
 
-    public CasillaTriangulo(int coordenadaX, int coordenadaY, int numero) {
+    public CasillaTriangulo(int coordenadaX, int coordenadaY, int numero, LugarTriangulo lugar) {
         super(coordenadaX, coordenadaY, numero);
+        this.lugar=lugar;
+    }
+
+    public LugarTriangulo getLugar() {
+        return lugar;
     }
 }

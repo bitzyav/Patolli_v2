@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filters;
+package grafico;
 
-import dominio.Partida;
+import java.awt.Graphics2D;
 
 /**
  *
  * @author alfonsofelix
  */
-public interface IFilter {
-    public void enviar(Partida partida);
-    public Partida recibir();
+abstract class ElementoGrafico {
+    protected final int ANCHO=50;
+    protected final int ALTO=50;
+    public abstract void dibujar(Graphics2D g2d);
 }

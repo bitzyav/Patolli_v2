@@ -5,11 +5,21 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
  * @author alfonsofelix
  */
-abstract class Filter<I,O> {
-    protected Pipe pipe;
-    protected abstract void doChain(Pipe pipe);
+abstract class Filter<I, O> {
+
+    protected Pipe<I> input;
+    protected Pipe<O> output;
+
+    public Filter(Pipe<I> input, Pipe<O> output) {
+        this.input = input;
+        this.output = output;
+    }
+
+    protected abstract void doChain(Pipe<I> input, Pipe<O> output);
 }

@@ -5,14 +5,22 @@
  */
 package frames;
 
+import dominio.Partida;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import socketCliente.SocketCliente;
 
 /**
  *
  * @author Itzel
  */
-public class FrmDireccPartida extends FrmBase {
+public class FrmDireccPartida extends FrmConexionAux {
+
+    private static FrmConfigurarPartida frmConfig;
 
     /**
      * Creates new form FrmCodigoSala
@@ -22,11 +30,12 @@ public class FrmDireccPartida extends FrmBase {
         inicializar();
     }
 
-    private void inicializar(){
-        this.setBackground(new Color(0,0,0,0));
+    private void inicializar() {
+        this.setBackground(new Color(0, 0, 0, 0));
         adaptarPantalla();
+        this.cliente = new SocketCliente();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,6 +85,9 @@ public class FrmDireccPartida extends FrmBase {
         btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn unirse.png"))); // NOI18N
         btnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnUnirse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUnirseMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnUnirseMouseEntered(evt);
             }
@@ -93,7 +105,8 @@ public class FrmDireccPartida extends FrmBase {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnUnirseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseEntered
         btnUnirse.setIcon(new ImageIcon("images\\btn unirse 2.png"));
@@ -101,7 +114,8 @@ public class FrmDireccPartida extends FrmBase {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnUnirseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseExited
         btnUnirse.setIcon(new ImageIcon("images\\btn unirse.png"));
@@ -109,7 +123,8 @@ public class FrmDireccPartida extends FrmBase {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
@@ -117,7 +132,8 @@ public class FrmDireccPartida extends FrmBase {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
@@ -125,13 +141,22 @@ public class FrmDireccPartida extends FrmBase {
 
     /**
      * Cambia de ventana al frame de inicio.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         this.setVisible(false);
         this.getInstanciaFrmInicio().setVisible(true);
     }//GEN-LAST:event_btnCancelarMouseClicked
-    
+
+    private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
+        try {
+            JOptionPane.showMessageDialog(this,cliente.conectar(txtDireccion.getText()));
+        } catch (IOException ex) {
+            Logger.getLogger(FrmDireccPartida.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnUnirseMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCancelar;
     private javax.swing.JLabel btnUnirse;
@@ -139,4 +164,11 @@ public class FrmDireccPartida extends FrmBase {
     private javax.swing.JLabel lblCampoCodigo;
     private javax.swing.JTextField txtDireccion;
     // End of variables declaration//GEN-END:variables
+
+    public static FrmConfigurarPartida getFrmConfig() {
+        if (frmConfig == null) {
+            frmConfig = new FrmConfigurarPartida();
+        }
+        return frmConfig;
+    }
 }

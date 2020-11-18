@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filters;
+package frames;
+
+import socketCliente.SocketCliente;
 
 /**
  *
  * @author alfonsofelix
  */
-class ThreadedRunner extends Thread{
-    
+abstract class FrmConexionAux extends FrmBase{
+    protected SocketCliente cliente;
+
+    public FrmConexionAux() {
+    }
 }

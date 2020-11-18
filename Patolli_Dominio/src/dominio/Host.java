@@ -14,11 +14,8 @@ import java.util.ArrayList;
 public class Host extends Jugador{
     private Partida partida; 
 
-    public Host(int numFichas) {
-        setFichas(new ArrayList<>());
-        for (int i = 0; i < numFichas; i++) {
-            getFichas().add(new Ficha(this,false));
-        }
+    public Host(String nombre, ColorFicha color) {
+        super(nombre, color);
     }
 
     public Partida getPartida() {

@@ -5,10 +5,26 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
  * @author alfonsofelix
  */
-class PipeImpl<T> implements Pipe{
-    
+class PipeImpl<T> implements Pipe<T>{
+    private T objeto;
+
+    public PipeImpl() {
+
+    }
+
+    @Override
+    public void put(T objeto, Filter filter) {
+        this.objeto=objeto;
+        filter.doChain(this, new PipeImpl<T>());
+    }
+
+    public T getObjeto() {
+        return objeto;
+    }
 }

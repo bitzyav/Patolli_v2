@@ -3,6 +3,8 @@ package main;
 import dominio.Partida;
 import game.Fabrica;
 import game.IPartida;
+import java.io.IOException;
+import java.net.ServerSocket;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,9 +21,9 @@ public class PatolliServerInitializer{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Partida p=new Partida();
-        IPartida partida=Fabrica.getFachadaPartida(p);
+    public static void main(String[] args) throws IOException {
+       ServerSocket socket = new ServerSocket(4444);
+       new PatolliServer(socket).run();
     }
     
 }

@@ -5,10 +5,13 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
  * @author alfonsofelix
  */
 interface Pipe<T>{
-    
+    public void put(T objeto, Filter filter);
+    public T getObjeto();
 }

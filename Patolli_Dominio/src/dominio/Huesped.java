@@ -11,4 +11,8 @@ package dominio;
  */
 public class Huesped extends Jugador{
     
+    public Huesped(String nombre, ColorFicha color) {
+        super(nombre, color);
+    }
+    
 }

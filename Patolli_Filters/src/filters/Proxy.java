@@ -11,22 +11,17 @@ import dominio.Partida;
  *
  * @author alfonsofelix
  */
-class FFilter implements IFilter{
+public class Proxy implements IServidor{
 
-    private Pipe<Partida> pipe;
+    private Partida partida;
 
-    public FFilter() {
-        pipe=new PipeImpl<>();
+    public Proxy(Partida partida) {
+        this.partida=partida;
     }
     
     @Override
     public void enviar(Partida partida) {
-        new FilterDado().doChain(pipe);
-    }
-
-    @Override
-    public Partida recibir() {
-        Pipe p=new SinkCliente<Partida>(pipe).recibirPipe();
-        return null;
+        Pipe<Partida> pipe = new PipeImpl<>();
+        pipe.put(partida, new FilterDado(pipe, new PipeImpl<>()));
     }
 }

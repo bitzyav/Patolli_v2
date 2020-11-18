@@ -7,7 +7,7 @@ package frames;
 
 /**
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class Main {
     

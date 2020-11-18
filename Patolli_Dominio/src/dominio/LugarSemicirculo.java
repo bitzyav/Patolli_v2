@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package dominio;
 
 /**
  *
- * @author alfonsofelix
+ * @author Invitado
  */
-public class SocketServer {
-    
+public enum LugarSemicirculo {
+    TOP,
+    LEFT,
+    RIGHT,
+    BOTTOM
 }

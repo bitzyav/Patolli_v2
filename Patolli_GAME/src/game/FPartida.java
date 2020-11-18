@@ -5,7 +5,6 @@
  */
 package game;
 
-import main.SocketServer;
 import dominio.Casilla;
 import dominio.CasillaPropia;
 import dominio.Host;

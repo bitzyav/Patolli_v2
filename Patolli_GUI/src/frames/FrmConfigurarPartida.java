@@ -5,6 +5,7 @@
  */
 package frames;
 
+import dominio.Partida;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -12,7 +13,7 @@ import javax.swing.ImageIcon;
  *
  * @author Itzel
  */
-public class FrmConfigurarPartida extends FrmBase {
+public class FrmConfigurarPartida extends FrmClienteAux {
 
     private static FrmSeleccion frmSeleccion;
     public static int numCasillas;
@@ -498,5 +499,10 @@ public class FrmConfigurarPartida extends FrmBase {
             frmSeleccion=new FrmSeleccion();
         }
         return frmSeleccion;
+    }
+
+    @Override
+    public void update(Partida partida) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

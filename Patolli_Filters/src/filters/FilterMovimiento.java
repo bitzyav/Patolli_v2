@@ -5,15 +5,24 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
  * @author alfonsofelix
  */
-class FilterMovimiento extends Filter{
+class FilterMovimiento extends Filter<Partida, Partida>{
+
+    public FilterMovimiento(Pipe input, Pipe output) {
+        super(input, output);
+    }
 
     @Override
-    protected void doChain(Pipe pipe) {
-        new FilterApuesta().doChain(pipe);
+    protected void doChain(Pipe<Partida> input, Pipe<Partida> output) {
+        Partida partida=input.getObjeto();
+        
+        //Al final
+        output.put(partida, new FilterApuesta(output,new PipeFinal<>()));
     }
-    
+
 }

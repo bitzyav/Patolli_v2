@@ -5,15 +5,24 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
  * @author alfonsofelix
  */
-class FilterApuesta extends Filter{
+class FilterApuesta extends Filter<Partida, Partida>{
+
+    public FilterApuesta(Pipe input, Pipe output) {
+        super(input, output);
+    }
 
     @Override
-    protected void doChain(Pipe pipe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void doChain(Pipe<Partida> input, Pipe<Partida> output) {
+        Partida partida=input.getObjeto();
+        
+        //Al final final
+        output.put(partida, null);
     }
-    
+
 }

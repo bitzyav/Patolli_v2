@@ -11,10 +11,17 @@ package dominio;
  */
 public class CasillaSemicirculo extends Casilla{
 
+    private LugarSemicirculo lugar;
+    
     public CasillaSemicirculo() {
     }
 
-    public CasillaSemicirculo(int coordenadaX, int coordenadaY, int numero) {
+    public CasillaSemicirculo(int coordenadaX, int coordenadaY, int numero, LugarSemicirculo lugar) {
         super(coordenadaX, coordenadaY, numero);
+        this.lugar=lugar;
     }    
+
+    public LugarSemicirculo getLugar() {
+        return lugar;
+    }
 }

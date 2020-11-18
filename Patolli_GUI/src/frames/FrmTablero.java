@@ -10,6 +10,7 @@ import dominio.CasillaPropia;
 import dominio.ColorFicha;
 import dominio.Ficha;
 import dominio.Host;
+import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
 import grafico.CnvTablero;
@@ -30,8 +31,7 @@ public class FrmTablero extends FrmBase {
     private static FrmSalir frmSalir;
     private JPanel pnlTablero;
     private CnvTablero cnvTablero;
-    private SocketCliente cliente;
-    private Host jugador;
+    private Jugador jugador;
     private Partida partida;
 
     /**
@@ -50,11 +50,10 @@ public class FrmTablero extends FrmBase {
     private void inicializar() {
         adaptarPantalla();
         extenderPantalla();
-
-        partida = new Partida();
+/*
+        partida = new Partida(FrmConfigurarPartida.numCasillas, FrmConfigurarPartida.numFichas, FrmConfigurarPartida.numFondoApuesta);
         Tablero tablero = new Tablero();
-        tablero.generarCasillas(FrmConfigurarPartida.numCasillas, this.getBounds().width, 50);
-
+        cnvTablero = new CnvTablero(tablero.getCasillas(), FrmConfigurarPartida.numCasillas, this.getSize().width);
         jugador = new Host(FrmConfigurarPartida.numFichas);
         jugador.setColor(ColorFicha.ROJO);
 
@@ -70,7 +69,7 @@ public class FrmTablero extends FrmBase {
             }
         }
         pnlTablero = new JPanel();
-        cnvTablero = new CnvTablero(tablero.getCasillas(), 50, FrmConfigurarPartida.numCasillas);
+        
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
         pnlTablero.setPreferredSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));

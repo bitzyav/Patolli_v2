@@ -9,9 +9,18 @@ import java.util.ArrayList;
 public class Partida {
     private Tablero tablero;
     private ArrayList<Jugador> jugadores;
+    private Jugador jugadorTurno;
+    private EstadoPartida estado;
+    private int numCasillasAspa;
+    private int numFichasJugador;
+    private int fondoApuesta;
 
-    public Partida() {
+    public Partida(int numCasillasAspa, int numFichasJugador, int fondoApuesta) {
         jugadores=new ArrayList<>();
+        this.estado=EstadoPartida.ESPERA;
+        this.numCasillasAspa=numCasillasAspa;
+        this.numFichasJugador=numFichasJugador;
+        this.fondoApuesta=fondoApuesta;
     }
     
     public Tablero getTablero() {
@@ -28,5 +37,21 @@ public class Partida {
 
     public void setJugadores(ArrayList<Jugador> jugadores) {
         this.jugadores = jugadores;
+    }
+
+    public Jugador getJugadorTurno() {
+        return jugadorTurno;
+    }
+
+    public void setJugadorTurno(Jugador jugadorTurno) {
+        this.jugadorTurno = jugadorTurno;
+    }
+
+    public EstadoPartida getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPartida estado) {
+        this.estado = estado;
     }
 }

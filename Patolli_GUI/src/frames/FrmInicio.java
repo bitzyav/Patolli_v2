@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
  * @author Itzel
  */
 public class FrmInicio extends FrmBase {
-    private static FrmConfigurarPartida frmConfig;
     private static FrmDireccPartida frmDirecc;
     
     /**
@@ -127,7 +126,7 @@ public class FrmInicio extends FrmBase {
      */
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         this.setVisible(false);
-        getFrmConfig().setVisible(true);
+        getFrmDirecc().setVisible(true);
     }//GEN-LAST:event_btnCrearMouseClicked
 
     /**
@@ -172,12 +171,7 @@ public class FrmInicio extends FrmBase {
     }//GEN-LAST:event_btnSalirMouseExited
 
 
-    public static FrmConfigurarPartida getFrmConfig() {
-        if(frmConfig==null){
-            frmConfig=new FrmConfigurarPartida();
-        }
-        return frmConfig;
-    }
+   
 
     public static FrmDireccPartida getFrmDirecc() {
         if(frmDirecc==null){

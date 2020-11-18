@@ -5,15 +5,28 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
  * @author alfonsofelix
  */
-class FilterDado extends Filter{
+class FilterDado extends Filter<Partida, Partida>{
+
+    public FilterDado(Pipe input, Pipe output) {
+        super(input, output);
+    }
 
     @Override
-    protected void doChain(Pipe pipe) {
-        new FilterMovimiento().doChain(pipe);
+    protected void doChain(Pipe<Partida> input, Pipe<Partida> output) {
+        Partida partida=input.getObjeto();
+        
+        
+        
+        
+        //Al final
+        output.put(partida, new FilterMovimiento(output, new PipeImpl<>()));
     }
     
+
 }

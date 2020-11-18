@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filters;
+package frames;
+
+import dominio.Partida;
 
 /**
  *
  * @author alfonsofelix
  */
-public class Fabrica {
-    static IFilter filter;
-    
-    public static IFilter getFachada(){
-        if(filter==null){
-            filter=new FFilter();
-        }
-        return filter;
-    }
+public interface Observer {
+    public void update(Partida partida);
 }

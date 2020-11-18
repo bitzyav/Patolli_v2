@@ -9,9 +9,9 @@ package filters;
  *
  * @author alfonsofelix
  */
-class SinkCliente<T> extends Sink{
+class SinkCliente<T> extends Sink<T>{
     
-    public SinkCliente(Pipe pipe) {
+    public SinkCliente(Pipe<T> pipe) {
         super(pipe);
     }
     
