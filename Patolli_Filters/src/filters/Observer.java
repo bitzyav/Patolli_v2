@@ -5,10 +5,12 @@
  */
 package filters;
 
+import dominio.Partida;
+
 /**
  *
- * @author alfonsofelix
+ * @author Invitado
  */
-class SinkCliente<T> extends Sink<T>{
-    
+public interface Observer {
+    public void update(Partida partida);
 }

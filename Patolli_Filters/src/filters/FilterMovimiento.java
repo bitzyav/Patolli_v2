@@ -18,11 +18,11 @@ class FilterMovimiento extends Filter<Partida, Partida>{
     }
 
     @Override
-    protected void doChain(Pipe<Partida> input, Pipe<Partida> output) {
+    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
         Partida partida=input.getObjeto();
         
         //Al final
-        output.put(partida, new FilterApuesta(output,new PipeFinal<>()));
+        input.put(partida, new FilterApuesta(input,output));
     }
 
 }

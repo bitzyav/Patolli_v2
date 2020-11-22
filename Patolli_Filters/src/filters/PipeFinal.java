@@ -14,10 +14,14 @@ public class PipeFinal<T> implements Pipe<T> {
     private T objeto;
     private Sink<T> sink;
 
+    public PipeFinal(Sink<T> sink) {
+        this.sink = sink;
+    }
+
     @Override
     public void put(T objeto, Filter filter) {
         this.objeto=objeto;
-        this.sink = new SinkCliente(this);
+        this.sink.setPipe(this);
     }
 
     @Override

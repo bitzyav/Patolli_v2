@@ -12,16 +12,18 @@ import dominio.Partida;
  * @author alfonsofelix
  */
 public class Proxy implements IServidor{
-
+    
+    private Pipe<Partida> pipeFinal;
     private Partida partida;
 
     public Proxy(Partida partida) {
         this.partida=partida;
+        this.pipeFinal=new PipeFinal<>(new SinkCliente<>());
     }
     
     @Override
     public void enviar(Partida partida) {
         Pipe<Partida> pipe = new PipeImpl<>();
-        pipe.put(partida, new FilterDado(pipe, new PipeImpl<>()));
+        pipe.put(partida, new FilterDado(pipe, this.pipeFinal));
     }
 }

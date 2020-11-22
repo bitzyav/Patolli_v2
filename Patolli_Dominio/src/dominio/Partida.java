@@ -15,12 +15,9 @@ public class Partida {
     private int numFichasJugador;
     private int fondoApuesta;
 
-    public Partida(int numCasillasAspa, int numFichasJugador, int fondoApuesta) {
+    public Partida() {
         jugadores=new ArrayList<>();
         this.estado=EstadoPartida.ESPERA;
-        this.numCasillasAspa=numCasillasAspa;
-        this.numFichasJugador=numFichasJugador;
-        this.fondoApuesta=fondoApuesta;
     }
     
     public Tablero getTablero() {

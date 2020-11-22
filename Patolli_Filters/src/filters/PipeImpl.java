@@ -21,7 +21,7 @@ class PipeImpl<T> implements Pipe<T>{
     @Override
     public void put(T objeto, Filter filter) {
         this.objeto=objeto;
-        filter.doChain(this, new PipeImpl<T>());
+        filter.doFilter(this, new PipeImpl<T>());
     }
 
     public T getObjeto() {

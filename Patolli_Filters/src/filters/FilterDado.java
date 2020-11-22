@@ -18,14 +18,11 @@ class FilterDado extends Filter<Partida, Partida>{
     }
 
     @Override
-    protected void doChain(Pipe<Partida> input, Pipe<Partida> output) {
+    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
         Partida partida=input.getObjeto();
         
-        
-        
-        
         //Al final
-        output.put(partida, new FilterMovimiento(output, new PipeImpl<>()));
+        input.put(partida, new FilterMovimiento(input, output));
     }
     
 

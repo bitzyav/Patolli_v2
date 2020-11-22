@@ -18,7 +18,7 @@ class FilterApuesta extends Filter<Partida, Partida>{
     }
 
     @Override
-    protected void doChain(Pipe<Partida> input, Pipe<Partida> output) {
+    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
         Partida partida=input.getObjeto();
         
         //Al final final

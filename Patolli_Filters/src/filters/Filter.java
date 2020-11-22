@@ -21,5 +21,5 @@ abstract class Filter<I, O> {
         this.output = output;
     }
 
-    protected abstract void doChain(Pipe<I> input, Pipe<O> output);
+    protected abstract void doFilter(Pipe<I> input, Pipe<O> output);
 }

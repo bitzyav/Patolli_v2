@@ -12,8 +12,12 @@ package filters;
 abstract class Sink <T>{
     Pipe<T> pipe;
     
-    public Sink(Pipe<T> pipe){
-        this.pipe=pipe;
+    public Sink(){
+        
+    }
+
+    public void setPipe(Pipe<T> pipe) {
+        this.pipe = pipe;
     }
     
     public Pipe<T> recibirPipe(){

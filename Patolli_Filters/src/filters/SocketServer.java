@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package filters;
 
-import dominio.Jugador;
+import dominio.Partida;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,22 +17,24 @@ import java.net.Socket;
  *
  * @author alfonsofelix
  */
-public class PatolliServer implements Runnable {
+public class SocketServer implements IServidor, Observer {
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
+    private Proxy proxyFilters;
     private Socket[] clientes;
     private byte conectados;
 
-    public PatolliServer(ServerSocket serverSocket) {
+    public SocketServer(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
-        clientes = new Socket[4];
+        inicializar();
     }
-
-    @Override
-    public void run() {
+    
+    private void inicializar(){
+        this.clientes = new Socket[4];
+        this.proxyFilters=new Proxy(new Partida());
         escuchar();
     }
-
+    
     private void escuchar() {
         while (true) {
             try {
@@ -65,6 +67,16 @@ public class PatolliServer implements Runnable {
                 System.exit(1);
             }
         }
+    }
+
+    @Override
+    public void enviar(Partida partida) {
+        proxyFilters.enviar(partida);
+    }
+
+    @Override
+    public void update(Partida partida) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
