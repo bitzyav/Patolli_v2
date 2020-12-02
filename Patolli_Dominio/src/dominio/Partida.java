@@ -1,12 +1,13 @@
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author alfonsofelix
  */
-public class Partida {
+public class Partida implements Serializable{
     private Tablero tablero;
     private ArrayList<Jugador> jugadores;
     private Jugador jugadorTurno;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filters;
+package server;
 
 import dominio.Partida;
 
@@ -11,6 +11,8 @@ import dominio.Partida;
  *
  * @author Invitado
  */
-public interface Observer {
-    public void update(Partida partida);
+public interface ObserverConexion {
+    public void update(PatolliServer conexion);
+    public void updatePartida(Partida partida);
+    public int getNumConectados();
 }

@@ -5,10 +5,27 @@
  */
 package filters;
 
+import dominio.Partida;
+import server.ObserverManager;
+
 /**
  *
  * @author alfonsofelix
  */
-class SinkCliente<T> extends Sink<T>{
+public class SinkCliente extends Sink<Partida>{
+
+    public SinkCliente(ObserverManager serverManager) {
+        super(serverManager);
+    }
+
+    public void actualizar(Partida partida){
+        this.partida=partida;
+        notificar();
+    }
+    
+    @Override
+    protected void notificar() {
+        serverManager.update(partida);
+    }
     
 }

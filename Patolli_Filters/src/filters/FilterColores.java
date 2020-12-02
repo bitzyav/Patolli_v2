@@ -9,18 +9,18 @@ import dominio.Partida;
 
 /**
  *
- * @author alfonsofelix
+ * @author Invitado
  */
-class FilterDado extends Filter<Partida, Partida>{
+class FilterColores extends Filter<Partida, Partida>{
 
-    public FilterDado(Pipe input, Pipe output) {
+    public FilterColores(Pipe<Partida> input, Pipe<Partida> output) {
         super(input, output);
     }
 
     @Override
     protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
+    
 }

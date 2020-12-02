@@ -14,6 +14,9 @@ import java.util.ArrayList;
 public class Host extends Jugador{
     private Partida partida; 
 
+    public Host(){
+    }
+    
     public Host(String nombre, ColorFicha color) {
         super(nombre, color);
     }

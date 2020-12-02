@@ -6,6 +6,7 @@
 package filters;
 
 import dominio.Partida;
+import java.util.List;
 
 /**
  *
@@ -13,17 +14,16 @@ import dominio.Partida;
  */
 public class Proxy implements IServidor{
     
-    private Pipe<Partida> pipeFinal;
-    private Partida partida;
+    private List<Filter> filters;
+    private List<Pipe> pipes;
 
-    public Proxy(Partida partida) {
-        this.partida=partida;
-        this.pipeFinal=new PipeFinal<>(new SinkCliente<>());
+    public Proxy(List<Filter> filters, List<Pipe> pipes) {
+        this.filters=filters;
+        this.pipes=pipes;
     }
     
     @Override
     public void enviar(Partida partida) {
-        Pipe<Partida> pipe = new PipeImpl<>();
-        pipe.put(partida, new FilterDado(pipe, this.pipeFinal));
+        
     }
 }

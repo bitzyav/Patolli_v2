@@ -5,9 +5,11 @@
  */
 package frames;
 
+import dominio.Jugador;
 import dominio.Partida;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import socketCliente.SocketCliente;
 
 /**
  *
@@ -26,13 +28,13 @@ public class FrmConfigurarPartida extends FrmClienteAux {
     private final int MIN_FONDO = 10;
     private final int MAX_FONDO = 10000;
 
-    /**
-     * Creates new form FrmConfigurarSala
-     */
-    public FrmConfigurarPartida() {
+    public FrmConfigurarPartida(SocketCliente cliente, Jugador jugador, Partida partida) {
+        super(cliente, jugador, partida);
         initComponents();
         inicializar();
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

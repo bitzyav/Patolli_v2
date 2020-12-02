@@ -15,18 +15,21 @@ public class PipeFinal<T> implements Pipe<T> {
     private Sink<T> sink;
 
     public PipeFinal(Sink<T> sink) {
-        this.sink = sink;
+        this.sink=sink;
     }
 
     @Override
-    public void put(T objeto, Filter filter) {
+    public void put(T objeto) {
         this.objeto=objeto;
-        this.sink.setPipe(this);
     }
 
     @Override
-    public T getObjeto() {
-        return this.objeto;
+    public T next() {
+        return null;
     }
 
+    @Override
+    public void doChain() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

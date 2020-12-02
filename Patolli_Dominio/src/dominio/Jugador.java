@@ -21,6 +21,10 @@ public class Jugador {
     private ArrayList<Apuesta> apuestas;
     private CasillaPropia casillaPropia;
 
+    public Jugador(){
+        
+    }
+    
     public Jugador(String nombre, ColorFicha color) {
         this.fichas=new ArrayList<>();
         this.apuestas=new ArrayList<>();
@@ -78,5 +82,29 @@ public class Jugador {
 
     public void setCasillaPropia(CasillaPropia casillaPropia) {
         this.casillaPropia = casillaPropia;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Jugador other = (Jugador) obj;
+        if (this.numJugador != other.numJugador) {
+            return false;
+        }
+        return true;
     }
 }

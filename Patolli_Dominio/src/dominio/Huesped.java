@@ -10,6 +10,9 @@ package dominio;
  * @author alfonsofelix
  */
 public class Huesped extends Jugador{
+
+    public Huesped() {
+    }
     
     public Huesped(String nombre, ColorFicha color) {
         super(nombre, color);

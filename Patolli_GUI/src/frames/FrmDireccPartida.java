@@ -5,6 +5,8 @@
  */
 package frames;
 
+import dominio.Host;
+import dominio.Jugador;
 import dominio.Partida;
 import java.awt.Color;
 import java.io.IOException;
@@ -18,9 +20,12 @@ import socketCliente.SocketCliente;
  *
  * @author Itzel
  */
-public class FrmDireccPartida extends FrmConexionAux {
+public class FrmDireccPartida extends FrmBase {
 
+    private static SocketCliente cliente;
     private static FrmConfigurarPartida frmConfig;
+    private static Jugador jugador;
+    private static Partida partida;
 
     /**
      * Creates new form FrmCodigoSala
@@ -33,7 +38,7 @@ public class FrmDireccPartida extends FrmConexionAux {
     private void inicializar() {
         this.setBackground(new Color(0, 0, 0, 0));
         adaptarPantalla();
-        this.cliente = new SocketCliente();
+        cliente = new SocketCliente();
     }
 
     /**
@@ -151,8 +156,20 @@ public class FrmDireccPartida extends FrmConexionAux {
 
     private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
         try {
-            JOptionPane.showMessageDialog(this,cliente.conectar(txtDireccion.getText()));
+            
+            if(jugador==null){
+                Partida respuesta=cliente.conectar(txtDireccion.getText());
+                
+                if(respuesta.getJugadores().isEmpty()){
+                    partida=new Partida();
+                    jugador=new Host();
+                    jugador.setNumJugador((byte)1);
+                }
+            }
+            //JOptionPane.showMessageDialog(this, );
         } catch (IOException ex) {
+            Logger.getLogger(FrmDireccPartida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(FrmDireccPartida.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUnirseMouseClicked
@@ -167,7 +184,7 @@ public class FrmDireccPartida extends FrmConexionAux {
 
     public static FrmConfigurarPartida getFrmConfig() {
         if (frmConfig == null) {
-            frmConfig = new FrmConfigurarPartida();
+            frmConfig = new FrmConfigurarPartida(cliente, jugador, partida);
         }
         return frmConfig;
     }

@@ -1,7 +1,7 @@
 package main;
 
 import dominio.Partida;
-import filters.SocketServer;
+import server.ServerManager;
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -21,12 +21,7 @@ public class ServerInit{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try{
-       ServerSocket socket = new ServerSocket(4444);
-       new SocketServer(socket);
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
+        new ServerManager();
     }
     
 }

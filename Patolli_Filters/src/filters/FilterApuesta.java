@@ -19,10 +19,7 @@ class FilterApuesta extends Filter<Partida, Partida>{
 
     @Override
     protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
-        Partida partida=input.getObjeto();
         
-        //Al final final
-        output.put(partida, null);
     }
 
 }

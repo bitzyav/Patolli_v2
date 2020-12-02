@@ -5,22 +5,20 @@
  */
 package filters;
 
+import dominio.Partida;
+import server.ObserverManager;
+
 /**
  *
  * @author alfonsofelix
  */
-abstract class Sink <T>{
-    Pipe<T> pipe;
+public abstract class Sink <T>{
+    protected ObserverManager serverManager;
+    protected T partida;
     
-    public Sink(){
-        
+    public Sink(ObserverManager serverManager){
+        this.serverManager=serverManager;
     }
 
-    public void setPipe(Pipe<T> pipe) {
-        this.pipe = pipe;
-    }
-    
-    public Pipe<T> recibirPipe(){
-        return pipe;
-    }
+    protected abstract void notificar();
 }

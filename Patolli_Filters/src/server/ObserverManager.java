@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frames;
+package server;
 
-import socketCliente.SocketCliente;
+import dominio.Partida;
 
 /**
  *
- * @author alfonsofelix
+ * @author Invitado
  */
-abstract class FrmConexionAux extends FrmBase{
-    protected SocketCliente cliente;
-
-    public FrmConexionAux() {
-    }
+public interface ObserverManager {
+    public void update(Partida partida);
 }

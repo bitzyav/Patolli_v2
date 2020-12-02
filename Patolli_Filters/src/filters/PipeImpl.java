@@ -11,20 +11,27 @@ import dominio.Partida;
  *
  * @author alfonsofelix
  */
-class PipeImpl<T> implements Pipe<T>{
+class PipeImpl<T> implements Pipe<T> {
+
     private T objeto;
+    private Filter filter;
 
-    public PipeImpl() {
-
+    public PipeImpl(Filter filter) {
+        this.filter = filter;
     }
 
     @Override
-    public void put(T objeto, Filter filter) {
-        this.objeto=objeto;
-        filter.doFilter(this, new PipeImpl<T>());
+    public void put(T objeto) {
+        this.objeto = objeto;
     }
 
-    public T getObjeto() {
-        return objeto;
+    @Override
+    public T next() {
+        return this.objeto;
+    }
+
+    @Override
+    public void doChain() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

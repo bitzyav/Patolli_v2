@@ -5,8 +5,14 @@
         <group>
             <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/socketCliente/SocketCliente.java</file>
             <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/Main.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmConfigurarPartida.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmClienteAux.java</file>
             <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmDireccPartida.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmConexionAux.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/Observer.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/grafico/CnvTablero.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmBase.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/grafico/ElementoGrafico.java</file>
+            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmInicio.java</file>
         </group>
     </open-files>
 </project-private>
