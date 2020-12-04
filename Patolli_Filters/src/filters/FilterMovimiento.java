@@ -11,14 +11,10 @@ import dominio.Partida;
  *
  * @author alfonsofelix
  */
-class FilterMovimiento extends Filter<Partida, Partida>{
-
-    public FilterMovimiento(Pipe input, Pipe output) {
-        super(input, output);
-    }
+class FilterMovimiento extends Filter<Partida, Partida> {
 
     @Override
-    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
+    protected void doFilter() {
         
     }
 

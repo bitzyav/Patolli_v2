@@ -11,8 +11,8 @@ import dominio.Partida;
  *
  * @author alfonsofelix
  */
-interface Pipe<T>{
+public interface Pipe<T>{
     public void put(T objeto);
-    public T next();
+    public T get();
     public void doChain();
 }

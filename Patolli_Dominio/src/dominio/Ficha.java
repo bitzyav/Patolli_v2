@@ -10,14 +10,17 @@ package dominio;
  * @author alfonsofelix
  */
 public class Ficha {
+
+    private int numero;
     private Jugador jugador;
     private boolean enJuego;
 
-    public Ficha(Jugador jugador, boolean enJuego) {
+    public Ficha(int numero, Jugador jugador, boolean enJuego) {
+        this.numero=numero;
         this.jugador = jugador;
-        this.enJuego=enJuego;
+        this.enJuego = enJuego;
     }
-    
+
     public Jugador getJugador() {
         return jugador;
     }
@@ -32,5 +35,9 @@ public class Ficha {
 
     public void setEnJuego(boolean enJuego) {
         this.enJuego = enJuego;
+    }
+
+    public int getNumero() {
+        return numero;
     }
 }

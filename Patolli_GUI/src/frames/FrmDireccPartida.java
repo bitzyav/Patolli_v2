@@ -5,7 +5,9 @@
  */
 package frames;
 
+import dominio.EstadoPartida;
 import dominio.Host;
+import dominio.Huesped;
 import dominio.Jugador;
 import dominio.Partida;
 import java.awt.Color;
@@ -24,6 +26,7 @@ public class FrmDireccPartida extends FrmBase {
 
     private static SocketCliente cliente;
     private static FrmConfigurarPartida frmConfig;
+    private static FrmSeleccion frmSeleccion;
     private static Jugador jugador;
     private static Partida partida;
 
@@ -63,7 +66,7 @@ public class FrmDireccPartida extends FrmBase {
         txtDireccion.setFont(new java.awt.Font("Eras Bold ITC", 0, 24)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(139, 89, 10));
         txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDireccion.setText("...");
+        txtDireccion.setText("127.0.0.1");
         txtDireccion.setBorder(null);
         txtDireccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtDireccion.setOpaque(false);
@@ -156,21 +159,33 @@ public class FrmDireccPartida extends FrmBase {
 
     private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
         try {
-            
-            if(jugador==null){
-                Partida respuesta=cliente.conectar(txtDireccion.getText());
-                
-                if(respuesta.getJugadores().isEmpty()){
-                    partida=new Partida();
-                    jugador=new Host();
-                    jugador.setNumJugador((byte)1);
+
+            if (jugador == null) {
+                Partida respuesta = cliente.conectar(txtDireccion.getText());
+                if (respuesta != null) {
+                    if (respuesta.getEstado() == EstadoPartida.VACIA) {
+                        partida = respuesta;
+                        jugador = new Host();
+                        jugador.setNumJugador((byte) 1);
+                        this.setVisible(false);
+                        getFrmConfig().setVisible(true);
+                    } else if (respuesta.getEstado() == EstadoPartida.ESPERA) {
+                        partida = respuesta;
+                        jugador = new Huesped();
+                        jugador.setNumJugador((byte) (partida.getJugadores().size() + 1));
+                        this.setVisible(false);
+                        getFrmSeleccion().setVisible(true);
+                    }else if(respuesta.getEstado()==EstadoPartida.INICIADA){
+                        JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Ocurrió un error desconocido.");
                 }
             }
             //JOptionPane.showMessageDialog(this, );
-        } catch (IOException ex) {
-            Logger.getLogger(FrmDireccPartida.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FrmDireccPartida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnUnirseMouseClicked
 
@@ -187,5 +202,12 @@ public class FrmDireccPartida extends FrmBase {
             frmConfig = new FrmConfigurarPartida(cliente, jugador, partida);
         }
         return frmConfig;
+    }
+
+    public static FrmSeleccion getFrmSeleccion() {
+        if (frmSeleccion == null) {
+            frmSeleccion = new FrmSeleccion();
+        }
+        return frmSeleccion;
     }
 }

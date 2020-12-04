@@ -13,12 +13,8 @@ import dominio.Partida;
  */
 class FilterApuesta extends Filter<Partida, Partida>{
 
-    public FilterApuesta(Pipe input, Pipe output) {
-        super(input, output);
-    }
-
     @Override
-    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
+    protected void doFilter() {
         
     }
 

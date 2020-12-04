@@ -11,15 +11,21 @@ import dominio.Partida;
  *
  * @author alfonsofelix
  */
-abstract class Filter<I, O> {
+public abstract class Filter<I, O> {
 
     protected Pipe<I> input;
     protected Pipe<O> output;
 
-    public Filter(Pipe<I> input, Pipe<O> output) {
-        this.input = input;
-        this.output = output;
+    public Filter() {
     }
 
-    protected abstract void doFilter(Pipe<I> input, Pipe<O> output);
+    public void setInput(Pipe<I> input) {
+        this.input = input;
+    }
+
+    public void setOutput(Pipe<O> output) {
+        this.output = output;
+    }
+    
+    protected abstract void doFilter();
 }

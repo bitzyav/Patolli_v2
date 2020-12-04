@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/socketCliente/SocketCliente.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/Main.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmConfigurarPartida.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmClienteAux.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmDireccPartida.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/Observer.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/grafico/CnvTablero.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmBase.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/grafico/ElementoGrafico.java</file>
-            <file>file:/C:/Users/user/Desktop/Patolli/Patolli_v2/Patolli_GUI/src/frames/FrmInicio.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

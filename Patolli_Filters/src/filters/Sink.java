@@ -12,12 +12,24 @@ import server.ObserverManager;
  *
  * @author alfonsofelix
  */
-public abstract class Sink <T>{
+public abstract class Sink<T> {
+
     protected ObserverManager serverManager;
     protected T partida;
-    
-    public Sink(ObserverManager serverManager){
-        this.serverManager=serverManager;
+
+    public Sink(ObserverManager serverManager) {
+        this.serverManager = serverManager;
+    }
+
+    public T getPartida() {
+        return partida;
+    }
+
+    public void actualizar(T partida) {
+        this.partida = partida;
+        System.out.println("Llegó al Sink");
+        notificar();
+        System.out.println("Notificó");
     }
 
     protected abstract void notificar();

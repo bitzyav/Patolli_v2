@@ -24,12 +24,12 @@ public class PipeFinal<T> implements Pipe<T> {
     }
 
     @Override
-    public T next() {
+    public T get() {
         return null;
     }
 
     @Override
     public void doChain() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sink.actualizar(objeto);
     }
 }

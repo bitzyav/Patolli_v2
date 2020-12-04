@@ -5,6 +5,7 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -12,7 +13,7 @@ import java.util.Queue;
  *
  * @author alfonsofelix
  */
-public class Jugador {
+public class Jugador implements Serializable{
     private byte numJugador;
     private String nombre;
     private int numFrijoles;
@@ -20,9 +21,10 @@ public class Jugador {
     private ArrayList<Ficha> fichas;
     private ArrayList<Apuesta> apuestas;
     private CasillaPropia casillaPropia;
+    private boolean asignado;
 
     public Jugador(){
-        
+        this.asignado=false;
     }
     
     public Jugador(String nombre, ColorFicha color) {
@@ -82,6 +84,14 @@ public class Jugador {
 
     public void setCasillaPropia(CasillaPropia casillaPropia) {
         this.casillaPropia = casillaPropia;
+    }
+
+    public boolean isAsignado() {
+        return asignado;
+    }
+
+    public void setAsignado(boolean asignado) {
+        this.asignado = asignado;
     }
 
     @Override

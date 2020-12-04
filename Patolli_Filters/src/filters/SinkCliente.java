@@ -16,11 +16,7 @@ public class SinkCliente extends Sink<Partida>{
 
     public SinkCliente(ObserverManager serverManager) {
         super(serverManager);
-    }
-
-    public void actualizar(Partida partida){
-        this.partida=partida;
-        notificar();
+        this.partida=new Partida();
     }
     
     @Override

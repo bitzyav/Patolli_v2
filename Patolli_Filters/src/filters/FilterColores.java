@@ -11,16 +11,17 @@ import dominio.Partida;
  *
  * @author Invitado
  */
-class FilterColores extends Filter<Partida, Partida>{
-
-    public FilterColores(Pipe<Partida> input, Pipe<Partida> output) {
-        super(input, output);
-    }
+public class FilterColores extends Filter<Partida, Partida> {
 
     @Override
-    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void doFilter() {
+        
+        Partida partida = input.get();
+        
+        System.out.println("Entró a Filter Colores");
+        
+        output.put(partida);
+        output.doChain();
     }
 
-    
 }

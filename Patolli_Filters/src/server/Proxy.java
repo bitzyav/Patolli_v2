@@ -3,27 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package filters;
+package server;
 
 import dominio.Partida;
+import filters.Filter;
+import filters.Pipe;
 import java.util.List;
 
 /**
  *
  * @author alfonsofelix
  */
-public class Proxy implements IServidor{
-    
-    private List<Filter> filters;
-    private List<Pipe> pipes;
+public class Proxy implements IServidor {
 
-    public Proxy(List<Filter> filters, List<Pipe> pipes) {
-        this.filters=filters;
-        this.pipes=pipes;
+    private Pipe pipeInicial;
+
+    public Proxy(Pipe pipeInicial) {
+        this.pipeInicial = pipeInicial;
     }
-    
+
     @Override
     public void enviar(Partida partida) {
-        
+        this.pipeInicial.put(partida);
+        this.pipeInicial.doChain();
     }
 }

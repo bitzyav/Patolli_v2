@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * @author alfonsofelix
  */
 public class Partida implements Serializable{
+
+    private static final long serialVersionUID = 5528623733435420078L;
     private Tablero tablero;
     private ArrayList<Jugador> jugadores;
     private Jugador jugadorTurno;
@@ -18,7 +20,7 @@ public class Partida implements Serializable{
 
     public Partida() {
         jugadores=new ArrayList<>();
-        this.estado=EstadoPartida.ESPERA;
+        this.estado=EstadoPartida.VACIA;
     }
     
     public Tablero getTablero() {
@@ -51,5 +53,10 @@ public class Partida implements Serializable{
 
     public void setEstado(EstadoPartida estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Partida{" + "estado=" + estado + '}';
     }
 }

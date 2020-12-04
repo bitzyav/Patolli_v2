@@ -170,9 +170,6 @@ public class FrmInicio extends FrmBase {
         btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
     }//GEN-LAST:event_btnSalirMouseExited
 
-
-   
-
     public static FrmDireccPartida getFrmDirecc() {
         if(frmDirecc==null){
             frmDirecc=new FrmDireccPartida();

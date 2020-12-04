@@ -5,6 +5,8 @@
  */
 package filters;
 
+import dominio.EstadoPartida;
+import dominio.Host;
 import dominio.Jugador;
 import dominio.Partida;
 import java.util.List;
@@ -13,23 +15,33 @@ import java.util.List;
  *
  * @author Invitado
  */
-class FilterUnirJugador extends Filter<Partida, Partida>{
-
-    public FilterUnirJugador(Pipe<Partida> input, Pipe<Partida> output) {
-        super(input, output);
-    }
+public class FilterUnirJugador extends Filter<Partida, Partida>{
 
     @Override
-    protected void doFilter(Pipe<Partida> input, Pipe<Partida> output) {
-        Partida partida=input.next();
-        
+    protected void doFilter() {
+        Partida partida=input.get();
+        /*
         List<Jugador> jugadores=partida.getJugadores();
         
         switch(jugadores.size()){
             
+        }*/
+        
+        System.out.println("Entró a Filter Unir Jugador");
+        
+        if(partida.getJugadores().isEmpty()){
+            Jugador host=new Host();
+            
+            host.setNumJugador((byte)1);
+            host.setAsignado(true);
+            
+            partida.getJugadores().add(host);
+        }else{
+            partida.setEstado(EstadoPartida.ESPERA);
         }
         
         output.put(partida);
+        output.doChain();
     }
     
 }

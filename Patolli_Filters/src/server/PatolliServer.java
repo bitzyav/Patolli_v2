@@ -8,9 +8,12 @@ package server;
 import dominio.Jugador;
 import dominio.Partida;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,7 +26,8 @@ public class PatolliServer implements Runnable {
     private ServerSocket serverSocket;
     private ObserverConexion serverManagerConexion;
     private ObserverManager serverManagerPartida;
-    private Jugador jugador;
+    ObjectOutputStream out;
+    ObjectInputStream in;
     private Socket cliente;
 
     public PatolliServer(ServerSocket serverSocket, ObserverConexion serverManagerConexion, ObserverManager serverManagerPartida) {
@@ -43,38 +47,18 @@ public class PatolliServer implements Runnable {
             cliente = serverSocket.accept();
             PatolliServer hilo = new PatolliServer(serverSocket, serverManagerConexion, serverManagerPartida);
             new Thread(hilo).start();
-            PrintWriter out = null;
-            BufferedReader in = null;
-            out = new PrintWriter(cliente.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(
-                    cliente.getInputStream()));
 
-            String inputLine, outputLine;
-            if (serverManagerConexion.getNumConectados() < 4) {
-                notificarConexion();
-                outputLine = "Conectado a Patolli, eres el jugador #" + serverManagerConexion.getNumConectados();
-                out.println(outputLine);
-                while (true) {
+            out = new ObjectOutputStream(cliente.getOutputStream());
 
-                    /*while ((inputLine = in.readLine()) != null) {
-                        outputLine = kkp.processInput(inputLine);
-                        out.println(outputLine);
-                        if (outputLine.equals("Bye.")) {
-                            break;
-                        }
-                    }*/
-                }
-            }else{
-                outputLine = "Lo sentimos :( el servidor está lleno." + serverManagerConexion.getNumConectados();
-                out.println(outputLine);
-                in.close();
-                out.close();
-                cliente.close();
-            }
+            notificarConexion();
 
         } catch (IOException e) {
-            System.err.println("Ocurrió un error en el puerto 4444.");
+            System.err.println("Ocurrió un error: " + e.getMessage());
         }
+    }
+
+    public void enviarPartida(Partida partida) throws IOException {
+        this.out.writeObject(partida);
     }
 
     public Socket getCliente() {
@@ -89,11 +73,9 @@ public class PatolliServer implements Runnable {
         serverManagerConexion.updatePartida(partida);
     }
 
-    public Jugador getJugador() {
-        return jugador;
-    }
-
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
-    }
+    /*private byte[] serializar(Partida partida, ObjectOutputStream os) throws IOException {
+        os.writeObject(partida);
+        
+        return ;
+    }*/
 }

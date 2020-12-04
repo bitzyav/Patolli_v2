@@ -5,8 +5,14 @@
  */
 package server;
 
+import dominio.EstadoPartida;
 import dominio.Partida;
-import filters.Proxy;
+import filters.Filter;
+import filters.FilterColores;
+import filters.FilterUnirJugador;
+import filters.Pipe;
+import filters.PipeFinal;
+import filters.PipeImpl;
 import filters.Sink;
 import filters.SinkCliente;
 import java.io.BufferedReader;
@@ -41,18 +47,34 @@ public class ServerManager implements ObserverManager, ObserverConexion {
 
     private void inicializar() {
         this.clientes = new ArrayList<>();
-            
+        this.sink = new SinkCliente(this);
         //Para la línea de producción de conexiones
-        //proxyConexiones=new Proxy();
+
+        Filter filterUnirJugador = new FilterUnirJugador();
+        Filter filterColores = new FilterColores();
+        Pipe<Partida> pipeConexion1 = new PipeImpl<>(filterUnirJugador);
+
+        Pipe<Partida> pipeConexion2 = new PipeImpl<>(filterColores);
+        Pipe<Partida> pipeConexionFinal = new PipeFinal<>(this.sink);
+
+        filterUnirJugador.setInput(pipeConexion1);
+        filterUnirJugador.setOutput(pipeConexion2);
+
+        filterColores.setInput(pipeConexion2);
+        filterColores.setOutput(pipeConexionFinal);
+
+        proxyConexiones=new Proxy(pipeConexion1);
         escuchar();
     }
 
     private void escuchar() {
         try {
             PatolliServer cliente1 = new PatolliServer(new ServerSocket(4444), this, this);
+            System.out.println("Servidor iniciado");
             cliente1.run();
+
         } catch (IOException ex) {
-            Logger.getLogger(ServerManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -63,18 +85,33 @@ public class ServerManager implements ObserverManager, ObserverConexion {
 
     @Override
     public void update(Partida partida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        enviarPartidaAClientes(partida);
     }
 
     @Override
     public void update(PatolliServer conexion) {
-
+        accionesConexion(conexion);
+    }
+    
+    public void accionesConexion(PatolliServer conexion){
+        System.out.println("Un jugador se ha conectado");
         this.clientes.add(conexion);
+        this.proxyConexiones.enviar(this.sink.getPartida());
+    }
+
+    public void enviarPartidaAClientes(Partida partida) {
+        for (PatolliServer cliente : clientes) {
+            try {
+                cliente.enviarPartida(partida);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     @Override
     public void updatePartida(Partida partida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     private byte[] serializar(Partida partida) throws IOException {

@@ -5,11 +5,15 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Invitado
  */
-public enum EstadoPartida {
+public enum EstadoPartida implements Serializable{
+    VACIA,
+    CONFIGURACION,
     ESPERA,
     INICIADA,
     TERMINADA
