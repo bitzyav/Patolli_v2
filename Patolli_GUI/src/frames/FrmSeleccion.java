@@ -5,22 +5,36 @@
  */
 package frames;
 
+import dominio.Jugador;
+import dominio.Partida;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import socketCliente.SocketCliente;
 
 /**
  *
- * @author Itzel
+ * @author Invitado
  */
-public class FrmSeleccion extends FrmBase{
+public class FrmSeleccion extends FrmClienteAux {
 
     private static FrmTablero frmTablero;
+
     /**
      * Creates new form FrmSeleccion
      */
     public FrmSeleccion() {
         initComponents();
         inicializar();
+    }
+
+    public FrmSeleccion(SocketCliente cliente, Jugador jugador, Partida partida) {
+        super(cliente, jugador, partida);
+        inicializar();
+    }
+
+    private void inicializar() {
+        adaptarPantalla();
+        this.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -32,22 +46,25 @@ public class FrmSeleccion extends FrmBase{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNombre = new javax.swing.JTextField();
+        btnColorAmarillo = new javax.swing.JLabel();
         lblCampoNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        btnColorRojo = new javax.swing.JLabel();
+        btnColorNaranja = new javax.swing.JLabel();
         btnColorVerde = new javax.swing.JLabel();
         btnColorCyan = new javax.swing.JLabel();
-        btnColorNaranja = new javax.swing.JLabel();
         btnColorAzul = new javax.swing.JLabel();
-        btnColorAmarillo = new javax.swing.JLabel();
         btnColorRosa = new javax.swing.JLabel();
         btnColorMorado = new javax.swing.JLabel();
-        btnColorRojo = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JLabel();
-        fondo = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnColorAmarillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color amarillo.png"))); // NOI18N
+        btnColorAmarillo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        lblCampoNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
 
         txtNombre.setBackground(new java.awt.Color(243, 242, 237));
         txtNombre.setFont(new java.awt.Font("Eras Bold ITC", 0, 24)); // NOI18N
@@ -57,57 +74,27 @@ public class FrmSeleccion extends FrmBase{
         txtNombre.setBorder(null);
         txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtNombre.setOpaque(false);
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 220, 30));
-
-        lblCampoNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
-        getContentPane().add(lblCampoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
-
-        btnColorVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color verde.png"))); // NOI18N
-        btnColorVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
-
-        btnColorCyan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color cyan.png"))); // NOI18N
-        btnColorCyan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorCyan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
-
-        btnColorNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color naranja.png"))); // NOI18N
-        btnColorNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
-
-        btnColorAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color azul.png"))); // NOI18N
-        btnColorAzul.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 70, -1));
-
-        btnColorAmarillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color amarillo.png"))); // NOI18N
-        btnColorAmarillo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorAmarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
-
-        btnColorRosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rosa.png"))); // NOI18N
-        btnColorRosa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
-
-        btnColorMorado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color morado.png"))); // NOI18N
-        btnColorMorado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorMorado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, -1, -1));
 
         btnColorRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rojo.png"))); // NOI18N
         btnColorRojo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(btnColorRojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseExited(evt);
-            }
-        });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, -1, -1));
+        btnColorNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color naranja.png"))); // NOI18N
+        btnColorNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnColorVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color verde.png"))); // NOI18N
+        btnColorVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnColorCyan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color cyan.png"))); // NOI18N
+        btnColorCyan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnColorAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color azul.png"))); // NOI18N
+        btnColorAzul.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnColorRosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rosa.png"))); // NOI18N
+        btnColorRosa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnColorMorado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color morado.png"))); // NOI18N
+        btnColorMorado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn aceptar.png"))); // NOI18N
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -122,63 +109,133 @@ public class FrmSeleccion extends FrmBase{
                 btnAceptarMouseExited(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, -1, -1));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm seleccion.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 680));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(196, 196, 196)
+                            .addComponent(lblCampoNombre)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(230, 230, 230)
+                            .addComponent(btnColorCyan)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnColorAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnColorRosa)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnColorMorado))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(218, 218, 218)
+                            .addComponent(btnColorRojo)
+                            .addGap(101, 101, 101)
+                            .addComponent(btnColorNaranja)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnColorAmarillo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnColorVerde)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(btnAceptar)
+                        .addGap(102, 102, 102)
+                        .addComponent(btnCancelar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(lblCampoNombre)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(88, 88, 88)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnColorNaranja)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnColorVerde)
+                                        .addComponent(btnColorAmarillo)))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnColorAzul)
+                                    .addComponent(btnColorRosa)
+                                    .addComponent(btnColorMorado)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(btnColorRojo)
+                                .addGap(64, 64, 64)
+                                .addComponent(btnColorCyan))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnCancelar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
-     */
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
+        this.setVisible(false);
+        getFrmTablero().setVisible(true);
+    }//GEN-LAST:event_btnAceptarMouseClicked
+
     private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
         btnAceptar.setIcon(new ImageIcon("images\\btn aceptar 2.png"));
     }//GEN-LAST:event_btnAceptarMouseEntered
 
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
-     */
     private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
         btnAceptar.setIcon(new ImageIcon("images\\btn aceptar.png"));
     }//GEN-LAST:event_btnAceptarMouseExited
 
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
-     */
-    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
-    }//GEN-LAST:event_btnCancelarMouseEntered
-
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
-     */
-    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
-    }//GEN-LAST:event_btnCancelarMouseExited
-
-    /**
-     * Cambia de ventana al frame de inicio.
-     * @param evt 
-     */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         this.setVisible(false);
         this.getInstanciaFrmInicio().setVisible(true);
     }//GEN-LAST:event_btnCancelarMouseClicked
 
-    /**
-     * Cambia de ventana al tablero.
-     * @param evt 
-     */
-    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        this.setVisible(false);
-        getFrmTablero().setVisible(true);
-    }//GEN-LAST:event_btnAceptarMouseClicked
+    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
+    }//GEN-LAST:event_btnCancelarMouseEntered
+
+    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
+    }//GEN-LAST:event_btnCancelarMouseExited
+
+    @Override
+    public void update(Partida partidaLlegada) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static FrmTablero getFrmTablero() {
+        if (frmTablero == null) {
+            frmTablero = new FrmTablero();
+        }
+        return frmTablero;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAceptar;
@@ -191,20 +248,7 @@ public class FrmSeleccion extends FrmBase{
     private javax.swing.JLabel btnColorRojo;
     private javax.swing.JLabel btnColorRosa;
     private javax.swing.JLabel btnColorVerde;
-    private javax.swing.JLabel fondo;
     private javax.swing.JLabel lblCampoNombre;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-
-    private void inicializar() {
-        adaptarPantalla();
-        this.setBackground(new Color(0,0,0,0));
-    }
-
-    public static FrmTablero getFrmTablero() {
-        if(frmTablero==null){
-            frmTablero=new FrmTablero();
-        }
-        return frmTablero;
-    }
 }

@@ -5,6 +5,7 @@
  */
 package frames;
 
+import dominio.Partida;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -12,7 +13,7 @@ import javax.swing.ImageIcon;
  *
  * @author Itzel
  */
-public class FrmSalir extends FrmBase {
+public class FrmSalir extends FrmClienteAux {
 
     /**
      * Creates new form FrmSalir
@@ -133,5 +134,10 @@ public class FrmSalir extends FrmBase {
     private void inicializar() {
         adaptarPantalla();
         this.setBackground(new Color(0,0,0,0));
+    }
+
+    @Override
+    public void update(Partida partidaLlegada) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

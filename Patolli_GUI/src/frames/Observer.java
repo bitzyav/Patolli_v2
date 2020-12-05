@@ -12,5 +12,5 @@ import dominio.Partida;
  * @author alfonsofelix
  */
 public interface Observer {
-    public void update(Partida partida);
+    public void update(Partida partidaLlegada);
 }

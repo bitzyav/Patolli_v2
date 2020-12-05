@@ -26,13 +26,11 @@ import socketCliente.SocketCliente;
  *
  * @author Itzel
  */
-public class FrmTablero extends FrmBase {
+public class FrmTablero extends FrmClienteAux {
 
     private static FrmSalir frmSalir;
     private JPanel pnlTablero;
     private CnvTablero cnvTablero;
-    private Jugador jugador;
-    private Partida partida;
 
     /**
      * Inicializa y crea la instancia del frame FrmTablero
@@ -274,5 +272,10 @@ public class FrmTablero extends FrmBase {
 
         partida.setTablero(tablero);
         this.getContentPane().add(pnlTablero);
+    }
+
+    @Override
+    public void update(Partida partidaLlegada) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

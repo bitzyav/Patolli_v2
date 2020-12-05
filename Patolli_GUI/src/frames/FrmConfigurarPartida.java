@@ -8,6 +8,9 @@ package frames;
 import dominio.Jugador;
 import dominio.Partida;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import socketCliente.SocketCliente;
 
@@ -33,8 +36,6 @@ public class FrmConfigurarPartida extends FrmClienteAux {
         initComponents();
         inicializar();
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -253,7 +254,6 @@ public class FrmConfigurarPartida extends FrmClienteAux {
         btnCrear.setIcon(new ImageIcon("images\\btn crear.png"));
     }//GEN-LAST:event_btnCrearMouseExited
 
-    
     /**
      * Evento que cambia la imagen del boton cuando pase el cursor sobre él.
      *
@@ -378,8 +378,17 @@ public class FrmConfigurarPartida extends FrmClienteAux {
      * @param evt
      */
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        this.setVisible(false);
-        getFrmSeleccion().setVisible(true);
+        partida.setFondoApuesta(numFondoApuesta);
+        partida.setNumCasillasAspa(numCasillas);
+        partida.setNumFichasJugador(numFichas);
+
+        try {
+            cliente.enviar(partida);
+            this.setVisible(false);
+            getFrmSeleccion().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmConfigurarPartida.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCrearMouseClicked
 
     /**
@@ -413,7 +422,7 @@ public class FrmConfigurarPartida extends FrmClienteAux {
      */
     private void btnMasApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMasApuestaMouseClicked
         if (numFondoApuesta != MAX_FONDO) {
-            numFondoApuesta+=10;
+            numFondoApuesta += 10;
             lblApuesta.setText(numFondoApuesta + "");
         }
     }//GEN-LAST:event_btnMasApuestaMouseClicked
@@ -425,7 +434,7 @@ public class FrmConfigurarPartida extends FrmClienteAux {
      */
     private void btnMenosCasillasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosCasillasMouseClicked
         if (numCasillas != MIN_CASILLAS) {
-            numCasillas-= 1;
+            numCasillas -= 1;
             lblNumCasillas.setText(numCasillas + "");
         }
     }//GEN-LAST:event_btnMenosCasillasMouseClicked
@@ -449,7 +458,7 @@ public class FrmConfigurarPartida extends FrmClienteAux {
      */
     private void btnMenosApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenosApuestaMouseClicked
         if (numFondoApuesta != MIN_FONDO) {
-            numFondoApuesta-=10;
+            numFondoApuesta -= 10;
             lblApuesta.setText(numFondoApuesta + "");
         }
     }//GEN-LAST:event_btnMenosApuestaMouseClicked
@@ -466,11 +475,11 @@ public class FrmConfigurarPartida extends FrmClienteAux {
         lblNumFichas.setText(numFichas + "");
         lblApuesta.setText(numFondoApuesta + "");
     }
-    
+
     /**
-     * Centra la pantalla y ajusta las dimensiones dependiendo de la pantalla en el que se ejecute.
+     * Centra la pantalla y ajusta las dimensiones dependiendo de la pantalla en
+     * el que se ejecute.
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCancelar;
@@ -497,14 +506,14 @@ public class FrmConfigurarPartida extends FrmClienteAux {
     }
 
     public static FrmSeleccion getFrmSeleccion() {
-        if(frmSeleccion==null){
-            frmSeleccion=new FrmSeleccion();
+        if (frmSeleccion == null) {
+            frmSeleccion = new FrmSeleccion(cliente, jugador, partida);
         }
         return frmSeleccion;
     }
 
     @Override
-    public void update(Partida partida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Partida partidaLlegada) {
+        partida = partidaLlegada;
     }
 }

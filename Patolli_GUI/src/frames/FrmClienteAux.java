@@ -14,14 +14,17 @@ import socketCliente.SocketCliente;
  * @author alfonsofelix
  */
 abstract class FrmClienteAux extends FrmBase implements Observer{
-    protected SocketCliente cliente;
-    protected Jugador jugador;
-    protected Partida partida;
+    protected static SocketCliente cliente;
+    protected static Jugador jugador;
+    protected static Partida partida;
 
-    public FrmClienteAux(SocketCliente cliente, Jugador jugador, Partida partida) {
-        this.cliente=cliente;
-        this.cliente = cliente;
-        this.partida=partida;
+    public FrmClienteAux(SocketCliente clienteN, Jugador jugadorN, Partida partidaN) {
+        cliente=clienteN;
+        cliente = clienteN;
+        partida=partidaN;
     }
     
+    public FrmClienteAux(){
+        
+    }
 }

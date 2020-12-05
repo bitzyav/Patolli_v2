@@ -30,12 +30,7 @@ public class FilterUnirJugador extends Filter<Partida, Partida>{
         System.out.println("Entró a Filter Unir Jugador");
         
         if(partida.getJugadores().isEmpty()){
-            Jugador host=new Host();
             
-            host.setNumJugador((byte)1);
-            host.setAsignado(true);
-            
-            partida.getJugadores().add(host);
         }else{
             partida.setEstado(EstadoPartida.ESPERA);
         }

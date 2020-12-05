@@ -55,8 +55,32 @@ public class Partida implements Serializable{
         this.estado = estado;
     }
 
+    public int getNumCasillasAspa() {
+        return numCasillasAspa;
+    }
+
+    public void setNumCasillasAspa(int numCasillasAspa) {
+        this.numCasillasAspa = numCasillasAspa;
+    }
+
+    public int getNumFichasJugador() {
+        return numFichasJugador;
+    }
+
+    public void setNumFichasJugador(int numFichasJugador) {
+        this.numFichasJugador = numFichasJugador;
+    }
+
+    public int getFondoApuesta() {
+        return fondoApuesta;
+    }
+
+    public void setFondoApuesta(int fondoApuesta) {
+        this.fondoApuesta = fondoApuesta;
+    }
+
     @Override
     public String toString() {
-        return "Partida{" + "estado=" + estado + '}';
+        return "Partida{" + "estado=" + estado + ", numCasillasAspa=" + numCasillasAspa + ", numFichasJugador=" + numFichasJugador + ", fondoApuesta=" + fondoApuesta + '}';
     }
 }

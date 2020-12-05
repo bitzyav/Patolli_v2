@@ -5,33 +5,25 @@
  */
 package frames;
 
-import dominio.EstadoPartida;
-import dominio.Host;
 import dominio.Huesped;
-import dominio.Jugador;
 import dominio.Partida;
+import static frames.FrmClienteAux.cliente;
 import java.awt.Color;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import socketCliente.SocketCliente;
 
 /**
  *
- * @author Itzel
+ * @author Invitado
  */
-public class FrmDireccPartida extends FrmBase {
+public class FrmDireccPartida extends FrmClienteAux {
 
-    private static SocketCliente cliente;
     private static FrmConfigurarPartida frmConfig;
     private static FrmSeleccion frmSeleccion;
-    private static Jugador jugador;
-    private static Partida partida;
 
     /**
-     * Creates new form FrmCodigoSala
+     * Creates new form FrmDireccPartida
      */
     public FrmDireccPartida() {
         initComponents();
@@ -39,9 +31,8 @@ public class FrmDireccPartida extends FrmBase {
     }
 
     private void inicializar() {
-        this.setBackground(new Color(0, 0, 0, 0));
         adaptarPantalla();
-        cliente = new SocketCliente();
+        this.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -53,42 +44,13 @@ public class FrmDireccPartida extends FrmBase {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtDireccion = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JLabel();
-        lblCampoCodigo = new javax.swing.JLabel();
         btnUnirse = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
+        lblCampoCodigo = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtDireccion.setBackground(new java.awt.Color(243, 242, 237));
-        txtDireccion.setFont(new java.awt.Font("Eras Bold ITC", 0, 24)); // NOI18N
-        txtDireccion.setForeground(new java.awt.Color(139, 89, 10));
-        txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtDireccion.setText("127.0.0.1");
-        txtDireccion.setBorder(null);
-        txtDireccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtDireccion.setOpaque(false);
-        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 220, 30));
-
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseExited(evt);
-            }
-        });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
-
-        lblCampoCodigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
-        getContentPane().add(lblCampoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
 
         btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn unirse.png"))); // NOI18N
         btnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -103,85 +65,91 @@ public class FrmDireccPartida extends FrmBase {
                 btnUnirseMouseExited(evt);
             }
         });
-        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
+
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseExited(evt);
+            }
+        });
+
+        txtDireccion.setBackground(new java.awt.Color(243, 242, 237));
+        txtDireccion.setFont(new java.awt.Font("Eras Bold ITC", 0, 24)); // NOI18N
+        txtDireccion.setForeground(new java.awt.Color(139, 89, 10));
+        txtDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDireccion.setText("127.0.0.1");
+        txtDireccion.setBorder(null);
+        txtDireccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtDireccion.setOpaque(false);
+
+        lblCampoCodigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm direcc ip.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 380));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(302, Short.MAX_VALUE)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(btnUnirse)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(450, 450, 450)
+                            .addComponent(btnCancelar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(270, 270, 270)
+                            .addComponent(lblCampoCodigo))
+                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(btnUnirse)
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(240, 240, 240)
+                            .addComponent(btnCancelar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(130, 130, 130)
+                            .addComponent(lblCampoCodigo))
+                        .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     *
-     * @param evt
-     */
-    private void btnUnirseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseEntered
-        btnUnirse.setIcon(new ImageIcon("images\\btn unirse 2.png"));
-    }//GEN-LAST:event_btnUnirseMouseEntered
-
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     *
-     * @param evt
-     */
-    private void btnUnirseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseExited
-        btnUnirse.setIcon(new ImageIcon("images\\btn unirse.png"));
-    }//GEN-LAST:event_btnUnirseMouseExited
-
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     *
-     * @param evt
-     */
-    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
-        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
-    }//GEN-LAST:event_btnCancelarMouseEntered
-
-    /**
-     * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     *
-     * @param evt
-     */
-    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
-        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
-    }//GEN-LAST:event_btnCancelarMouseExited
-
-    /**
-     * Cambia de ventana al frame de inicio.
-     *
-     * @param evt
-     */
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        this.setVisible(false);
-        this.getInstanciaFrmInicio().setVisible(true);
-    }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
         try {
 
             if (jugador == null) {
-                Partida respuesta = cliente.conectar(txtDireccion.getText());
-                if (respuesta != null) {
-                    if (respuesta.getEstado() == EstadoPartida.VACIA) {
-                        partida = respuesta;
-                        jugador = new Host();
-                        jugador.setNumJugador((byte) 1);
-                        this.setVisible(false);
-                        getFrmConfig().setVisible(true);
-                    } else if (respuesta.getEstado() == EstadoPartida.ESPERA) {
-                        partida = respuesta;
-                        jugador = new Huesped();
-                        jugador.setNumJugador((byte) (partida.getJugadores().size() + 1));
-                        this.setVisible(false);
-                        getFrmSeleccion().setVisible(true);
-                    }else if(respuesta.getEstado()==EstadoPartida.INICIADA){
-                        JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Ocurrió un error desconocido.");
-                }
+                cliente = new SocketCliente(txtDireccion.getText());
+                cliente.setObserver(this);
+                new Thread(cliente).start();
             }
             //JOptionPane.showMessageDialog(this, );
         } catch (Exception ex) {
@@ -189,13 +157,67 @@ public class FrmDireccPartida extends FrmBase {
         }
     }//GEN-LAST:event_btnUnirseMouseClicked
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnCancelar;
-    private javax.swing.JLabel btnUnirse;
-    private javax.swing.JLabel fondo;
-    private javax.swing.JLabel lblCampoCodigo;
-    private javax.swing.JTextField txtDireccion;
-    // End of variables declaration//GEN-END:variables
+    private void btnUnirseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseEntered
+        btnUnirse.setIcon(new ImageIcon("images\\btn unirse 2.png"));
+    }//GEN-LAST:event_btnUnirseMouseEntered
+
+    private void btnUnirseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseExited
+        btnUnirse.setIcon(new ImageIcon("images\\btn unirse.png"));
+    }//GEN-LAST:event_btnUnirseMouseExited
+
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
+        this.setVisible(false);
+        this.getInstanciaFrmInicio().setVisible(true);
+    }//GEN-LAST:event_btnCancelarMouseClicked
+
+    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
+    }//GEN-LAST:event_btnCancelarMouseEntered
+
+    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
+        btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
+    }//GEN-LAST:event_btnCancelarMouseExited
+
+    @Override
+    public void update(Partida partidaLlegada) {
+        try {
+            partida=partidaLlegada;
+            if (partida != null) {
+                System.out.println(partida);
+                switch (partida.getEstado()) {
+                    case CONFIGURACION:
+                        if (!partida.getJugadores().get(0).isAsignado()) {
+                            jugador = partida.getJugadores().get(0);
+                            jugador.setAsignado(true);
+                            partida.getJugadores().set(0, jugador);
+                            //cliente.setObserver(getFrmConfig());
+                            getFrmConfig().setVisible(true);
+                            cliente.enviar(partida);
+                            this.setVisible(false);
+                            this.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "La partida está siendo configurada.");
+                        }
+                        break;
+                    case ESPERA:
+                        jugador = new Huesped();
+                        jugador.setNumJugador((byte) (partida.getJugadores().size() + 1));
+                        this.setVisible(false);
+                        getFrmSeleccion().setVisible(true);
+                        break;
+                    case INICIADA:
+                        JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Ocurrió un error desconocido.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static FrmConfigurarPartida getFrmConfig() {
         if (frmConfig == null) {
@@ -206,8 +228,17 @@ public class FrmDireccPartida extends FrmBase {
 
     public static FrmSeleccion getFrmSeleccion() {
         if (frmSeleccion == null) {
-            frmSeleccion = new FrmSeleccion();
+            frmSeleccion = new FrmSeleccion(cliente, jugador, partida);
         }
         return frmSeleccion;
     }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnCancelar;
+    private javax.swing.JLabel btnUnirse;
+    private javax.swing.JLabel fondo;
+    private javax.swing.JLabel lblCampoCodigo;
+    private javax.swing.JTextField txtDireccion;
+    // End of variables declaration//GEN-END:variables
 }

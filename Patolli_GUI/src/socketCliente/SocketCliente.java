@@ -26,31 +26,58 @@ import java.util.logging.Logger;
  *
  * @author alfonsofelix
  */
-public class SocketCliente {
+public class SocketCliente implements Runnable {
+
     private Observer observer;
     private Socket cliente;
     private ObjectOutputStream out;
     private ObjectInputStream in;
+    private String ip;
 
-    public Partida conectar(String ip) throws IOException, ClassNotFoundException {
-
-        cliente = new Socket(ip, 4444);
-        //  out = new PrintWriter(cliente.getOutputStream(), true);
-        in = new ObjectInputStream(cliente.getInputStream());
-
-        Partida partida = null;
-        try {
-            partida = (Partida) in.readObject();
-            System.out.println(partida);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return partida;
+    public SocketCliente(String ip) {
+        this.ip = ip;
     }
-    
-    public void notificar(Partida partida){
+
+    public void conectar(String ip) throws IOException, ClassNotFoundException {
+        if (cliente == null) {
+            cliente = new Socket(ip, 4444);
+            //  out = new PrintWriter(cliente.getOutputStream(), true);
+            in = new ObjectInputStream(cliente.getInputStream());
+            out = new ObjectOutputStream(cliente.getOutputStream());
+            Partida partida = null;
+            try {
+                partida = (Partida) in.readObject();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            notificar(partida);
+        }
+        while (true) {
+            try {
+                Partida partida;
+                if ((partida = (Partida) in.readObject()) != null) {
+                    notificar(partida);
+                    System.out.println("notificó");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+    }
+
+    private void notificar(Partida partida) {
         observer.update(partida);
+    }
+
+    public void enviar(Partida partida) throws IOException {
+        if (cliente.isConnected()) {
+            out.writeObject(partida);
+        }
+    }
+
+    public void setObserver(Observer observer) {
+        this.observer = observer;
     }
 
     /*   private byte[] serializar(Partida partida) throws IOException {
@@ -65,4 +92,14 @@ public class SocketCliente {
         Partida p = (Partida) partida;
         return p;
     }*/
+    @Override
+    public void run() {
+        try {
+            conectar(ip);
+        } catch (IOException ex) {
+            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -16,6 +16,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,11 +25,11 @@ import java.net.Socket;
  */
 public class PatolliServer implements Runnable {
 
-    private ServerSocket serverSocket;
-    private ObserverConexion serverManagerConexion;
-    private ObserverManager serverManagerPartida;
-    ObjectOutputStream out;
-    ObjectInputStream in;
+    private final ServerSocket serverSocket;
+    private final ObserverConexion serverManagerConexion;
+    private final ObserverManager serverManagerPartida;
+    private ObjectOutputStream out;
+    private ObjectInputStream in;
     private Socket cliente;
 
     public PatolliServer(ServerSocket serverSocket, ObserverConexion serverManagerConexion, ObserverManager serverManagerPartida) {
@@ -49,9 +51,22 @@ public class PatolliServer implements Runnable {
             new Thread(hilo).start();
 
             out = new ObjectOutputStream(cliente.getOutputStream());
+            in = new ObjectInputStream(cliente.getInputStream());
 
             notificarConexion();
 
+            while (true) {
+                try {
+                    Partida partida;
+                    if ((partida = (Partida) in.readObject()) != null) {
+                        System.out.println(partida);
+                        System.out.println(partida.getJugadores().get(0).isAsignado());
+                        notificarMovimiento(partida);
+                    }
+                } catch (Exception e) {
+
+                }
+            }
         } catch (IOException e) {
             System.err.println("Ocurrió un error: " + e.getMessage());
         }

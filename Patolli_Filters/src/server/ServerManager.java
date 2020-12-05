@@ -9,6 +9,7 @@ import dominio.EstadoPartida;
 import dominio.Partida;
 import filters.Filter;
 import filters.FilterColores;
+import filters.FilterConfiguracion;
 import filters.FilterUnirJugador;
 import filters.Pipe;
 import filters.PipeFinal;
@@ -39,6 +40,7 @@ public class ServerManager implements ObserverManager, ObserverConexion {
     private List<PatolliServer> clientes;
     private Proxy proxyConexiones;
     private Proxy proxyJuego;
+    private Proxy proxyConfiguracion;
     private Sink<Partida> sink;
 
     public ServerManager() {
@@ -48,8 +50,18 @@ public class ServerManager implements ObserverManager, ObserverConexion {
     private void inicializar() {
         this.clientes = new ArrayList<>();
         this.sink = new SinkCliente(this);
-        //Para la línea de producción de conexiones
 
+        //Para la línea de producción de configuración
+        Filter filterConfig = new FilterConfiguracion();
+        Pipe<Partida> pipeConfig1 = new PipeImpl<>(filterConfig);
+        Pipe<Partida> pipeConfigFinal = new PipeFinal<>(this.sink);
+
+        filterConfig.setInput(pipeConfig1);
+        filterConfig.setOutput(pipeConfigFinal);
+
+        proxyConfiguracion = new Proxy(pipeConfig1);
+
+        //Para la línea de producción de conexiones
         Filter filterUnirJugador = new FilterUnirJugador();
         Filter filterColores = new FilterColores();
         Pipe<Partida> pipeConexion1 = new PipeImpl<>(filterUnirJugador);
@@ -63,7 +75,8 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         filterColores.setInput(pipeConexion2);
         filterColores.setOutput(pipeConexionFinal);
 
-        proxyConexiones=new Proxy(pipeConexion1);
+        proxyConexiones = new Proxy(pipeConexion1);
+
         escuchar();
     }
 
@@ -72,7 +85,6 @@ public class ServerManager implements ObserverManager, ObserverConexion {
             PatolliServer cliente1 = new PatolliServer(new ServerSocket(4444), this, this);
             System.out.println("Servidor iniciado");
             cliente1.run();
-
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -92,11 +104,25 @@ public class ServerManager implements ObserverManager, ObserverConexion {
     public void update(PatolliServer conexion) {
         accionesConexion(conexion);
     }
-    
-    public void accionesConexion(PatolliServer conexion){
+
+    public void accionesConexion(PatolliServer conexion) {
         System.out.println("Un jugador se ha conectado");
         this.clientes.add(conexion);
-        this.proxyConexiones.enviar(this.sink.getPartida());
+        if (this.sink.getPartida().getEstado() == EstadoPartida.VACIA || this.sink.getPartida().getEstado() == EstadoPartida.CONFIGURACION) {
+            proxyConfiguracion.enviar(this.sink.getPartida());
+            if (this.clientes.size() > 1) {
+                for (int i = 1; i < clientes.size(); i++) {
+                    try {
+                        clientes.get(i).getCliente().close();
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    clientes.remove(i);
+                }
+            }
+        } else if (this.sink.getPartida().getEstado() == EstadoPartida.ESPERA) {
+            this.proxyConexiones.enviar(this.sink.getPartida());
+        }
     }
 
     public void enviarPartidaAClientes(Partida partida) {
@@ -111,7 +137,18 @@ public class ServerManager implements ObserverManager, ObserverConexion {
 
     @Override
     public void updatePartida(Partida partida) {
-
+        System.out.println(partida);
+        switch (partida.getEstado()) {
+            case CONFIGURACION:
+                this.proxyConfiguracion.enviar(partida);
+                break;
+            case ESPERA:
+                this.proxyConexiones.enviar(partida);
+                break;
+            case INICIADA:
+                this.proxyJuego.enviar(partida);
+                break;
+        }
     }
 
     private byte[] serializar(Partida partida) throws IOException {
