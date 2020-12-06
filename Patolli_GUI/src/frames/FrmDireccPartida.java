@@ -181,36 +181,39 @@ public class FrmDireccPartida extends FrmClienteAux {
     @Override
     public void update(Partida partidaLlegada) {
         try {
-            partida=partidaLlegada;
+            partida = partidaLlegada;
             if (partida != null) {
-                System.out.println(partida);
-                switch (partida.getEstado()) {
-                    case CONFIGURACION:
-                        if (!partida.getJugadores().get(0).isAsignado()) {
-                            jugador = partida.getJugadores().get(0);
-                            jugador.setAsignado(true);
-                            partida.getJugadores().set(0, jugador);
-                            //cliente.setObserver(getFrmConfig());
-                            getFrmConfig().setVisible(true);
-                            cliente.enviar(partida);
+                if (!getFrmConfig().isVisible() && !getFrmSeleccion().isVisible()) {
+                    switch (partida.getEstado()) {
+                        case CONFIGURACION:
+                            if (!partida.getJugadores().get(0).isAsignado()) {
+                                jugador = partida.getJugadores().get(0);
+                                jugador.setAsignado(true);
+                                partida.getJugadores().set(0, jugador);
+                                cliente.setObserver(getFrmConfig());
+                                getFrmConfig().setVisible(true);
+                                cliente.enviar(partida);
+                                this.setVisible(false);
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "La partida está siendo configurada.");
+                            }
+                            break;
+                        case ESPERA:
+                            jugador = new Huesped();
+                            jugador.setNumJugador((byte) (partida.getJugadores().size() + 1));
                             this.setVisible(false);
                             this.dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(rootPane, "La partida está siendo configurada.");
-                        }
-                        break;
-                    case ESPERA:
-                        jugador = new Huesped();
-                        jugador.setNumJugador((byte) (partida.getJugadores().size() + 1));
-                        this.setVisible(false);
-                        getFrmSeleccion().setVisible(true);
-                        break;
-                    case INICIADA:
-                        JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
-                        break;
-                    default:
-                        break;
+                            getFrmSeleccion().setVisible(true);
+                            break;
+                        case INICIADA:
+                            JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Ocurrió un error desconocido.");
             }
