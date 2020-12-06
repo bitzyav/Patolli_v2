@@ -6,12 +6,15 @@
 package dominio;
 
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 
 /**
  *
  * @author alfonsofelix
  */
-public class Casilla {
+public class Casilla implements Serializable{
+
+    private static final long serialVersionUID = -7010454262487254551L;
     private int coordenadaX;
     private int coordenadaY;
     private int numero;

@@ -5,10 +5,12 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alfonsofelix
  */
-public enum ColorFicha {
+public enum ColorFicha implements Serializable{
     ROJO, NARANJA, AMARILLO, VERDE, CYAN, AZUL, MORADO, ROSA
 }

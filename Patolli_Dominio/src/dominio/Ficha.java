@@ -5,11 +5,15 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alfonsofelix
  */
-public class Ficha {
+public class Ficha implements Serializable{
+
+    private static final long serialVersionUID = -4089478173118647905L;
 
     private int numero;
     private Jugador jugador;

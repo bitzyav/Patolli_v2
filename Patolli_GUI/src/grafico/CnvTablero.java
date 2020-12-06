@@ -35,12 +35,13 @@ public class CnvTablero extends Canvas {
     private int numCasillasAspa;
     private int ancho;
     private int alto;
+    private int anchoPantalla;
     Graphics2D g2d;
 
     public CnvTablero(LinkedList<Casilla> casillas, int numCasillasAspa, int anchoPantalla) {
         this.casillas = casillas;
         this.numCasillasAspa = numCasillasAspa;
-        this.generarCasillas(numCasillasAspa, anchoPantalla, 50);
+        this.anchoPantalla=Math.round(anchoPantalla/2.5f);
         this.ancho = casillas.size() * 50 + 50 * 3;
         this.alto=ancho;
     }
@@ -69,9 +70,14 @@ public class CnvTablero extends Canvas {
         }
     }
 
-    public void generarCasillas(int numCasillasAspa, int anchoPantalla, int tamanioCasilla) {
+    public void setCasillas(LinkedList<Casilla> casillas) {
+        this.casillas = casillas;
+    }
+
+    public LinkedList<Casilla> generarCasillas() {
+        int tamanioCasilla=50;
         int casilla = 0;
-        int x = anchoPantalla / 2;
+        int x = anchoPantalla;
         int y = 0;
 
         if (numCasillasAspa % 2 == 0) {
@@ -376,6 +382,7 @@ public class CnvTablero extends Canvas {
             y -= tamanioCasilla;
             casillas.add(new CasillaTriangulo(x, y, casilla, LugarTriangulo.TOP_RIGHT_B));
         }
+        return casillas;
     }
 
     public int getAncho() {

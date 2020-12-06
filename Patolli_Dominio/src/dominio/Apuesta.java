@@ -5,11 +5,15 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alfonsofelix
  */
-public class Apuesta {
+public class Apuesta implements Serializable{
+
+    private static final long serialVersionUID = -5988478280952761303L;
     private Ficha ficha;
 
     public Ficha getFicha() {

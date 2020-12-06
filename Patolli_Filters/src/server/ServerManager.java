@@ -8,7 +8,6 @@ package server;
 import dominio.EstadoPartida;
 import dominio.Partida;
 import filters.Filter;
-import filters.FilterColores;
 import filters.FilterConfiguracion;
 import filters.FilterUnirJugador;
 import filters.Pipe;
@@ -63,17 +62,11 @@ public class ServerManager implements ObserverManager, ObserverConexion {
 
         //Para la línea de producción de conexiones
         Filter filterUnirJugador = new FilterUnirJugador();
-        Filter filterColores = new FilterColores();
         Pipe<Partida> pipeConexion1 = new PipeImpl<>(filterUnirJugador);
-
-        Pipe<Partida> pipeConexion2 = new PipeImpl<>(filterColores);
         Pipe<Partida> pipeConexionFinal = new PipeFinal<>(this.sink);
 
         filterUnirJugador.setInput(pipeConexion1);
-        filterUnirJugador.setOutput(pipeConexion2);
-
-        filterColores.setInput(pipeConexion2);
-        filterColores.setOutput(pipeConexionFinal);
+        filterUnirJugador.setOutput(pipeConexionFinal);
 
         proxyConexiones = new Proxy(pipeConexion1);
 
@@ -106,7 +99,6 @@ public class ServerManager implements ObserverManager, ObserverConexion {
     }
 
     public void accionesConexion(PatolliServer conexion) {
-        System.out.println("Un jugador se ha conectado");
         this.clientes.add(conexion);
         if (this.sink.getPartida().getEstado() == EstadoPartida.VACIA || this.sink.getPartida().getEstado() == EstadoPartida.CONFIGURACION) {
             proxyConfiguracion.enviar(this.sink.getPartida());

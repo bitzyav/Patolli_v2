@@ -5,24 +5,33 @@
  */
 package frames;
 
+import dominio.ColorFicha;
+import dominio.EstadoPartida;
 import dominio.Jugador;
 import dominio.Partida;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import socketCliente.SocketCliente;
 
 /**
  *
  * @author Itzel
  */
-public class FrmSeleccion extends FrmClienteAux{
+public class FrmSeleccion extends FrmClienteAux {
 
     private static FrmTablero frmTablero;
+
     /**
      * Creates new form FrmSeleccion
      */
-    public FrmSeleccion(SocketCliente cliente, Jugador jugador, Partida partida) { 
-        super(cliente,jugador,partida);
+    public FrmSeleccion(SocketCliente cliente, Jugador jugador, Partida partida) {
+        super(cliente, jugador, partida);
         initComponents();
         inicializar();
     }
@@ -57,9 +66,10 @@ public class FrmSeleccion extends FrmClienteAux{
         txtNombre.setFont(new java.awt.Font("Eras Bold ITC", 0, 24)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(139, 89, 10));
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNombre.setText("...");
+        txtNombre.setToolTipText("Nombre de usuario");
         txtNombre.setBorder(null);
         txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtNombre.setName(""); // NOI18N
         txtNombre.setOpaque(false);
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 220, 30));
 
@@ -68,34 +78,74 @@ public class FrmSeleccion extends FrmClienteAux{
 
         btnColorVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color verde.png"))); // NOI18N
         btnColorVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorVerde.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorVerdeMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
 
         btnColorCyan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color cyan.png"))); // NOI18N
         btnColorCyan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorCyan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorCyanMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorCyan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
 
         btnColorNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color naranja.png"))); // NOI18N
         btnColorNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorNaranja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorNaranjaMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
 
         btnColorAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color azul.png"))); // NOI18N
         btnColorAzul.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorAzul.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorAzulMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 70, -1));
 
         btnColorAmarillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color amarillo.png"))); // NOI18N
         btnColorAmarillo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorAmarillo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorAmarilloMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorAmarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
 
         btnColorRosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rosa.png"))); // NOI18N
         btnColorRosa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorRosa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorRosaMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
 
         btnColorMorado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color morado.png"))); // NOI18N
         btnColorMorado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorMorado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorMoradoMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorMorado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, -1, -1));
 
         btnColorRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rojo.png"))); // NOI18N
         btnColorRojo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnColorRojo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorRojoMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnColorRojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
@@ -136,7 +186,8 @@ public class FrmSeleccion extends FrmClienteAux{
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
         btnAceptar.setIcon(new ImageIcon("images\\btn aceptar 2.png"));
@@ -144,7 +195,8 @@ public class FrmSeleccion extends FrmClienteAux{
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
         btnAceptar.setIcon(new ImageIcon("images\\btn aceptar.png"));
@@ -152,7 +204,8 @@ public class FrmSeleccion extends FrmClienteAux{
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
@@ -160,7 +213,8 @@ public class FrmSeleccion extends FrmClienteAux{
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
@@ -168,7 +222,8 @@ public class FrmSeleccion extends FrmClienteAux{
 
     /**
      * Cambia de ventana al frame de inicio.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         this.setVisible(false);
@@ -177,12 +232,138 @@ public class FrmSeleccion extends FrmClienteAux{
 
     /**
      * Cambia de ventana al tablero.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        this.setVisible(false);
-        getFrmTablero().setVisible(true);
+        if (jugador.getColor() != null) {
+            try {
+                this.setVisible(false);
+                cliente.setObserver(getFrmTablero());
+
+                Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+                jugador = jug;
+                jugador.setNombre(txtNombre.getText());
+                partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+                partida.setJugadorTurno(jugador);
+
+                cliente.enviar(partida);
+                getFrmTablero().setVisible(true);
+                this.dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Throwable ex) {
+                Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Primero debe seleccionar un color.");
+        }
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void btnColorRojoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorRojoMouseClicked
+
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.ROJO);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorRojoMouseClicked
+
+    private void btnColorNaranjaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorNaranjaMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.NARANJA);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorNaranjaMouseClicked
+
+    private void btnColorAmarilloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorAmarilloMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.AMARILLO);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorAmarilloMouseClicked
+
+    private void btnColorVerdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorVerdeMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.VERDE);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorVerdeMouseClicked
+
+    private void btnColorCyanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorCyanMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.CYAN);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorCyanMouseClicked
+
+    private void btnColorAzulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorAzulMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.AZUL);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorAzulMouseClicked
+
+    private void btnColorRosaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorRosaMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.ROSA);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorRosaMouseClicked
+
+    private void btnColorMoradoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorMoradoMouseClicked
+        try {
+            Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+            jugador = jug;
+            jugador.setColor(ColorFicha.MORADO);
+            partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnColorMoradoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAceptar;
@@ -202,18 +383,91 @@ public class FrmSeleccion extends FrmClienteAux{
 
     private void inicializar() {
         adaptarPantalla();
-        this.setBackground(new Color(0,0,0,0));
+        //this.setBackground(new Color(0, 0, 0, 0));
     }
 
     public static FrmTablero getFrmTablero() {
-        if(frmTablero==null){
-            frmTablero=new FrmTablero();
+        if (frmTablero == null) {
+            frmTablero = new FrmTablero(cliente, jugador, partida);
         }
         return frmTablero;
     }
 
     @Override
     public void update(Partida partidaLlegada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super.update(partidaLlegada);
+        List<ColorFicha> lstColoresOcupados = new ArrayList<>();
+
+        for (Jugador jugadore : partida.getJugadores()) {
+            if (jugadore.getColor() != null) {
+                lstColoresOcupados.add(jugadore.getColor());
+            }
+        }
+
+        for (ColorFicha value : ColorFicha.values()) {
+            if (lstColoresOcupados.contains(value)) {
+                quitarColor(value);
+            } else {
+                mostrarColor(value);
+            }
+        }
+    }
+
+    public void quitarColor(ColorFicha color) {
+        switch (color) {
+            case ROJO:
+                btnColorRojo.setVisible(false);
+                break;
+            case NARANJA:
+                btnColorNaranja.setVisible(false);
+                break;
+            case AMARILLO:
+                btnColorAmarillo.setVisible(false);
+                break;
+            case VERDE:
+                btnColorVerde.setVisible(false);
+                break;
+            case CYAN:
+                btnColorCyan.setVisible(false);
+                break;
+            case AZUL:
+                btnColorAzul.setVisible(false);
+                break;
+            case ROSA:
+                btnColorRosa.setVisible(false);
+                break;
+            case MORADO:
+                btnColorMorado.setVisible(false);
+                break;
+        }
+    }
+
+    public void mostrarColor(ColorFicha color) {
+        switch (color) {
+            case ROJO:
+                btnColorRojo.setVisible(true);
+                break;
+            case NARANJA:
+                btnColorNaranja.setVisible(true);
+                break;
+            case AMARILLO:
+                btnColorAmarillo.setVisible(true);
+                break;
+            case VERDE:
+                btnColorVerde.setVisible(true);
+                break;
+            case CYAN:
+                btnColorCyan.setVisible(true);
+                break;
+            case AZUL:
+                btnColorAzul.setVisible(true);
+                break;
+            case ROSA:
+                btnColorRosa.setVisible(true);
+                break;
+            case MORADO:
+                btnColorMorado.setVisible(true);
+                break;
+        }
     }
 }

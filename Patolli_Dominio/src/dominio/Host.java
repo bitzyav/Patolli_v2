@@ -5,20 +5,20 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author alfonsofelix
  */
-public class Host extends Jugador{
-    private Partida partida; 
+public class Host extends Jugador implements Serializable {
 
-    public Host(){
-    }
-    
-    public Host(String nombre, ColorFicha color) {
-        super(nombre, color);
+    private static final long serialVersionUID = 5829818356531324847L;
+
+    private Partida partida;
+
+    public Host() {
     }
 
     public Partida getPartida() {

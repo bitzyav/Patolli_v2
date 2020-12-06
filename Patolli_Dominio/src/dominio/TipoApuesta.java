@@ -5,10 +5,12 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alfonsofelix
  */
-public enum TipoApuesta {
+public enum TipoApuesta implements Serializable{
     OBLIGATORIA, VOLUNTARIA
 }

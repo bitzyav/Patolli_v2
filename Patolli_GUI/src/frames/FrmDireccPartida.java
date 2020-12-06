@@ -5,10 +5,14 @@
  */
 package frames;
 
+import dominio.ColorFicha;
 import dominio.Huesped;
+import dominio.Jugador;
 import dominio.Partida;
 import static frames.FrmClienteAux.cliente;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import socketCliente.SocketCliente;
@@ -32,7 +36,7 @@ public class FrmDireccPartida extends FrmClienteAux {
 
     private void inicializar() {
         adaptarPantalla();
-        this.setBackground(new Color(0, 0, 0, 0));
+//        this.setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -145,7 +149,6 @@ public class FrmDireccPartida extends FrmClienteAux {
 
     private void btnUnirseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUnirseMouseClicked
         try {
-
             if (jugador == null) {
                 cliente = new SocketCliente(txtDireccion.getText());
                 cliente.setObserver(this);
@@ -180,8 +183,8 @@ public class FrmDireccPartida extends FrmClienteAux {
 
     @Override
     public void update(Partida partidaLlegada) {
+        super.update(partidaLlegada);
         try {
-            partida = partidaLlegada;
             if (partida != null) {
                 if (!getFrmConfig().isVisible() && !getFrmSeleccion().isVisible()) {
                     switch (partida.getEstado()) {
@@ -197,14 +200,23 @@ public class FrmDireccPartida extends FrmClienteAux {
                                 this.dispose();
                             } else {
                                 JOptionPane.showMessageDialog(rootPane, "La partida está siendo configurada.");
+                                getFrmInicio().setVisible(true);
                             }
                             break;
                         case ESPERA:
-                            jugador = new Huesped();
-                            jugador.setNumJugador((byte) (partida.getJugadores().size() + 1));
-                            this.setVisible(false);
-                            this.dispose();
-                            getFrmSeleccion().setVisible(true);
+                            for (Jugador jug : partida.getJugadores()) {
+                                if (!jug.isAsignado()) {
+                                    jugador = jug;
+                                    jugador.setAsignado(true);
+                                    partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
+                                    cliente.setObserver(getFrmSeleccion());
+                                    cliente.enviar(partida);
+                                    this.setVisible(false);
+                                    getFrmSeleccion().setVisible(true);
+                                    this.dispose();
+                                    break;
+                                }
+                            }
                             break;
                         case INICIADA:
                             JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
@@ -219,6 +231,8 @@ public class FrmDireccPartida extends FrmClienteAux {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } catch (Throwable ex) {
+            Logger.getLogger(FrmDireccPartida.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

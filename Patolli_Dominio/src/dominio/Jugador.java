@@ -7,13 +7,13 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Queue;
 
 /**
  *
  * @author alfonsofelix
  */
 public class Jugador implements Serializable{
+    private static final long serialVersionUID = -3776674854141656300L;
     private byte numJugador;
     private String nombre;
     private int numFrijoles;
@@ -25,13 +25,7 @@ public class Jugador implements Serializable{
 
     public Jugador(){
         this.asignado=false;
-    }
-    
-    public Jugador(String nombre, ColorFicha color) {
         this.fichas=new ArrayList<>();
-        this.apuestas=new ArrayList<>();
-        this.nombre = nombre;
-        this.color = color;
     }
 
     public byte getNumJugador() {
@@ -116,5 +110,10 @@ public class Jugador implements Serializable{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Jugador{" + "numJugador=" + numJugador + ", asignado=" + asignado + '}';
     }
 }

@@ -11,6 +11,8 @@ package dominio;
  */
 public class CasillaSemicirculo extends Casilla{
 
+    private static final long serialVersionUID = 4788848240622610403L;
+
     private LugarSemicirculo lugar;
     
     public CasillaSemicirculo() {

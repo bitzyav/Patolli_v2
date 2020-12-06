@@ -1,9 +1,6 @@
 package main;
 
-import dominio.Partida;
 import server.ServerManager;
-import java.io.IOException;
-import java.net.ServerSocket;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

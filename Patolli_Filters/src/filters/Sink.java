@@ -27,9 +27,7 @@ public abstract class Sink<T> {
 
     public void actualizar(T partida) {
         this.partida = partida;
-        System.out.println("Llegó al Sink");
         notificar();
-        System.out.println("Notificó");
     }
 
     protected abstract void notificar();

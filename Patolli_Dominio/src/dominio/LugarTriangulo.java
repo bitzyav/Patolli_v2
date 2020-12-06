@@ -5,11 +5,13 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Invitado
  */
-public enum LugarTriangulo {
+public enum LugarTriangulo implements Serializable{
     TOP_LEFT_A,
     TOP_LEFT_B,
     TOP_RIGHT_A,

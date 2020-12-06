@@ -5,17 +5,18 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alfonsofelix
  */
-public class Huesped extends Jugador{
+public class Huesped extends Jugador implements Serializable{
+
+    private static final long serialVersionUID = -5442313719887969676L;
 
     public Huesped() {
     }
     
-    public Huesped(String nombre, ColorFicha color) {
-        super(nombre, color);
-    }
     
 }

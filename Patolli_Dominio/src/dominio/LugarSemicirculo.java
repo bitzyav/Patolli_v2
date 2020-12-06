@@ -5,11 +5,13 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Invitado
  */
-public enum LugarSemicirculo {
+public enum LugarSemicirculo implements Serializable{
     TOP,
     LEFT,
     RIGHT,

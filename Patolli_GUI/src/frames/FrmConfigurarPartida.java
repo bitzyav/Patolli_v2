@@ -383,10 +383,15 @@ public class FrmConfigurarPartida extends FrmClienteAux {
         partida.setNumFichasJugador(numFichas);
 
         try {
+            cliente.setObserver(getFrmSeleccion());
+            partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
-            this.setVisible(false);
             getFrmSeleccion().setVisible(true);
+            this.setVisible(false);
+            this.finalize();
         } catch (IOException ex) {
+            Logger.getLogger(FrmConfigurarPartida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Throwable ex) {
             Logger.getLogger(FrmConfigurarPartida.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCrearMouseClicked
@@ -501,7 +506,7 @@ public class FrmConfigurarPartida extends FrmClienteAux {
 
     private void inicializar() {
         adaptarPantalla();
-        this.setBackground(new Color(0, 0, 0, 0));
+        //this.setBackground(new Color(0, 0, 0, 0));
         inicializarValores();
     }
 
@@ -514,6 +519,6 @@ public class FrmConfigurarPartida extends FrmClienteAux {
 
     @Override
     public void update(Partida partidaLlegada) {
-        partida = partidaLlegada;
+        super.update(partidaLlegada);
     }
 }

@@ -11,6 +11,8 @@ package dominio;
  */
 public class CasillaPropia extends Casilla{
 
+    private static final long serialVersionUID = 7432876372194512736L;
+
     private Jugador jugador;
     
     public CasillaPropia() {

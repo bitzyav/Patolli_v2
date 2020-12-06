@@ -11,6 +11,8 @@ package dominio;
  */
 public class CasillaCentro extends Casilla{
 
+    private static final long serialVersionUID = -3921572654001988296L;
+
     public CasillaCentro() {
     }
 

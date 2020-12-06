@@ -19,7 +19,7 @@ abstract class FrmBase extends javax.swing.JFrame {
      * Creates new form FrmBase
      */
     public FrmBase() {
-        setUndecorated(true);
+        //setUndecorated(true);
         initComponents();
     }
 

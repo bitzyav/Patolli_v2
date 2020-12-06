@@ -14,9 +14,13 @@ import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
 import grafico.CnvTablero;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import java.awt.Dimension;
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -29,16 +33,13 @@ import socketCliente.SocketCliente;
 public class FrmTablero extends FrmClienteAux {
 
     private static FrmSalir frmSalir;
-    private JPanel pnlTablero;
+    // private JPanel pnlTablero;
     private CnvTablero cnvTablero;
 
-    /**
-     * Inicializa y crea la instancia del frame FrmTablero
-     */
-    public FrmTablero() {
+    public FrmTablero(SocketCliente clienteN, Jugador jugadorN, Partida partidaN) {
+        super(clienteN, jugadorN, partidaN);
         initComponents();
         inicializar();
-
     }
 
     /**
@@ -48,7 +49,33 @@ public class FrmTablero extends FrmClienteAux {
     private void inicializar() {
         adaptarPantalla();
         extenderPantalla();
-/*
+
+        Tablero tablero = partida.getTablero();
+
+        if (partida.getTablero() == null) {
+            try {
+                tablero = new Tablero();
+                cnvTablero = new CnvTablero(tablero.getCasillas(), partida.getNumCasillasAspa(), this.getSize().width);
+                tablero.setCasillas(cnvTablero.generarCasillas());
+                partida.setTablero(tablero);
+                cliente.enviar(partida);
+            } catch (IOException ex) {
+                Logger.getLogger(FrmTablero.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            cnvTablero = new CnvTablero(tablero.getCasillas(), partida.getNumCasillasAspa(), this.getSize().width);
+        }
+
+        pintarTablero();
+        //pnlTablero = new JPanel();
+
+        /*this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
+        pnlTablero.setPreferredSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
+        pnlTablero.setMaximumSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
+        pnlTablero.setBorder(BorderFactory.createEtchedBorder());*/
+ /*
         partida = new Partida(FrmConfigurarPartida.numCasillas, FrmConfigurarPartida.numFichas, FrmConfigurarPartida.numFondoApuesta);
         Tablero tablero = new Tablero();
         cnvTablero = new CnvTablero(tablero.getCasillas(), FrmConfigurarPartida.numCasillas, this.getSize().width);
@@ -102,41 +129,6 @@ public class FrmTablero extends FrmClienteAux {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    /**
-     * Método que dibuja el tablero según el número de casillas introducidas.
-     *
-     * @param numCasillas El número de casillas que tendrá el tablero.
-     */
-    private void dibujarTablero(int numCasillas) {
-        /*host = new Host(FrmConfigurarPartida.numFichas);
-        Partida p = new Partida();
-        host.setPartida(p);
-        host.setColor(ColorFicha.ROJO); //Esto es provicional
-
-        p.getJugadores().add(host);
-        partida = Fabrica.getFachadaPartida(host);
-
-        partida.obtenerPartida().setTablero(new Tablero(numCasillas));
-
-        JPanel pnlTablero = new JPanel();
-        JPanel pnlBotones = new JPanel();
-        this.setLayout(new FlowLayout());
-        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
-        pnlBotones.setLayout(new BoxLayout(pnlBotones, BoxLayout.X_AXIS));
-        pnlTablero.add(partida.obtenerTablero().getCanvasTablero());
-        pnlTablero.setPreferredSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(), partida.obtenerTablero().getCanvasTablero().getAlto()));
-        pnlBotones.add(btnTirarCanias);
-        pnlBotones.add(btnRetirarse);
-        pnlBotones.add(btnAvanzarNormal);
-        pnlBotones.add(btnMeterFicha);
-        pnlTablero.setMaximumSize(new Dimension(partida.obtenerTablero().getCanvasTablero().getAncho(), partida.obtenerTablero().getCanvasTablero().getAlto()));
-        pnlTablero.setBorder(BorderFactory.createEtchedBorder());
-        pnlBotones.setBorder(BorderFactory.createEmptyBorder());
-        this.getContentPane().add(pnlTablero);
-        this.getContentPane().add(pnlBotones);*/
-    }
-
     public static FrmSalir getFrmSalir() {
         if (frmSalir == null) {
             frmSalir = new FrmSalir();
@@ -152,6 +144,7 @@ public class FrmTablero extends FrmClienteAux {
         btnRetirarse = new javax.swing.JButton();
         btnAvanzarNormal = new javax.swing.JButton();
         btnMeterFicha = new javax.swing.JButton();
+        pnlTablero = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -184,38 +177,55 @@ public class FrmTablero extends FrmClienteAux {
             }
         });
 
+        pnlTablero.setMinimumSize(new java.awt.Dimension(300, 300));
+
+        javax.swing.GroupLayout pnlTableroLayout = new javax.swing.GroupLayout(pnlTablero);
+        pnlTablero.setLayout(pnlTableroLayout);
+        pnlTableroLayout.setHorizontalGroup(
+            pnlTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlTableroLayout.setVerticalGroup(
+            pnlTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 621, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMeterFicha)
+                .addGap(202, 202, 202))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
-                        .addComponent(btnRetirarse))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(391, 391, 391)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnAvanzarNormal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTirarCanias))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(486, 486, 486)
-                        .addComponent(btnAvanzarNormal))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(445, 445, 445)
-                        .addComponent(btnMeterFicha)))
-                .addContainerGap(353, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addComponent(btnRetirarse)))
+                .addContainerGap(1833, Short.MAX_VALUE))
+            .addComponent(pnlTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRetirarse)
-                .addGap(23, 23, 23)
-                .addComponent(btnTirarCanias)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAvanzarNormal)
-                .addGap(51, 51, 51)
-                .addComponent(btnMeterFicha)
-                .addGap(450, 450, 450))
+                .addComponent(pnlTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnMeterFicha)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnRetirarse)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAvanzarNormal)
+                        .addContainerGap())
+                    .addComponent(btnTirarCanias, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         pack();
@@ -249,13 +259,11 @@ public class FrmTablero extends FrmClienteAux {
                     } else {
                         partida.getTablero().getCasillas().getFirst().setFicha(ficha);
                     }
-                    pintarTablero(partida.getTablero());
+                    pintarTablero();
                     break;
                 }
             }
         }
-
-
     }//GEN-LAST:event_btnAvanzarNormalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -263,19 +271,20 @@ public class FrmTablero extends FrmClienteAux {
     private javax.swing.JButton btnMeterFicha;
     private javax.swing.JButton btnRetirarse;
     private javax.swing.JButton btnTirarCanias;
+    private javax.swing.JPanel pnlTablero;
     // End of variables declaration//GEN-END:variables
 
-    private void pintarTablero(Tablero tablero) {
-        cnvTablero.paint(this.getGraphics());
-
-        pnlTablero.add(cnvTablero);
-
-        partida.setTablero(tablero);
-        this.getContentPane().add(pnlTablero);
+    private void pintarTablero() {
+        cnvTablero.setCasillas(partida.getTablero().getCasillas());
+        for (int i = 0; i < 10; i++) {
+            cnvTablero.paint(pnlTablero.getGraphics());
+            pnlTablero.add(cnvTablero);
+        }
     }
 
     @Override
     public void update(Partida partidaLlegada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super.update(partidaLlegada);
+        pintarTablero();
     }
 }

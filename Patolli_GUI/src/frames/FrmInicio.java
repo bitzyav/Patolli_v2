@@ -25,7 +25,7 @@ public class FrmInicio extends FrmBase {
 
     private void inicializar(){
         adaptarPantalla();
-        this.setBackground(new Color(0,0,0,0));
+//        this.setBackground(new Color(0,0,0,0));
     }
     
     /**

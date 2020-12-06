@@ -11,6 +11,8 @@ package dominio;
  */
 public class CasillaTriangulo extends Casilla{
 
+    private static final long serialVersionUID = 4108042744956269656L;
+
     private LugarTriangulo lugar;
     
     public CasillaTriangulo() {

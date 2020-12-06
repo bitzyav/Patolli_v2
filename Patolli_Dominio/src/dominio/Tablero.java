@@ -5,13 +5,16 @@
  */
 package dominio;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author alfonsofelix
  */
-public class Tablero {
+public class Tablero implements Serializable{
+
+    private static final long serialVersionUID = -4931699436996681187L;
 
     private LinkedList<Casilla> casillas;
 

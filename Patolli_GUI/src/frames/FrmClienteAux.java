@@ -27,4 +27,9 @@ abstract class FrmClienteAux extends FrmBase implements Observer{
     public FrmClienteAux(){
         
     }
+
+    @Override
+    public void update(Partida partidaLlegada) {
+        partida=partidaLlegada;
+    }
 }
