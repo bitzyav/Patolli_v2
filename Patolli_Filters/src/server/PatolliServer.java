@@ -26,6 +26,10 @@ import java.util.logging.Logger;
 public class PatolliServer implements Runnable {
 
     private final ServerSocket serverSocket;
+    
+    
+    
+    
     private final ObserverConexion serverManagerConexion;
     private final ObserverManager serverManagerPartida;
     private ObjectOutputStream out;

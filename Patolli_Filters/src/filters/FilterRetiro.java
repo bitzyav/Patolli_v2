@@ -9,19 +9,17 @@ import dominio.Partida;
 
 /**
  *
- * @author alfonsofelix
+ * @author Invitado
  */
-public class FilterDado extends Filter<Partida, Partida>{
+public class FilterRetiro extends Filter<Partida, Partida> {
 
     @Override
     protected void doFilter() {
-        Partida partida=input.get();
-        
+        Partida partida = input.get();
+
         //AQUI VAN ACCIONES
-        
         output.put(partida);
         output.doChain();
     }
-    
 
 }

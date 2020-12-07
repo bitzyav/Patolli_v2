@@ -11,11 +11,16 @@ import dominio.Partida;
  *
  * @author alfonsofelix
  */
-class FilterMovimiento extends Filter<Partida, Partida> {
+public class FilterMovimiento extends Filter<Partida, Partida> {
 
     @Override
     protected void doFilter() {
+        Partida partida=input.get();
         
+        //AQUI VAN ACCIONES
+        
+        output.put(partida);
+        output.doChain();
     }
 
 }

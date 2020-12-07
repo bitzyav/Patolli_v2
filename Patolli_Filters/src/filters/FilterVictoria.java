@@ -9,9 +9,9 @@ import dominio.Partida;
 
 /**
  *
- * @author alfonsofelix
+ * @author Invitado
  */
-public class FilterDado extends Filter<Partida, Partida>{
+public class FilterVictoria extends Filter<Partida, Partida> {
 
     @Override
     protected void doFilter() {
@@ -23,5 +23,4 @@ public class FilterDado extends Filter<Partida, Partida>{
         output.doChain();
     }
     
-
 }
