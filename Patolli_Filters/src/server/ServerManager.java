@@ -8,27 +8,26 @@ package server;
 import dominio.EstadoPartida;
 import dominio.Partida;
 import filters.Filter;
+import filters.FilterApuesta;
 import filters.FilterConfiguracion;
+import filters.FilterDado;
+import filters.FilterMovimiento;
+import filters.FilterRetiro;
 import filters.FilterUnirJugador;
+import filters.FilterVictoria;
 import filters.Pipe;
 import filters.PipeFinal;
 import filters.PipeImpl;
 import filters.Sink;
 import filters.SinkCliente;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -69,6 +68,33 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         filterUnirJugador.setOutput(pipeConexionFinal);
 
         proxyConexiones = new Proxy(pipeConexion1);
+        
+        //Para la línea de producción del juego
+        Filter filterDado = new FilterDado();
+        Filter filterMovimiento = new FilterMovimiento();
+        Filter filterApuesta=new FilterApuesta();
+        Filter filterRetiro=new FilterRetiro();
+        Filter filterVictoria=new FilterVictoria();
+        
+        Pipe<Partida> pipeJuego1=new PipeImpl<>(filterDado);
+        Pipe<Partida> pipeJuego2=new PipeImpl<>(filterMovimiento);
+        Pipe<Partida> pipeJuego3=new PipeImpl<>(filterApuesta);
+        Pipe<Partida> pipeJuego4=new PipeImpl<>(filterRetiro);
+        Pipe<Partida> pipeJuego5=new PipeImpl<>(filterVictoria);
+        Pipe<Partida> pipeJuegoFinal=new PipeFinal<>(this.sink);
+        
+        filterDado.setInput(pipeJuego1);
+        filterDado.setOutput(pipeJuego2);
+        filterMovimiento.setInput(pipeJuego2);
+        filterMovimiento.setOutput(pipeJuego3);
+        filterApuesta.setInput(pipeJuego3);
+        filterApuesta.setOutput(pipeJuego4);
+        filterRetiro.setInput(pipeJuego4);
+        filterRetiro.setOutput(pipeJuego5);
+        filterVictoria.setInput(pipeJuego5);
+        filterVictoria.setOutput(pipeJuegoFinal);
+        
+        proxyJuego=new Proxy(pipeJuego1);
 
         escuchar();
     }

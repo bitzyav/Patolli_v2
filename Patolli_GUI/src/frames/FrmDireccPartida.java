@@ -222,10 +222,10 @@ public class FrmDireccPartida extends FrmClienteAux {
                             JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
                             break;
                         default:
+                            JOptionPane.showMessageDialog(rootPane, "La partida está llena o ya ha comenzado.");
                             break;
                     }
                 }
-                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Ocurrió un error desconocido.");
             }

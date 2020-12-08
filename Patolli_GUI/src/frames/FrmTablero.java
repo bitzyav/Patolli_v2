@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -49,7 +50,8 @@ public class FrmTablero extends FrmClienteAux {
     private void inicializar() {
         adaptarPantalla();
         extenderPantalla();
-
+        setResizable(false);
+        
         Tablero tablero = partida.getTablero();
 
         if (partida.getTablero() == null) {
@@ -66,7 +68,9 @@ public class FrmTablero extends FrmClienteAux {
         } else {
             cnvTablero = new CnvTablero(tablero.getCasillas(), partida.getNumCasillasAspa(), this.getSize().width);
         }
-
+        cnvTablero.setSize(this.getWidth(),500);
+        cnvTablero.add(btnMeterFicha);
+        this.add(cnvTablero);
         pintarTablero();
         //pnlTablero = new JPanel();
 
@@ -145,10 +149,12 @@ public class FrmTablero extends FrmClienteAux {
         btnAvanzarNormal = new javax.swing.JButton();
         btnMeterFicha = new javax.swing.JButton();
         pnlTablero = new javax.swing.JPanel();
+        lblDado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
+        btnTirarCanias.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnTirarCanias.setText("Tirar cañas");
         btnTirarCanias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +169,7 @@ public class FrmTablero extends FrmClienteAux {
             }
         });
 
+        btnAvanzarNormal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnAvanzarNormal.setText("Avanzar Ficha del Turno");
         btnAvanzarNormal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +177,7 @@ public class FrmTablero extends FrmClienteAux {
             }
         });
 
+        btnMeterFicha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnMeterFicha.setText("Meter ficha");
         btnMeterFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,45 +195,44 @@ public class FrmTablero extends FrmClienteAux {
         );
         pnlTableroLayout.setVerticalGroup(
             pnlTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 621, Short.MAX_VALUE)
+            .addGap(0, 562, Short.MAX_VALUE)
         );
+
+        lblDado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblDado.setText("Tiro: --");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMeterFicha)
-                .addGap(202, 202, 202))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(btnAvanzarNormal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTirarCanias))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(btnRetirarse)))
-                .addContainerGap(1833, Short.MAX_VALUE))
             .addComponent(pnlTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRetirarse, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAvanzarNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMeterFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTirarCanias, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblDado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(1275, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(pnlTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnMeterFicha)
-                        .addGap(89, 89, 89))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRetirarse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAvanzarNormal)
-                        .addContainerGap())
-                    .addComponent(btnTirarCanias, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnTirarCanias, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAvanzarNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnMeterFicha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addComponent(btnRetirarse, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -236,11 +243,13 @@ public class FrmTablero extends FrmClienteAux {
     }//GEN-LAST:event_btnRetirarseActionPerformed
 
     private void btnTirarCaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTirarCaniasActionPerformed
-
+        Random r=new Random();
+        int tiro=r.nextInt(6);
+        lblDado.setText("Tiro: "+tiro);
     }//GEN-LAST:event_btnTirarCaniasActionPerformed
 
     private void btnMeterFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeterFichaActionPerformed
-
+        
     }//GEN-LAST:event_btnMeterFichaActionPerformed
 
     private void btnAvanzarNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarNormalActionPerformed
@@ -271,14 +280,15 @@ public class FrmTablero extends FrmClienteAux {
     private javax.swing.JButton btnMeterFicha;
     private javax.swing.JButton btnRetirarse;
     private javax.swing.JButton btnTirarCanias;
+    private javax.swing.JLabel lblDado;
     private javax.swing.JPanel pnlTablero;
     // End of variables declaration//GEN-END:variables
 
     private void pintarTablero() {
         cnvTablero.setCasillas(partida.getTablero().getCasillas());
-        for (int i = 0; i < 10; i++) {
-            cnvTablero.paint(pnlTablero.getGraphics());
-            pnlTablero.add(cnvTablero);
+        for (int i = 0; i < 3; i++) {
+            //cnvTablero.paintComponent(cnvTablero.getGraphics());
+           // this.add(cnvTablero);
         }
     }
 

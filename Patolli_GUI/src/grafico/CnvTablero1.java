@@ -24,13 +24,12 @@ import java.awt.Shape;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.util.LinkedList;
-import javax.swing.JPanel;
 
 /**
  *
  * @author Equipo2
  */
-public final class CnvTablero extends JPanel {
+public class CnvTablero1 extends Canvas {
 
     private LinkedList<Casilla> casillas;
     private int numCasillasAspa;
@@ -39,18 +38,23 @@ public final class CnvTablero extends JPanel {
     private int anchoPantalla;
     Graphics2D g2d;
 
-    public CnvTablero(LinkedList<Casilla> casillas, int numCasillasAspa, int anchoPantalla) {
+    public CnvTablero1(LinkedList<Casilla> casillas, int numCasillasAspa, int anchoPantalla) {
         this.casillas = casillas;
         this.numCasillasAspa = numCasillasAspa;
-        this.anchoPantalla=anchoPantalla/2;
+        this.anchoPantalla=Math.round(anchoPantalla/2.5f);
         this.ancho = casillas.size() * 50 + 50 * 3;
         this.alto=ancho;
     }
-    
+
+    /**
+     * Método estético para el tablero
+     *
+     * @param g Componente Graphics2D
+     */
     @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
+    public void paint(Graphics g) {
         this.g2d = (Graphics2D) g;
+        
         for (Casilla casilla : casillas) {
             if(casilla.getClass().getName().contains("Centro")){
                (new GCasillaCentro(casilla, numCasillasAspa)).dibujar(g2d);
@@ -64,16 +68,6 @@ public final class CnvTablero extends JPanel {
                 (new GCasillaNormal(casilla, numCasillasAspa)).dibujar(g2d);
             }
         }
-    }
-
-    /**
-     * Método estético para el tablero
-     *
-     * @param g Componente Graphics2D
-     */
-    @Override
-    public void paint(Graphics g) {
-        
     }
 
     public void setCasillas(LinkedList<Casilla> casillas) {

@@ -14,9 +14,12 @@ public class Partida implements Serializable{
     private ArrayList<Jugador> jugadores;
     private Jugador jugadorTurno;
     private EstadoPartida estado;
+    private Ficha fichaMovimiento;
+    private boolean turnoApuesta;
     private int numCasillasAspa;
     private int numFichasJugador;
     private int fondoApuesta;
+    private int valorApuesta;
 
     public Partida() {
         jugadores=new ArrayList<>();
@@ -79,6 +82,30 @@ public class Partida implements Serializable{
         this.fondoApuesta = fondoApuesta;
     }
 
+    public int getValorApuesta() {
+        return valorApuesta;
+    }
+
+    public void setValorApuesta(int valorApuesta) {
+        this.valorApuesta = valorApuesta;
+    }
+
+    public Ficha getFichaMovimiento() {
+        return fichaMovimiento;
+    }
+
+    public void setFichaMovimiento(Ficha fichaMovimiento) {
+        this.fichaMovimiento = fichaMovimiento;
+    }
+
+    public boolean isTurnoApuesta() {
+        return turnoApuesta;
+    }
+
+    public void setTurnoApuesta(boolean turnoApuesta) {
+        this.turnoApuesta = turnoApuesta;
+    }
+    
     @Override
     public String toString() {
         return "Partida{" + "estado=" + estado + ", numCasillasAspa=" + numCasillasAspa + ", numFichasJugador=" + numFichasJugador + ", fondoApuesta=" + fondoApuesta + '}';

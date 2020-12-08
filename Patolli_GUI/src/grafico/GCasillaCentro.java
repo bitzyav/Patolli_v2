@@ -8,6 +8,7 @@ package grafico;
 import dominio.Casilla;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -23,6 +24,7 @@ public class GCasillaCentro extends GCasillaNormal{
 
     @Override
     public void dibujar(Graphics2D g2d) {
+        Graphics g;
         Rectangle rect = new Rectangle();
         g2d.setColor(Color.LIGHT_GRAY);
         rect.setBounds(casilla.getCoordenadaX(), casilla.getCoordenadaY(), ANCHO, ALTO);
