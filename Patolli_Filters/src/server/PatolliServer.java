@@ -59,12 +59,10 @@ public class PatolliServer implements Runnable {
                 try {
                     Partida partida;
                     if ((partida = (Partida) in.readObject()) != null) {
-                        System.out.println(partida);
-                        System.out.println(partida.getJugadores().get(0).isAsignado());
                         notificarMovimiento(partida);
                     }
                 } catch (Exception e) {
-
+                    System.out.println("Error al avanzar ficha: "+e.getMessage());
                 }
             }
         } catch (IOException e) {

@@ -19,7 +19,8 @@ public class Partida implements Serializable{
     private Jugador ganador;
     private EstadoPartida estado;
     private Ficha fichaMovimiento;
-    private boolean turnoApuesta;
+    private boolean avanzaPagando;
+    private int cuantasApuestas;
     private int numCasillasAspa;
     private int numFichasJugador;
     private int fondoApuesta;
@@ -31,6 +32,7 @@ public class Partida implements Serializable{
         jugadores=new ArrayList<>();
         turnos=new LinkedList<>();
         this.estado=EstadoPartida.VACIA;
+        this.valorApuesta=1;
         this.cantidadDado=-1;
     }
     
@@ -106,13 +108,23 @@ public class Partida implements Serializable{
         this.fichaMovimiento = fichaMovimiento;
     }
 
-    public boolean isTurnoApuesta() {
-        return turnoApuesta;
+    public boolean avanzaPagando() {
+        return avanzaPagando;
     }
 
-    public void setTurnoApuesta(boolean turnoApuesta) {
-        this.turnoApuesta = turnoApuesta;
+    public void setAvanzaPagando(boolean avanzaPagando) {
+        this.avanzaPagando = avanzaPagando;
     }
+
+    public int getCuantasApuestas() {
+        return cuantasApuestas;
+    }
+
+    public void setCuantasApuestas(int cuantasApuestas) {
+        this.cuantasApuestas = cuantasApuestas;
+    }
+
+    
 
     public Queue<Jugador> getTurnos() {
         return turnos;

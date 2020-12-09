@@ -7,6 +7,7 @@ package frames;
 
 import dominio.Casilla;
 import dominio.EstadoPartida;
+import dominio.Ficha;
 import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import socketCliente.SocketCliente;
 
@@ -100,58 +102,6 @@ public class FrmTablero extends FrmClienteAux {
         });
         this.add(cnvTablero);
         pintarTablero();
-        //pnlTablero = new JPanel();
-
-        /*this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
-        pnlTablero.setPreferredSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
-        pnlTablero.setMaximumSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
-        pnlTablero.setBorder(BorderFactory.createEtchedBorder());*/
- /*
-        partida = new Partida(FrmConfigurarPartida.numCasillas, FrmConfigurarPartida.numFichas, FrmConfigurarPartida.numFondoApuesta);
-        Tablero tablero = new Tablero();
-        cnvTablero = new CnvTablero(tablero.getCasillas(), FrmConfigurarPartida.numCasillas, this.getSize().width);
-        jugador = new Host(FrmConfigurarPartida.numFichas);
-        jugador.setColor(ColorFicha.ROJO);
-
-        for (Casilla casilla : tablero.getCasillas()) {
-            if (casilla.getClass().getName().contains("CasillaPropia")) {
-                CasillaPropia cas = (CasillaPropia) casilla;
-                if (cas.getJugador() == null) {
-                    cas.setJugador(jugador);
-                    jugador.setCasillaPropia(cas);
-                    cas.setFicha(jugador.getFichas().get(0));
-                    break;
-                }
-            }
-        }
-        pnlTablero = new JPanel();
-        
-        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        pnlTablero.setLayout(new BoxLayout(pnlTablero, BoxLayout.X_AXIS));
-        pnlTablero.setPreferredSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
-        pnlTablero.setMaximumSize(new Dimension(cnvTablero.getAncho(), cnvTablero.getAlto()));
-        pnlTablero.setBorder(BorderFactory.createEtchedBorder());
-        pintarTablero(tablero);
-
-        /*dibujarTablero(FrmConfigurarPartida.numCasillas);
-        btnMeterFicha.setEnabled(false);
-        new Thread(new Runnable() {
-            public void run() {
-                while (!partida.isTableroListo()) {
-                    System.out.println("no");
-                }
-                System.out.println("hola");
-                btnMeterFicha.setEnabled(true);
-                partida.agregarJugador(host);
-                try {
-                    this.finalize();
-                } catch (Throwable ex) {
-                    Logger.getLogger(FrmTablero.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        }).start();*/
     }
 
     /**
@@ -187,61 +137,6 @@ public class FrmTablero extends FrmClienteAux {
         //  this.paintComponents(this.getGraphics());
     }
 
-    @Override
-    public void update(Partida partidaLlegada) {
-        super.update(partidaLlegada);
-        actualizaJugador();
-        pintarTablero();
-        actualizarPantalla();
-    }
-
-    private void actualizarPantalla() {
-        if (partida.getCantidadDado() != -1) {
-            lblDado.setText("Tiro: " + partida.getCantidadDado());
-        }
-
-        if (partida.getCuantasMueve() == 0) {
-            lblDado.setText("Tiro: " + partida.getCuantasMueve());
-        }
-
-        if (partida.getEstado() == EstadoPartida.ESPERA && jugador.getNumJugador() == 1) {
-            btnComenzarPartida.setVisible(true);
-        } else {
-            btnComenzarPartida.setVisible(false);
-        }
-
-        if (partida.getJugadorTurno().equals(jugador)) {
-            if (partida.getCantidadDado() == -1) {
-                btnTirarCanias.setEnabled(true);
-            }
-
-            if (partida.getCuantasMueve() != 0) {
-                btnMeterFicha.setEnabled(true);
-                btnAvanzarNormal.setEnabled(true);
-            }
-            if (btnTirarCanias.isEnabled()) {
-                btnMeterFicha.setEnabled(false);
-                btnAvanzarNormal.setEnabled(false);
-            }
-        } else {
-            btnTirarCanias.setEnabled(false);
-            btnMeterFicha.setEnabled(false);
-            btnAvanzarNormal.setEnabled(false);
-        }
-
-    }
-
-    private void cnvTableroClick(MouseEvent e) {
-        double x = e.getPoint().getX();
-        double y = e.getPoint().getY();
-        for (Casilla casilla : partida.getTablero().getCasillas()) {
-            if (x >= casilla.getCoordenadaX() && x <= (casilla.getCoordenadaX() + 50) && y >= casilla.getCoordenadaY() && y <= (casilla.getCoordenadaY() + 50)) {
-                System.out.println(casilla);
-                break;
-            }
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -259,9 +154,11 @@ public class FrmTablero extends FrmClienteAux {
         btnComenzarPartida = new javax.swing.JButton();
         lblFichasGanadoras = new javax.swing.JLabel();
         lblNumFrijoles = new javax.swing.JLabel();
+        btnPagarApuesta = new javax.swing.JButton();
+        lblTurno = new javax.swing.JLabel();
+        lblImgTurno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 204, 102));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -280,6 +177,11 @@ public class FrmTablero extends FrmClienteAux {
         btnMeterFicha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnMeterFicha.setText("Meter ficha");
         btnMeterFicha.setEnabled(false);
+        btnMeterFicha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMeterFichaMouseClicked(evt);
+            }
+        });
         btnMeterFicha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMeterFichaActionPerformed(evt);
@@ -324,6 +226,27 @@ public class FrmTablero extends FrmClienteAux {
         lblNumFrijoles.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNumFrijoles.setText("Te quedan -- frijolitos");
 
+        btnPagarApuesta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnPagarApuesta.setText("Pagar apuesta");
+        btnPagarApuesta.setActionCommand("<html><p>Pagar apuesta y seleccionar ficha</p></html>");
+        btnPagarApuesta.setEnabled(false);
+        btnPagarApuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPagarApuestaMouseClicked(evt);
+            }
+        });
+        btnPagarApuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarApuestaActionPerformed(evt);
+            }
+        });
+
+        lblTurno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTurno.setText("Turno:");
+
+        lblImgTurno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblImgTurno.setText("--");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -340,19 +263,29 @@ public class FrmTablero extends FrmClienteAux {
                             .addComponent(lblDado, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFichasGanadoras, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNumFrijoles, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnComenzarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 623, Short.MAX_VALUE))
+                            .addComponent(btnComenzarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPagarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblImgTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 435, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnTirarCanias, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTirarCanias, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblImgTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMeterFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
+                .addComponent(btnPagarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAvanzarNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(lblFichasGanadoras, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,7 +293,7 @@ public class FrmTablero extends FrmClienteAux {
                 .addComponent(lblNumFrijoles, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnComenzarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(btnRetirarse, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -372,7 +305,7 @@ public class FrmTablero extends FrmClienteAux {
             partida.setFichaMovimiento(jugador.getColaFichas().peek());
 
             if (partida.getFichaMovimiento() == null) {
-                partida.setCantidadDado(0);
+                partida.setCantidadDado(-1);
             }
 
             cliente.enviar(partida);
@@ -383,7 +316,13 @@ public class FrmTablero extends FrmClienteAux {
     }//GEN-LAST:event_btnAvanzarNormalActionPerformed
 
     private void btnMeterFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeterFichaActionPerformed
-
+        try {
+            jugador.setMeterFicha(true);
+            partida.setJugadorTurno(jugador);
+            cliente.enviar(partida);
+        } catch (IOException ex) {
+            Logger.getLogger(FrmTablero.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnMeterFichaActionPerformed
 
     private void btnTirarCaniasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTirarCaniasActionPerformed
@@ -429,25 +368,142 @@ public class FrmTablero extends FrmClienteAux {
         }
     }//GEN-LAST:event_btnComenzarPartidaMouseClicked
 
+    private void btnMeterFichaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMeterFichaMouseClicked
+
+    }//GEN-LAST:event_btnMeterFichaMouseClicked
+
+    private void btnPagarApuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPagarApuestaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPagarApuestaMouseClicked
+
+    private void btnPagarApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarApuestaActionPerformed
+        partida.setAvanzaPagando(true);
+        btnAvanzarNormal.setEnabled(false);
+        btnMeterFicha.setEnabled(false);
+        btnPagarApuesta.setEnabled(false);
+    }//GEN-LAST:event_btnPagarApuestaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvanzarNormal;
     private javax.swing.JButton btnComenzarPartida;
     private javax.swing.JButton btnMeterFicha;
+    private javax.swing.JButton btnPagarApuesta;
     private javax.swing.JButton btnRetirarse;
     private javax.swing.JButton btnTirarCanias;
     private javax.swing.JLabel lblDado;
     private javax.swing.JLabel lblFichasGanadoras;
+    private javax.swing.JLabel lblImgTurno;
     private javax.swing.JLabel lblNumFrijoles;
+    private javax.swing.JLabel lblTurno;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Partida partidaLlegada) {
+        super.update(partidaLlegada);
+        actualizaJugador();
+        pintarTablero();
+        actualizarPantalla();
+    }
+
+    private void actualizarPantalla() {
+        if (partida.getCantidadDado() != -1) {
+            lblDado.setText("Tiro: " + partida.getCantidadDado());
+        }
+
+        if (partida.getCuantasMueve() == 0) {
+            lblDado.setText("Tiro: " + partida.getCuantasMueve());
+        }
+
+        System.out.println(partida);
+        if (partida.getEstado() == EstadoPartida.ESPERA && jugador.getNumJugador() == 1) {
+            btnComenzarPartida.setVisible(true);
+        } else {
+            btnComenzarPartida.setVisible(false);
+        }
+
+        if (partida.getJugadorTurno().equals(jugador)) {
+            if (partida.getCantidadDado() == -1) {
+                btnTirarCanias.setEnabled(true);
+            }
+
+            if (partida.getJugadorTurno().puedeMeter()) {
+                btnMeterFicha.setEnabled(true);
+            }
+
+            if (partida.getCuantasMueve() != 0) {
+                btnAvanzarNormal.setEnabled(true);
+            }
+
+            if (btnTirarCanias.isEnabled()) {
+                btnMeterFicha.setEnabled(false);
+                btnAvanzarNormal.setEnabled(false);
+            }
+        } else {
+            btnTirarCanias.setEnabled(false);
+            btnMeterFicha.setEnabled(false);
+            btnAvanzarNormal.setEnabled(false);
+        }
+
+        if (partida.getJugadorTurno() != null) {
+            switch (partida.getJugadorTurno().getColor()) {
+                case ROJO:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color rojo.png")));
+                    break;
+                case NARANJA:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color naranja.png")));
+                    break;
+                case AMARILLO:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color amarillo.png")));
+                    break;
+                case VERDE:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color verde.png")));
+                    break;
+                case CYAN:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color cyan.png")));
+                    break;
+                case AZUL:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color azul.png")));
+                    break;
+                case ROSA:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color rosa.png")));
+                    break;
+                case MORADO:
+                    lblImgTurno.setIcon(new ImageIcon(getClass().getResource("/images/btn color morado.png")));
+                    break;
+            }
+        }
+
+    }
+
+    private void cnvTableroClick(MouseEvent e) {
+        if (partida.avanzaPagando() && partida.getJugadorTurno().equals(jugador)) {
+            double x = e.getPoint().getX();
+            double y = e.getPoint().getY();
+            for (Casilla casilla : partida.getTablero().getCasillas()) {
+                if (casilla.getFicha() != null && x >= casilla.getCoordenadaX() && x <= (casilla.getCoordenadaX() + 50) && y >= casilla.getCoordenadaY() && y <= (casilla.getCoordenadaY() + 50)) {
+                    Ficha ficha = casilla.getFicha();
+                    if (ficha.getJugador().equals(jugador)) {
+                        try {
+                            partida.setFichaMovimiento(ficha);
+                            cliente.enviar(partida);
+                        } catch (IOException ex) {
+                            Logger.getLogger(FrmTablero.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
 
     private void actualizaJugador() {
         for (Jugador jugadore : partida.getJugadores()) {
             if (jugadore.equals(jugador)) {
                 jugador = jugadore;
-                lblFichasGanadoras.setText("Has metido " + jugador.getFichasGanadoras().size() + " fichas");
+                lblFichasGanadoras.setText("¡Llevas " + jugador.getFichasGanadoras().size() + " ficha(s)!");
                 if (jugador.getNumFrijoles() > 0) {
-                    lblNumFrijoles.setText("Te quedan " + jugador.getNumFrijoles() + " frijolitos");
+                    lblNumFrijoles.setText("Te quedan " + jugador.getNumFrijoles() + " frijolito(s)");
                 } else {
                     lblNumFrijoles.setText("Te has quedado sin frijolitos :(");
                 }

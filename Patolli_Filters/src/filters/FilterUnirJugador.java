@@ -64,11 +64,10 @@ public class FilterUnirJugador extends Filter<Partida, Partida> {
                     if (jug.getCasillaPropia() == null) {
                         ArrayList<Ficha> fichas = jug.getFichas();
                         for (int i = 0; i < partida.getNumFichasJugador(); i++) {
-                            fichas.add(new Ficha(i, jug, true));
+                            fichas.add(new Ficha(i, jug, false));
                         }
                         jug.setFichas(fichas);
                         LinkedList<Casilla> casillas = partida.getTablero().getCasillas();
-                        Queue<Ficha> colaFichas=jug.getColaFichas();
 
                         for (Casilla casilla : casillas) {
                             if (casilla.getClass().getName().contains("CasillaPropia")) {
@@ -76,13 +75,7 @@ public class FilterUnirJugador extends Filter<Partida, Partida> {
                                 if (cas.getJugador() == null) {
                                     cas.setJugador(jug);
                                     jug.setCasillaPropia(cas);
-                                    Ficha ficha = jug.getFichas().get(0);
-                                    ficha.setJugador(jug);
                                     jug.setNumFrijoles(partida.getFondoApuesta());
-                                    jug.getFichas().set(0, ficha);
-                                    cas.setFicha(jug.getFichas().get(0));
-                                    colaFichas.add(ficha);
-                                    jug.setColaFichas(colaFichas);
                                     break;
                                 }
                             }

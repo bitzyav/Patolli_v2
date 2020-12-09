@@ -26,14 +26,19 @@ public class Jugador implements Serializable{
     private Queue<Ficha> colaFichas;
     private CasillaPropia casillaPropia;
     private boolean haMetidoFicha;
+    private boolean perdio;
+    private boolean puedeMeter;
     private boolean meterFicha;
     private boolean asignado;
 
     public Jugador(){
         this.asignado=false;
+        this.puedeMeter=false;
+        this.haMetidoFicha=false;
         this.fichas=new ArrayList<>();
         this.colaFichas=new LinkedList<>();
         this.fichasGanadoras=new ArrayList<>();
+        this.apuestas=new ArrayList<>();
     }
 
     public byte getNumJugador() {
@@ -64,6 +69,10 @@ public class Jugador implements Serializable{
         return apuestas;
     }
 
+    public void setApuestas(ArrayList<Apuesta> apuestas) {
+        this.apuestas = apuestas;
+    }
+    
     public ColorFicha getColor() {
         return color;
     }
@@ -128,6 +137,22 @@ public class Jugador implements Serializable{
         this.meterFicha = meterFicha;
     }
 
+    public boolean puedeMeter() {
+        return puedeMeter;
+    }
+
+    public void setPuedeMeter(boolean puedeMeter) {
+        this.puedeMeter = puedeMeter;
+    }
+
+    public boolean perdio() {
+        return perdio;
+    }
+
+    public void setPerdio(boolean perdio) {
+        this.perdio = perdio;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

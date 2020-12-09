@@ -72,21 +72,25 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         Filter filterRetiro = new FilterRetiro();
         Filter filterVictoria = new FilterVictoria();
 
-        Pipe<Partida> pipeJuego1 = new PipeImpl<>(filterDado);
-        Pipe<Partida> pipeJuego2 = new PipeImpl<>(filterMovimiento);
-        Pipe<Partida> pipeJuego3 = new PipeImpl<>(filterApuesta);
-        Pipe<Partida> pipeJuego4 = new PipeImpl<>(filterRetiro);
+        Pipe<Partida> pipeJuego1 = new PipeImpl<>(filterRetiro);
+        Pipe<Partida> pipeJuego2 = new PipeImpl<>(filterDado);
+        Pipe<Partida> pipeJuego3 = new PipeImpl<>(filterMovimiento);
+        Pipe<Partida> pipeJuego4 = new PipeImpl<>(filterApuesta);
         Pipe<Partida> pipeJuego5 = new PipeImpl<>(filterVictoria);
         Pipe<Partida> pipeJuegoFinal = new PipeFinal<>(this.sink);
+        
+        filterRetiro.setInput(pipeJuego1);
+        filterRetiro.setOutput(pipeJuego2);
+        
+        filterDado.setInput(pipeJuego2);
+        filterDado.setOutput(pipeJuego3);
+        
+        filterMovimiento.setInput(pipeJuego3);
+        filterMovimiento.setOutput(pipeJuego4);
+        
+        filterApuesta.setInput(pipeJuego4);
+        filterApuesta.setOutput(pipeJuego5);
 
-        filterDado.setInput(pipeJuego1);
-        filterDado.setOutput(pipeJuego2);
-        filterMovimiento.setInput(pipeJuego2);
-        filterMovimiento.setOutput(pipeJuego3);
-        filterApuesta.setInput(pipeJuego3);
-        filterApuesta.setOutput(pipeJuego4);
-        filterRetiro.setInput(pipeJuego4);
-        filterRetiro.setOutput(pipeJuego5);
         filterVictoria.setInput(pipeJuego5);
         filterVictoria.setOutput(pipeJuegoFinal);
 

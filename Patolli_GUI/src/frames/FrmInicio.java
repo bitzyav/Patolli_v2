@@ -5,7 +5,6 @@
  */
 package frames;
 
-import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**

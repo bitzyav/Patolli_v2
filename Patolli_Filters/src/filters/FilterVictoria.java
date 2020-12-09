@@ -20,35 +20,49 @@ public class FilterVictoria extends Filter<Partida, Partida> {
     protected void doFilter() {
         Partida partida = input.get();
 
-        for (Jugador jug : partida.getJugadores()) {
-            if (jug.getNumFrijoles() <= 0 && partida.getTurnos().contains(jug)) {
-                Queue<Jugador> turnos = partida.getTurnos();
-                turnos.remove(jug);
-                partida.setTurnos(turnos);
-            }
+        if (partida.getEstado() == EstadoPartida.INICIADA) {
 
-            if (jug.getFichas().isEmpty() && jug.getColaFichas().isEmpty() && partida.getTurnos().contains(jug)) {
-                Queue<Jugador> turnos = partida.getTurnos();
-                turnos.remove(jug);
-                partida.setTurnos(turnos);
-            }
-
-            if (jug.getFichasGanadoras().size() == partida.getNumFichasJugador()) {
-                partida.setGanador(jug);
-                partida.setEstado(EstadoPartida.TERMINADA);
-                break;
-            }
-
-        }
-        if (partida.getTurnos().isEmpty()) {
-            Jugador ganador = partida.getJugadores().get(0);
-            for (Jugador jugador : partida.getJugadores()) {
-                if (jugador.getFichasGanadoras().size() > ganador.getFichasGanadoras().size()) {
-                    ganador = jugador;
+            for (Jugador jug : partida.getJugadores()) {
+                if (jug.getNumFrijoles() <= 0 && partida.getTurnos().contains(jug)) {
+                    Queue<Jugador> turnos = partida.getTurnos();
+                    turnos.remove(jug);
+                    partida.setTurnos(turnos);
                 }
+
+                /*if (jug.getFichas().isEmpty() && jug.getColaFichas().isEmpty() && partida.getTurnos().contains(jug)) {
+                Queue<Jugador> turnos = partida.getTurnos();
+                turnos.remove(jug);
+                partida.setTurnos(turnos);
+            }*/
+                if (jug.getFichasGanadoras().size() == partida.getNumFichasJugador()) {
+                    partida.setGanador(jug);
+                    partida.setEstado(EstadoPartida.TERMINADA);
+                    break;
+                }
+
             }
-            partida.setGanador(ganador);
-            partida.setEstado(EstadoPartida.TERMINADA);
+            if(partida.getTurnos().size() == 1){
+                Jugador ganador=partida.getTurnos().poll();
+                partida.setGanador(ganador);
+                partida.setEstado(EstadoPartida.TERMINADA);
+            }
+            if (partida.getTurnos().isEmpty()) {
+                Jugador ganador = null;
+                for (Jugador jugador : partida.getJugadores()) {
+                    if(!jugador.perdio()){
+                        ganador=jugador;
+                        break;
+                    }
+                }
+                
+                for (Jugador jugador : partida.getJugadores()) {
+                    if (jugador.getFichasGanadoras().size() > ganador.getFichasGanadoras().size() && !ganador.perdio()) {
+                        ganador = jugador;
+                    }
+                }
+                partida.setGanador(ganador);
+                partida.setEstado(EstadoPartida.TERMINADA);
+            }
         }
         output.put(partida);
         output.doChain();
