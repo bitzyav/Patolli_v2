@@ -6,6 +6,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -43,5 +44,39 @@ public class Ficha implements Serializable{
 
     public int getNumero() {
         return numero;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ficha other = (Ficha) obj;
+        if (this.numero != other.numero) {
+            return false;
+        }
+        if (!Objects.equals(this.jugador, other.jugador)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "Ficha{" + "numero=" + numero + ", jugador=" + jugador + ", enJuego=" + enJuego + '}';
     }
 }

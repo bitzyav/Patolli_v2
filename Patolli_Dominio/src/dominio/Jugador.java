@@ -7,6 +7,8 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
@@ -19,13 +21,19 @@ public class Jugador implements Serializable{
     private int numFrijoles;
     private ColorFicha color;
     private ArrayList<Ficha> fichas;
+    private ArrayList<Ficha> fichasGanadoras;
     private ArrayList<Apuesta> apuestas;
+    private Queue<Ficha> colaFichas;
     private CasillaPropia casillaPropia;
+    private boolean haMetidoFicha;
+    private boolean meterFicha;
     private boolean asignado;
 
     public Jugador(){
         this.asignado=false;
         this.fichas=new ArrayList<>();
+        this.colaFichas=new LinkedList<>();
+        this.fichasGanadoras=new ArrayList<>();
     }
 
     public byte getNumJugador() {
@@ -88,6 +96,38 @@ public class Jugador implements Serializable{
         this.asignado = asignado;
     }
 
+    public Queue<Ficha> getColaFichas() {
+        return colaFichas;
+    }
+
+    public void setColaFichas(Queue<Ficha> colaFichas) {
+        this.colaFichas = colaFichas;
+    }
+
+    public ArrayList<Ficha> getFichasGanadoras() {
+        return fichasGanadoras;
+    }
+
+    public void setFichasGanadoras(ArrayList<Ficha> fichasGanadoras) {
+        this.fichasGanadoras = fichasGanadoras;
+    }
+
+    public boolean haMetidoFicha() {
+        return haMetidoFicha;
+    }
+
+    public void setHaMetidoFicha(boolean haMetidoFicha) {
+        this.haMetidoFicha = haMetidoFicha;
+    }
+
+    public boolean isMeterFicha() {
+        return meterFicha;
+    }
+
+    public void setMeterFicha(boolean meterFicha) {
+        this.meterFicha = meterFicha;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -114,6 +154,8 @@ public class Jugador implements Serializable{
 
     @Override
     public String toString() {
-        return "Jugador{" + "numJugador=" + numJugador + ", asignado=" + asignado + '}';
+        return "Jugador{" + "numJugador=" + numJugador + ", nombre=" + nombre + ", color=" + color + ", asignado=" + asignado + '}';
     }
+
+    
 }

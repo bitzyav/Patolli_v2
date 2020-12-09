@@ -60,4 +60,9 @@ public class Casilla implements Serializable{
     public void setNumero(int numero) {
         this.numero = numero;
     }
+
+    @Override
+    public String toString() {
+        return "Casilla{" + "numero=" + numero + ", ficha=" + ficha + '}';
+    }
 }

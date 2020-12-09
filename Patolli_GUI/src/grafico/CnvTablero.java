@@ -10,19 +10,11 @@ import dominio.CasillaCentro;
 import dominio.CasillaPropia;
 import dominio.CasillaSemicirculo;
 import dominio.CasillaTriangulo;
-import dominio.Ficha;
 import dominio.LugarSemicirculo;
 import dominio.LugarTriangulo;
-import java.awt.BasicStroke;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Ellipse2D;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 
@@ -37,14 +29,21 @@ public final class CnvTablero extends JPanel {
     private int ancho;
     private int alto;
     private int anchoPantalla;
-    Graphics2D g2d;
+    private Graphics2D g2d;
 
     public CnvTablero(LinkedList<Casilla> casillas, int numCasillasAspa, int anchoPantalla) {
         this.casillas = casillas;
         this.numCasillasAspa = numCasillasAspa;
-        this.anchoPantalla=anchoPantalla/2;
+        this.anchoPantalla=anchoPantalla/4;
         this.ancho = casillas.size() * 50 + 50 * 3;
         this.alto=ancho;
+        inicializar();
+        
+        
+    }
+    
+    private void inicializar() {
+        this.setBackground(new Color(0,0,0,0));
     }
     
     @Override
@@ -65,17 +64,6 @@ public final class CnvTablero extends JPanel {
             }
         }
     }
-
-    /**
-     * Método estético para el tablero
-     *
-     * @param g Componente Graphics2D
-     */
-    @Override
-    public void paint(Graphics g) {
-        
-    }
-
     public void setCasillas(LinkedList<Casilla> casillas) {
         this.casillas = casillas;
     }

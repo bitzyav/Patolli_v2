@@ -20,11 +20,7 @@ import filters.PipeFinal;
 import filters.PipeImpl;
 import filters.Sink;
 import filters.SinkCliente;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,21 +64,21 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         filterUnirJugador.setOutput(pipeConexionFinal);
 
         proxyConexiones = new Proxy(pipeConexion1);
-        
+
         //Para la línea de producción del juego
         Filter filterDado = new FilterDado();
         Filter filterMovimiento = new FilterMovimiento();
-        Filter filterApuesta=new FilterApuesta();
-        Filter filterRetiro=new FilterRetiro();
-        Filter filterVictoria=new FilterVictoria();
-        
-        Pipe<Partida> pipeJuego1=new PipeImpl<>(filterDado);
-        Pipe<Partida> pipeJuego2=new PipeImpl<>(filterMovimiento);
-        Pipe<Partida> pipeJuego3=new PipeImpl<>(filterApuesta);
-        Pipe<Partida> pipeJuego4=new PipeImpl<>(filterRetiro);
-        Pipe<Partida> pipeJuego5=new PipeImpl<>(filterVictoria);
-        Pipe<Partida> pipeJuegoFinal=new PipeFinal<>(this.sink);
-        
+        Filter filterApuesta = new FilterApuesta();
+        Filter filterRetiro = new FilterRetiro();
+        Filter filterVictoria = new FilterVictoria();
+
+        Pipe<Partida> pipeJuego1 = new PipeImpl<>(filterDado);
+        Pipe<Partida> pipeJuego2 = new PipeImpl<>(filterMovimiento);
+        Pipe<Partida> pipeJuego3 = new PipeImpl<>(filterApuesta);
+        Pipe<Partida> pipeJuego4 = new PipeImpl<>(filterRetiro);
+        Pipe<Partida> pipeJuego5 = new PipeImpl<>(filterVictoria);
+        Pipe<Partida> pipeJuegoFinal = new PipeFinal<>(this.sink);
+
         filterDado.setInput(pipeJuego1);
         filterDado.setOutput(pipeJuego2);
         filterMovimiento.setInput(pipeJuego2);
@@ -93,8 +89,8 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         filterRetiro.setOutput(pipeJuego5);
         filterVictoria.setInput(pipeJuego5);
         filterVictoria.setOutput(pipeJuegoFinal);
-        
-        proxyJuego=new Proxy(pipeJuego1);
+
+        proxyJuego = new Proxy(pipeJuego1);
 
         escuchar();
     }
@@ -168,21 +164,4 @@ public class ServerManager implements ObserverManager, ObserverConexion {
                 break;
         }
     }
-
-    private byte[] serializar(Partida partida) throws IOException {
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-        ObjectOutputStream os = new ObjectOutputStream(bs);
-        os.writeObject(partida);
-        os.close();
-        return bs.toByteArray();
-    }
-
-    private Partida deserializar(byte[] partidaSerializada) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream bs = new ByteArrayInputStream(partidaSerializada); // bytes es el byte[]
-        ObjectInputStream is = new ObjectInputStream(bs);
-        Partida partida = (Partida) is.readObject();
-        is.close();
-        return partida;
-    }
-
 }

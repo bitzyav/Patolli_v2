@@ -33,6 +33,7 @@ public class FilterConfiguracion extends Filter<Partida, Partida> {
 
             partida.getJugadores().add(host);
 
+            
             partida.setEstado(EstadoPartida.CONFIGURACION);
         }
 

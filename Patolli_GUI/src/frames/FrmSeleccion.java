@@ -9,7 +9,6 @@ import dominio.ColorFicha;
 import dominio.EstadoPartida;
 import dominio.Jugador;
 import dominio.Partida;
-import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -266,6 +265,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.ROJO);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -279,6 +279,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.NARANJA);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -292,6 +293,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.AMARILLO);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -305,6 +307,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.VERDE);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -318,6 +321,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.CYAN);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -331,6 +335,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.AZUL);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -344,6 +349,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.ROSA);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -357,6 +363,7 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.MORADO);
+            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -386,16 +393,14 @@ public class FrmSeleccion extends FrmClienteAux {
         //this.setBackground(new Color(0, 0, 0, 0));
     }
 
-    public static FrmTablero getFrmTablero() {
-        if (frmTablero == null) {
-            frmTablero = new FrmTablero(cliente, jugador, partida);
-        }
-        return frmTablero;
-    }
-
     @Override
     public void update(Partida partidaLlegada) {
         super.update(partidaLlegada);
+        
+        if(partidaLlegada.getEstado()==EstadoPartida.INICIADA){
+            btnAceptarMouseClicked(null);
+        }
+        
         List<ColorFicha> lstColoresOcupados = new ArrayList<>();
 
         for (Jugador jugadore : partida.getJugadores()) {
@@ -469,5 +474,12 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorMorado.setVisible(true);
                 break;
         }
+    }
+    
+    private static FrmTablero getFrmTablero(){
+        if(frmTablero==null){
+            frmTablero=new FrmTablero(cliente, jugador, partida);
+        }
+        return frmTablero;
     }
 }

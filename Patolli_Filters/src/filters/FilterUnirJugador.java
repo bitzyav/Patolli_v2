@@ -17,6 +17,7 @@ import dominio.Tablero;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  *
@@ -46,6 +47,14 @@ public class FilterUnirJugador extends Filter<Partida, Partida> {
             }
         }
 
+        for (Jugador jugadore : partida.getJugadores()) {
+            if (jugadore.isAsignado()) {
+                if (!partida.getTurnos().contains(jugadore)) {
+                    partida.getTurnos().add(jugadore);
+                }
+            }
+        }
+
         Tablero tablero = partida.getTablero();
         if (tablero != null) {
             ArrayList<Jugador> jugadores = partida.getJugadores();
@@ -53,12 +62,13 @@ public class FilterUnirJugador extends Filter<Partida, Partida> {
             for (Jugador jug : jugadores) {
                 if (jug.isAsignado() && jug.getColor() != null) {
                     if (jug.getCasillaPropia() == null) {
-                        ArrayList<Ficha> fichas=jug.getFichas();
+                        ArrayList<Ficha> fichas = jug.getFichas();
                         for (int i = 0; i < partida.getNumFichasJugador(); i++) {
                             fichas.add(new Ficha(i, jug, true));
                         }
                         jug.setFichas(fichas);
                         LinkedList<Casilla> casillas = partida.getTablero().getCasillas();
+                        Queue<Ficha> colaFichas=jug.getColaFichas();
 
                         for (Casilla casilla : casillas) {
                             if (casilla.getClass().getName().contains("CasillaPropia")) {
@@ -66,10 +76,13 @@ public class FilterUnirJugador extends Filter<Partida, Partida> {
                                 if (cas.getJugador() == null) {
                                     cas.setJugador(jug);
                                     jug.setCasillaPropia(cas);
-                                    Ficha ficha=jug.getFichas().get(0);
+                                    Ficha ficha = jug.getFichas().get(0);
                                     ficha.setJugador(jug);
+                                    jug.setNumFrijoles(partida.getFondoApuesta());
                                     jug.getFichas().set(0, ficha);
                                     cas.setFicha(jug.getFichas().get(0));
+                                    colaFichas.add(ficha);
+                                    jug.setColaFichas(colaFichas);
                                     break;
                                 }
                             }
@@ -92,7 +105,7 @@ public class FilterUnirJugador extends Filter<Partida, Partida> {
     private boolean todosListos(Partida partida) {
         boolean listos = true;
         for (Jugador jugador : partida.getJugadores()) {
-            if (!jugador.isAsignado() || jugador.getColor() == null || jugador.getCasillaPropia()==null) {
+            if (!jugador.isAsignado() || jugador.getColor() == null || jugador.getCasillaPropia() == null) {
                 listos = false;
                 break;
             }

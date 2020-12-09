@@ -7,17 +7,9 @@ package socketCliente;
 
 import dominio.Partida;
 import frames.Observer;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,14 +52,16 @@ public class SocketCliente implements Runnable {
                     System.out.println("notificó");
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("Ocurrió un error: " + e.getMessage());
             }
 
         }
     }
 
     private void notificar(Partida partida) {
-        observer.update(partida);
+        if (partida != null) {
+            observer.update(partida);
+        }
     }
 
     public void enviar(Partida partida) throws IOException {
