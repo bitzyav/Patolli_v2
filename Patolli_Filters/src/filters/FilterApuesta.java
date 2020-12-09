@@ -21,8 +21,8 @@ public class FilterApuesta extends Filter<Partida, Partida> {
     @Override
     protected void doFilter() {
         Partida partida = input.get();
-/*
-        Jugador jugadorTurno = partida.getJugadorTurno();
+        
+        /*Jugador jugadorTurno = partida.getJugadorTurno();
         ArrayList<Apuesta> apuestas = jugadorTurno.getApuestas();
         Ficha fichaTurno = partida.getFichaMovimiento();
         if (partida.avanzaPagando()) {
@@ -54,7 +54,7 @@ public class FilterApuesta extends Filter<Partida, Partida> {
                     partida.setJugadores(jugadores);
                 }
             }
-        }
+        }*/
 
         partida.setCuantasApuestas(0);
         partida.setAvanzaPagando(false);
@@ -63,7 +63,7 @@ public class FilterApuesta extends Filter<Partida, Partida> {
             Jugador turno = partida.getTurnos().poll();
             partida.setJugadorTurno(turno);
             partida.getTurnos().add(turno);
-        }*/
+        }
 
         output.put(partida);
         output.doChain();

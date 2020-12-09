@@ -154,9 +154,9 @@ public class FrmTablero extends FrmClienteAux {
         btnComenzarPartida = new javax.swing.JButton();
         lblFichasGanadoras = new javax.swing.JLabel();
         lblNumFrijoles = new javax.swing.JLabel();
-        btnPagarApuesta = new javax.swing.JButton();
         lblTurno = new javax.swing.JLabel();
         lblImgTurno = new javax.swing.JLabel();
+        btnPagarApuesta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -226,9 +226,14 @@ public class FrmTablero extends FrmClienteAux {
         lblNumFrijoles.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNumFrijoles.setText("Te quedan -- frijolitos");
 
+        lblTurno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTurno.setText("Turno:");
+
+        lblImgTurno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblImgTurno.setText("--");
+
         btnPagarApuesta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnPagarApuesta.setText("Pagar apuesta");
-        btnPagarApuesta.setActionCommand("<html><p>Pagar apuesta y seleccionar ficha</p></html>");
         btnPagarApuesta.setEnabled(false);
         btnPagarApuesta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -240,12 +245,6 @@ public class FrmTablero extends FrmClienteAux {
                 btnPagarApuestaActionPerformed(evt);
             }
         });
-
-        lblTurno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblTurno.setText("Turno:");
-
-        lblImgTurno.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblImgTurno.setText("--");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,12 +277,12 @@ public class FrmTablero extends FrmClienteAux {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTirarCanias, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblImgTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblImgTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMeterFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPagarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPagarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(btnAvanzarNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,7 +292,7 @@ public class FrmTablero extends FrmClienteAux {
                 .addComponent(lblNumFrijoles, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnComenzarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(btnRetirarse, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -427,12 +426,26 @@ public class FrmTablero extends FrmClienteAux {
                 btnTirarCanias.setEnabled(true);
             }
 
+            if (partida.getCuantasMueve() != 0 && !partida.getJugadorTurno().getColaFichas().isEmpty()) {
+                btnAvanzarNormal.setEnabled(true);
+                if (partida.getJugadorTurno().getNumFrijoles() >= partida.getValorApuesta()) {
+                    btnPagarApuesta.setEnabled(true);
+                }
+            }
+            
+            
             if (partida.getJugadorTurno().puedeMeter()) {
                 btnMeterFicha.setEnabled(true);
-            }
+            }else if (partida.getJugadorTurno().getColaFichas().isEmpty()&&!btnTirarCanias.isEnabled()) {
+                try {
+                    partida.setFichaMovimiento(null);
+                    partida.setCantidadDado(-1);
+                    partida.setCuantasMueve(0);
+                    cliente.enviar(partida);
 
-            if (partida.getCuantasMueve() != 0) {
-                btnAvanzarNormal.setEnabled(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(FrmTablero.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             if (btnTirarCanias.isEnabled()) {
@@ -440,6 +453,7 @@ public class FrmTablero extends FrmClienteAux {
                 btnAvanzarNormal.setEnabled(false);
             }
         } else {
+            btnPagarApuesta.setEnabled(false);
             btnTirarCanias.setEnabled(false);
             btnMeterFicha.setEnabled(false);
             btnAvanzarNormal.setEnabled(false);
