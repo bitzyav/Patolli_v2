@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
 import dominio.EstadoPartida;
@@ -11,8 +6,8 @@ import dominio.Partida;
 import java.util.Queue;
 
 /**
- *
- * @author Invitado
+ * Clase encargada de ajustar el estado de la Partida para definir a un ganador.
+ * @author alfonsofelix
  */
 public class FilterVictoria extends Filter<Partida, Partida> {
 
@@ -64,6 +59,8 @@ public class FilterVictoria extends Filter<Partida, Partida> {
                 partida.setEstado(EstadoPartida.TERMINADA);
             }
         }
+        partida.setSaliendo(false);
+        
         output.put(partida);
         output.doChain();
     }

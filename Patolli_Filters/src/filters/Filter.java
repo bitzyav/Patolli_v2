@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
-import dominio.Partida;
-
 /**
+ * Clase encargada de filtrar el estado de un objeto y hacer ajustes.
  *
  * @author alfonsofelix
  */
@@ -19,13 +13,26 @@ public abstract class Filter<I, O> {
     public Filter() {
     }
 
+    /**
+     * Asigna el Pipe por el cual se recibirá el estado de un objeto a filtrar.
+     *
+     * @param input Instancia del Pipe por donde se recibirá.
+     */
     public void setInput(Pipe<I> input) {
         this.input = input;
     }
 
+    /**
+     * Asigna el Pipe por el cual se enviará el objeto filtrado./
+     *
+     * @param output Instancia del Pipe por donde saldrá el objeto.
+     */
     public void setOutput(Pipe<O> output) {
         this.output = output;
     }
-    
+
+    /**
+     * Método encargado de hacer los ajustes al objeto. (Filtrar el objeto).
+     */
     protected abstract void doFilter();
 }

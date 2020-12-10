@@ -12,5 +12,9 @@ import dominio.Partida;
  * @author alfonsofelix
  */
 public interface Observer {
+    /**
+     * Método para notificar al Observador de que ha llegado algo.
+     * @param partidaLlegada La partida que llegó.
+     */
     public void update(Partida partidaLlegada);
 }

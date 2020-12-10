@@ -1,27 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
-import dominio.Jugador;
 import dominio.Partida;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
+ * Clase auxiliar para realizar los envíos y recibimientos de la Partida entre
+ * cliente y servidor. Lado cliente.
  *
- * @author Invitado
+ * @author alfonsofelix
  */
 public class PatolliServer implements Runnable {
 
@@ -32,17 +22,34 @@ public class PatolliServer implements Runnable {
     private ObjectInputStream in;
     private Socket cliente;
 
+    /**
+     * Constructor que instancia un objeto e inicializa los siguientes valores.
+     *
+     * @param serverSocket El socket que se usa para escuchar clientes.
+     * @param serverManagerConexion Instancia del observador para notificar
+     * conexiones.
+     * @param serverManagerPartida Instancia del observador para notificar
+     * llegada de objetos.
+     */
     public PatolliServer(ServerSocket serverSocket, ObserverConexion serverManagerConexion, ObserverManager serverManagerPartida) {
         this.serverSocket = serverSocket;
         this.serverManagerConexion = serverManagerConexion;
         this.serverManagerPartida = serverManagerPartida;
     }
 
+    /**
+     * Método que comienza a ejecutar lo necesario al iniciar el hilo.
+     */
     @Override
     public void run() {
         escuchar();
     }
 
+    /**
+     * Método que se encarga de aceptar la conexión del cliente.
+     * También se encarga de escuchar la llegada de datos.
+     *
+     */
     private void escuchar() {
         try {
             cliente = null;
@@ -62,7 +69,15 @@ public class PatolliServer implements Runnable {
                         notificarMovimiento(partida);
                     }
                 } catch (Exception e) {
-                    System.out.println("Error al avanzar ficha: "+e.getMessage());
+                    if (e.getMessage().contains("Connection reset") || e.getMessage().contains("socket closed")) {
+                        if (out != null && in != null && cliente != null) {
+                            out.close();
+                            in.close();
+                            cliente.close();
+                        }
+                        break;
+                    }
+                    System.out.println("Error al avanzar ficha: " + e.getMessage());
                 }
             }
         } catch (IOException e) {
@@ -70,18 +85,33 @@ public class PatolliServer implements Runnable {
         }
     }
 
+    /**
+     * Método para enviar la partida a su respectivo cliente.
+     * @param partida Instancia de la Partida a enviar.
+     */
     public void enviarPartida(Partida partida) throws IOException {
         this.out.writeObject(partida);
     }
 
+    /**
+     * Método para obtener la instancia del Socket.
+     * @return Instancia del socket del cliente.
+     */
     public Socket getCliente() {
         return cliente;
     }
 
+    /**
+     * Método para notificar al observador que alguien se ha conectado al servidor.
+     */
     private void notificarConexion() {
         serverManagerConexion.update(this);
     }
 
+    /**
+     * Método para notificar al observador que llegó un objeto al servidor.
+     * @param partida 
+     */
     private void notificarMovimiento(Partida partida) {
         serverManagerConexion.updatePartida(partida);
     }

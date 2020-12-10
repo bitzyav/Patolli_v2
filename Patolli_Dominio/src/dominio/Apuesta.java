@@ -8,7 +8,7 @@ package dominio;
 import java.io.Serializable;
 
 /**
- *
+ * Clase con los datos necesarios para las Apuestas
  * @author alfonsofelix
  */
 public class Apuesta implements Serializable{
@@ -44,5 +44,15 @@ public class Apuesta implements Serializable{
 
     public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        String cadena="";
+        if(ficha!=null){
+            cadena="Ficha: "+ficha.getNumero()+" - ";
+        }
+        cadena+="$"+valor+" fue: "+tipo;
+        return cadena;
     }
 }

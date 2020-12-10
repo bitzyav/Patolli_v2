@@ -5,9 +5,11 @@
  */
 package frames;
 
+import dominio.Jugador;
 import dominio.Partida;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import socketCliente.SocketCliente;
 
 /**
  *
@@ -15,10 +17,17 @@ import javax.swing.ImageIcon;
  */
 public class FrmSalir extends FrmClienteAux {
 
+    private boolean salir;
+
     /**
-     * Creates new form FrmSalir
+     * Construye la instancia de la clase, inicializando los siguientes valores:
+     *
+     * @param clienteN Instancia de SocketCliente.
+     * @param jugadorN Instancia del jugador de este cliente.
+     * @param partidaN Instancia de la partida que se recibe del servidor.
      */
-    public FrmSalir() {
+    public FrmSalir(SocketCliente clienteN, Jugador jugadorN, Partida partidaN) {
+        super(clienteN, jugadorN, partidaN);
         initComponents();
         inicializar();
     }
@@ -52,7 +61,7 @@ public class FrmSalir extends FrmClienteAux {
                 btnCancelarMouseExited(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, -1, -1));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn salir.png"))); // NOI18N
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -67,17 +76,18 @@ public class FrmSalir extends FrmClienteAux {
                 btnSalirMouseExited(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm salir.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 440));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 0, 740, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
         btnSalir.setIcon(new ImageIcon("images\\btn salir 2.png"));
@@ -85,7 +95,8 @@ public class FrmSalir extends FrmClienteAux {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
         btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
@@ -93,7 +104,8 @@ public class FrmSalir extends FrmClienteAux {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar 2.png"));
@@ -101,7 +113,8 @@ public class FrmSalir extends FrmClienteAux {
 
     /**
      * Evento que cambia la imagen del boton cuando el cursor no esta sobre él.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         btnCancelar.setIcon(new ImageIcon("images\\btn cancelar.png"));
@@ -109,16 +122,24 @@ public class FrmSalir extends FrmClienteAux {
 
     /**
      * Cambia de ventana al frame de inicio.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
-        this.setVisible(false);
-        System.exit(0);
+        try {
+            partida.setJugadorTurno(jugador);
+            partida.setSaliendo(true);
+            salir = true;
+            cliente.enviar(partida);
+        } catch (Exception e) {
+
+        }
     }//GEN-LAST:event_btnSalirMouseClicked
 
     /**
      * Hace invisible este frame y se queda en el inicio.
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         this.setVisible(false);
@@ -131,13 +152,22 @@ public class FrmSalir extends FrmClienteAux {
     private javax.swing.JLabel fondo;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Inicializa la pantalla.
+     */
     private void inicializar() {
         adaptarPantalla();
-        this.setBackground(new Color(0,0,0,0));
     }
 
+    /**
+     * Método para ser notificado por el observado.
+     *
+     * @param partidaLlegada Instancia de la partida actual.
+     */
     @Override
     public void update(Partida partidaLlegada) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (salir) {
+            System.exit(0);
+        }
     }
 }

@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
+import dominio.Jugador;
 import dominio.Partida;
+import java.util.Queue;
 
 /**
- *
- * @author Invitado
+ * Clase encargada de ajustar el estado de la partida cuando un jugador sale de la misma.
+ * @author alfonsofelix
  */
 public class FilterRetiro extends Filter<Partida, Partida> {
 
@@ -17,6 +14,16 @@ public class FilterRetiro extends Filter<Partida, Partida> {
     protected void doFilter() {
         Partida partida = input.get();
 
+        if(partida.saliendo()){
+            Jugador jugadorSale=partida.getJugadorTurno();
+            Queue<Jugador> turnos=partida.getTurnos();
+            
+            turnos.remove(jugadorSale);
+            partida.setTurnos(turnos);
+            partida.setCantidadDado(-1);
+            
+        }
+        
         //AQUI VAN ACCIONES
         output.put(partida);
         output.doChain();

@@ -22,6 +22,9 @@ public class FrmInicio extends FrmBase {
         inicializar();
     }
 
+    /**
+     * Inicializa la pantalla.
+     */
     private void inicializar(){
         adaptarPantalla();
 //        this.setBackground(new Color(0,0,0,0));
@@ -57,7 +60,7 @@ public class FrmInicio extends FrmBase {
                 btnCrearMouseExited(evt);
             }
         });
-        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
+        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
 
         btnUnirse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn unirse.png"))); // NOI18N
         btnUnirse.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -72,7 +75,7 @@ public class FrmInicio extends FrmBase {
                 btnUnirseMouseExited(evt);
             }
         });
-        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 320, -1, -1));
+        getContentPane().add(btnUnirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn salir.png"))); // NOI18N
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -87,10 +90,10 @@ public class FrmInicio extends FrmBase {
                 btnSalirMouseExited(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm inicio.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 520));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, 820, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,6 +172,10 @@ public class FrmInicio extends FrmBase {
         btnSalir.setIcon(new ImageIcon("images\\btn salir.png"));
     }//GEN-LAST:event_btnSalirMouseExited
 
+    /**
+     * Método de singleton para obtener la instancia de FrmDirecc
+     * @return Instancia de FrmDirecc
+     */
     public static FrmDireccPartida getFrmDirecc() {
         if(frmDirecc==null){
             frmDirecc=new FrmDireccPartida();

@@ -23,6 +23,7 @@ public class Partida implements Serializable{
     private boolean repiteTurno;
     private boolean pagaTodos;
     private boolean recibeTodos;
+    private boolean saliendo;
     private int cuantasApuestas;
     private int numCasillasAspa;
     private int numFichasJugador;
@@ -40,6 +41,7 @@ public class Partida implements Serializable{
         this.repiteTurno=false;
         this.pagaTodos=false;
         this.recibeTodos=false;
+        this.saliendo=false;
     }
     
     public Tablero getTablero() {
@@ -172,7 +174,7 @@ public class Partida implements Serializable{
         this.repiteTurno = repiteTurno;
     }
 
-    public boolean PagaTodos() {
+    public boolean pagaTodos() {
         return pagaTodos;
     }
 
@@ -180,15 +182,21 @@ public class Partida implements Serializable{
         this.pagaTodos = pagaTodos;
     }
 
-    public boolean RecibeTodos() {
+    public boolean recibeTodos() {
         return recibeTodos;
     }
 
     public void setRecibeTodos(boolean recibeTodos) {
         this.recibeTodos = recibeTodos;
     }
-    
-    
+
+    public boolean saliendo() {
+        return saliendo;
+    }
+
+    public void setSaliendo(boolean saliendo) {
+        this.saliendo = saliendo;
+    }
     
     @Override
     public String toString() {

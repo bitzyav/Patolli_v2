@@ -14,7 +14,7 @@ import java.awt.Shape;
 import java.awt.geom.Arc2D;
 
 /**
- *
+ * Clase que indica que una casilla semicírculo tiene la capacidad de dibujarse.
  * @author alfonsofelix
  */
 public class GCasillaSemicirculo extends GraficoCasilla {
@@ -23,6 +23,10 @@ public class GCasillaSemicirculo extends GraficoCasilla {
         super(casilla, numCasillasAspa);
     }
 
+    /**
+     * Método para dibujar el elemento gráfico.
+     * @param g2d Instancia de Graphics2D
+     */
     @Override
     public void dibujar(Graphics2D g2d) {
         Shape punta = null;

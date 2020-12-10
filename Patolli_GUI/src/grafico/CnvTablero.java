@@ -31,6 +31,12 @@ public final class CnvTablero extends JPanel {
     private int anchoPantalla;
     private Graphics2D g2d;
 
+    /**
+     * Constructor que instancia la clase e inicializa lo siguiente:
+     * @param casillas Instancia de la lista enlazada de las casillas del tablero.
+     * @param numCasillasAspa Número de casillas por aspa del tablero.
+     * @param anchoPantalla Valor del ancho de la pantalla.
+     */
     public CnvTablero(LinkedList<Casilla> casillas, int numCasillasAspa, int anchoPantalla) {
         this.casillas = casillas;
         this.numCasillasAspa = numCasillasAspa;
@@ -42,32 +48,47 @@ public final class CnvTablero extends JPanel {
         
     }
     
+    /**
+     * Inicializa el pánel con ajustes personalizados.
+     */
     private void inicializar() {
         this.setBackground(new Color(0,0,0,0));
     }
     
+    /**
+     * Se encarga de mandar dibujar cada casilla.
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         this.g2d = (Graphics2D) g;
         for (Casilla casilla : casillas) {
-            if(casilla.getClass().getName().contains("Centro")){
+            if(casilla instanceof CasillaCentro){
                (new GCasillaCentro(casilla, numCasillasAspa)).dibujar(g2d);
-            }else if(casilla.getClass().getName().contains("Semicirculo")){
+            }else if(casilla instanceof CasillaSemicirculo){
                 (new GCasillaSemicirculo(casilla, numCasillasAspa)).dibujar(g2d);
-            }else if(casilla.getClass().getName().contains("Triangulo")){
+            }else if(casilla instanceof CasillaTriangulo){
                 (new GCasillaTriangulo(casilla, numCasillasAspa)).dibujar(g2d);
-            }else if(casilla.getClass().getName().contains("Propia")){
+            }else if(casilla instanceof CasillaPropia){
                 (new GCasillaPropia(casilla, numCasillasAspa)).dibujar(g2d);
             }else{
                 (new GCasillaNormal(casilla, numCasillasAspa)).dibujar(g2d);
             }
         }
     }
+    /**
+     * Método para asignar la lista enlazada de casillas.
+     * @param casillas Instancia de la lista enlazada de casillas.
+     */
     public void setCasillas(LinkedList<Casilla> casillas) {
         this.casillas = casillas;
     }
 
+    /**
+     * Método que genera las casillas del tablero de acuerdo a los criterios establecidos.
+     * @return Instancia de la lista enlazada ya con casillas generadas.
+     */
     public LinkedList<Casilla> generarCasillas() {
         int tamanioCasilla=50;
         int casilla = 0;

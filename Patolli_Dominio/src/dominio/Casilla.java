@@ -9,7 +9,7 @@ import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
 /**
- *
+ * Clase con los datos necesarios para todas las casillas.
  * @author alfonsofelix
  */
 public class Casilla implements Serializable{

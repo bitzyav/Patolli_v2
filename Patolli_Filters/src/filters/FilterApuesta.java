@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
 import dominio.Apuesta;
@@ -11,9 +6,10 @@ import dominio.Jugador;
 import dominio.Partida;
 import dominio.TipoApuesta;
 import java.util.ArrayList;
+import java.util.Queue;
 
 /**
- *
+ * Clase encargada de ajustar el estado de la partida cuando se hace una apuesta.
  * @author alfonsofelix
  */
 public class FilterApuesta extends Filter<Partida, Partida> {
@@ -21,53 +17,69 @@ public class FilterApuesta extends Filter<Partida, Partida> {
     @Override
     protected void doFilter() {
         Partida partida = input.get();
-        
-        Jugador jugadorTurno = partida.getJugadorTurno();
-        ArrayList<Apuesta> apuestas = jugadorTurno.getApuestas();
-        Ficha fichaTurno = partida.getFichaMovimiento();
-        if (partida.avanzaPagando()) {
-            Apuesta apuesta = new Apuesta(TipoApuesta.VOLUNTARIA);
-            if (fichaTurno != null) {
-                apuesta.setFicha(fichaTurno);
-            }
-            apuesta.setValor(partida.getValorApuesta());
-            apuestas.add(apuesta);
-            jugadorTurno.setApuestas(apuestas);
-            jugadorTurno.setNumFrijoles(jugadorTurno.getNumFrijoles() - partida.getValorApuesta());
-            ArrayList<Jugador> jugadores = partida.getJugadores();
-            jugadores.set(jugadores.indexOf(jugadorTurno), jugadorTurno);
-            partida.setJugadores(jugadores);
-        } else {
-            if (partida.getCuantasApuestas() > 0) {
-                for (int i = 0; i < partida.getCuantasApuestas(); i++) {
-                    Apuesta apuesta = new Apuesta(TipoApuesta.OBLIGATORIA);
-                    if (fichaTurno != null) {
-                        apuesta.setFicha(fichaTurno);
-                    }
-                    apuesta.setValor(partida.getValorApuesta());
-                    apuestas.add(apuesta);
-                    jugadorTurno.setApuestas(apuestas);
-                    jugadorTurno.setNumFrijoles(jugadorTurno.getNumFrijoles() - partida.getValorApuesta());
-                    ArrayList<Jugador> jugadores = partida.getJugadores();
-                    
-                    if (partida.PagaTodos()) {
-                        System.out.println(" paga a todos");
-                        for (int j = 0; j < jugadores.size(); j++) {
-                            if (!jugadores.get(j).equals(jugadorTurno)) {
-                                jugadores.get(j).setNumFrijoles(jugadores.get(j).getNumFrijoles() + partida.getValorApuesta());
-                            }
+        if (!partida.saliendo()) {
+            Jugador jugadorTurno = partida.getJugadorTurno();
+            ArrayList<Apuesta> apuestas = jugadorTurno.getApuestas();
+            Ficha fichaTurno = partida.getFichaMovimiento();
+            if (partida.avanzaPagando()) {
+                Apuesta apuesta = new Apuesta(TipoApuesta.VOLUNTARIA);
+                if (fichaTurno != null) {
+                    apuesta.setFicha(fichaTurno);
+                }
+                apuesta.setValor(partida.getValorApuesta());
+                apuestas.add(apuesta);
+                jugadorTurno.setApuestas(apuestas);
+                jugadorTurno.setNumFrijoles(jugadorTurno.getNumFrijoles() - partida.getValorApuesta());
+                ArrayList<Jugador> jugadores = partida.getJugadores();
+                jugadores.set(jugadores.indexOf(jugadorTurno), jugadorTurno);
+                partida.setJugadores(jugadores);
+            } else {
+                ArrayList<Jugador> jugadores = partida.getJugadores();
+                Queue<Jugador> turnos = partida.getTurnos();
+                if (partida.getCuantasApuestas() > 0) {
+
+                    for (int i = 0; i < partida.getCuantasApuestas(); i++) {
+                        Apuesta apuesta = new Apuesta(TipoApuesta.OBLIGATORIA);
+                        if (fichaTurno != null) {
+                            apuesta.setFicha(fichaTurno);
                         }
-                        partida.setPagaTodos(false);
+                        apuesta.setValor(partida.getValorApuesta());
+                        apuestas.add(apuesta);
+                        jugadorTurno.setApuestas(apuestas);
+                        jugadorTurno.setNumFrijoles(jugadorTurno.getNumFrijoles() - partida.getValorApuesta());
                     }
                     jugadores.set(jugadores.indexOf(jugadorTurno), jugadorTurno);
 
-                    partida.setJugadores(jugadores);
+                    if (partida.pagaTodos()) {
+                        for (Jugador turno : turnos) {
+                            if (!turno.equals(jugadorTurno)) {
+                                turno.setNumFrijoles(turno.getNumFrijoles() + partida.getValorApuesta());
+                                jugadores.set(jugadores.indexOf(turno), turno);
+                            }
+                        }
+                    }
                 }
-            }
-        }
+                if (partida.recibeTodos()) {
+                    for (Jugador turno : turnos) {
+                        if (!turno.equals(jugadorTurno)) {
+                            jugadorTurno.setNumFrijoles(jugadorTurno.getNumFrijoles() + partida.getValorApuesta());
+                            turno.setNumFrijoles(turno.getNumFrijoles() - partida.getValorApuesta());
+                            jugadores.set(jugadores.indexOf(turno), turno);
 
-        partida.setCuantasApuestas(0);
-        partida.setAvanzaPagando(false);
+                        }
+                    }
+                    jugadores.set(jugadores.indexOf(jugadorTurno), jugadorTurno);
+                }
+                partida.setTurnos(turnos);
+                partida.setJugadores(jugadores);
+            }
+
+            partida.setRecibeTodos(false);
+            partida.setPagaTodos(false);
+            partida.setCuantasApuestas(0);
+            partida.setAvanzaPagando(false);
+
+        }
 
         if (partida.getCantidadDado() == -1) {
             Jugador turno = partida.getTurnos().poll();

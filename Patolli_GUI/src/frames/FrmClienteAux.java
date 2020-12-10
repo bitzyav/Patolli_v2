@@ -17,7 +17,12 @@ abstract class FrmClienteAux extends FrmBase implements Observer{
     protected static SocketCliente cliente;
     protected static Jugador jugador;
     protected static Partida partida;
-
+    /**
+     * Construye la instancia de la clase, inicializando los siguientes valores:
+     * @param clienteN Instancia de SocketCliente.
+     * @param jugadorN Instancia del jugador de este cliente.
+     * @param partidaN Instancia de la partida que se recibe del servidor.
+     */
     public FrmClienteAux(SocketCliente clienteN, Jugador jugadorN, Partida partidaN) {
         cliente=clienteN;
         cliente = clienteN;
@@ -28,6 +33,10 @@ abstract class FrmClienteAux extends FrmBase implements Observer{
         
     }
 
+    /**
+     * Método para ser notificado por el observado.
+     * @param partidaLlegada Instancia de la partida actual.
+     */
     @Override
     public void update(Partida partidaLlegada) {
         partida=partidaLlegada;

@@ -70,10 +70,10 @@ public class FrmSeleccion extends FrmClienteAux {
         txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtNombre.setName(""); // NOI18N
         txtNombre.setOpaque(false);
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 220, 30));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 220, 30));
 
         lblCampoNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/campo texto gr.png"))); // NOI18N
-        getContentPane().add(lblCampoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, -1, -1));
+        getContentPane().add(lblCampoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
 
         btnColorVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color verde.png"))); // NOI18N
         btnColorVerde.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -82,7 +82,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorVerdeMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, -1, -1));
+        getContentPane().add(btnColorVerde, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, -1, -1));
 
         btnColorCyan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color cyan.png"))); // NOI18N
         btnColorCyan.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -91,7 +91,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorCyanMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorCyan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        getContentPane().add(btnColorCyan, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
 
         btnColorNaranja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color naranja.png"))); // NOI18N
         btnColorNaranja.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -100,7 +100,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorNaranjaMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
+        getContentPane().add(btnColorNaranja, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
 
         btnColorAzul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color azul.png"))); // NOI18N
         btnColorAzul.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -109,7 +109,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorAzulMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 70, -1));
+        getContentPane().add(btnColorAzul, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 70, -1));
 
         btnColorAmarillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color amarillo.png"))); // NOI18N
         btnColorAmarillo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -118,7 +118,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorAmarilloMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorAmarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+        getContentPane().add(btnColorAmarillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
 
         btnColorRosa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rosa.png"))); // NOI18N
         btnColorRosa.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -127,7 +127,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorRosaMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, -1, -1));
+        getContentPane().add(btnColorRosa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, -1, -1));
 
         btnColorMorado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color morado.png"))); // NOI18N
         btnColorMorado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -136,7 +136,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorMoradoMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorMorado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, -1, -1));
+        getContentPane().add(btnColorMorado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, -1));
 
         btnColorRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn color rojo.png"))); // NOI18N
         btnColorRojo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -145,7 +145,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnColorRojoMouseClicked(evt);
             }
         });
-        getContentPane().add(btnColorRojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
+        getContentPane().add(btnColorRojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn cancelar.png"))); // NOI18N
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -160,7 +160,7 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnCancelarMouseExited(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, -1, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, -1, -1));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btn aceptar.png"))); // NOI18N
         btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -175,10 +175,10 @@ public class FrmSeleccion extends FrmClienteAux {
                 btnAceptarMouseExited(evt);
             }
         });
-        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, -1, -1));
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frm seleccion.png"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 680));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, 0, 700, 680));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -235,14 +235,15 @@ public class FrmSeleccion extends FrmClienteAux {
      * @param evt
      */
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        if (jugador.getColor() != null) {
+        if (jugador.getColor() != null && !txtNombre.getText().isEmpty()) {
             try {
                 this.setVisible(false);
                 cliente.setObserver(getFrmTablero());
 
                 Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
+                jug.setNombre(txtNombre.getText());
                 jugador = jug;
-                jugador.setNombre(txtNombre.getText());
+                jugador.setNombre(jug.getNombre());
                 partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
                 partida.setJugadorTurno(jugador);
 
@@ -254,8 +255,8 @@ public class FrmSeleccion extends FrmClienteAux {
             } catch (Throwable ex) {
                 Logger.getLogger(FrmSeleccion.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Primero debe seleccionar un color.");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Primero debe seleccionar un color y poner un nombre.");
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
 
@@ -265,7 +266,6 @@ public class FrmSeleccion extends FrmClienteAux {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
             jugador.setColor(ColorFicha.ROJO);
-            jugador.setNombre(txtNombre.getText());
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -278,8 +278,8 @@ public class FrmSeleccion extends FrmClienteAux {
         try {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
-            jugador.setColor(ColorFicha.NARANJA);
             jugador.setNombre(txtNombre.getText());
+            jugador.setColor(ColorFicha.NARANJA);
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -306,8 +306,8 @@ public class FrmSeleccion extends FrmClienteAux {
         try {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
-            jugador.setColor(ColorFicha.VERDE);
             jugador.setNombre(txtNombre.getText());
+            jugador.setColor(ColorFicha.VERDE);
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -320,8 +320,8 @@ public class FrmSeleccion extends FrmClienteAux {
         try {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
-            jugador.setColor(ColorFicha.CYAN);
             jugador.setNombre(txtNombre.getText());
+            jugador.setColor(ColorFicha.CYAN);
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -334,8 +334,8 @@ public class FrmSeleccion extends FrmClienteAux {
         try {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
-            jugador.setColor(ColorFicha.AZUL);
             jugador.setNombre(txtNombre.getText());
+            jugador.setColor(ColorFicha.AZUL);
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -348,8 +348,8 @@ public class FrmSeleccion extends FrmClienteAux {
         try {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
-            jugador.setColor(ColorFicha.ROSA);
             jugador.setNombre(txtNombre.getText());
+            jugador.setColor(ColorFicha.ROSA);
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -362,8 +362,8 @@ public class FrmSeleccion extends FrmClienteAux {
         try {
             Jugador jug = partida.getJugadores().get(partida.getJugadores().indexOf(jugador));
             jugador = jug;
-            jugador.setColor(ColorFicha.MORADO);
             jugador.setNombre(txtNombre.getText());
+            jugador.setColor(ColorFicha.MORADO);
             partida.getJugadores().set(partida.getJugadores().indexOf(jug), jugador);
             partida.setJugadorTurno(jugador);
             cliente.enviar(partida);
@@ -396,11 +396,11 @@ public class FrmSeleccion extends FrmClienteAux {
     @Override
     public void update(Partida partidaLlegada) {
         super.update(partidaLlegada);
-        
-        if(partidaLlegada.getEstado()==EstadoPartida.INICIADA){
+
+        if (partidaLlegada.getEstado() == EstadoPartida.INICIADA) {
             btnAceptarMouseClicked(null);
         }
-        
+
         List<ColorFicha> lstColoresOcupados = new ArrayList<>();
 
         for (Jugador jugadore : partida.getJugadores()) {
@@ -475,10 +475,10 @@ public class FrmSeleccion extends FrmClienteAux {
                 break;
         }
     }
-    
-    private static FrmTablero getFrmTablero(){
-        if(frmTablero==null){
-            frmTablero=new FrmTablero(cliente, jugador, partida);
+
+    private static FrmTablero getFrmTablero() {
+        if (frmTablero == null) {
+            frmTablero = new FrmTablero(cliente, jugador, partida);
         }
         return frmTablero;
     }

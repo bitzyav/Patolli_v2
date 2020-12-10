@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import dominio.EstadoPartida;
@@ -26,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Clase que ayuda a controlar el servidor.
+ * Maneja el envío y recibimiento de los datos para saber qué hacer con ellos.
  * @author alfonsofelix
  */
 public class ServerManager implements ObserverManager, ObserverConexion {
@@ -41,6 +37,10 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         inicializar();
     }
 
+    /**
+     * Método para inicializar las líneas de producción que se utilizarán
+     * antes y durante el juego.
+     */
     private void inicializar() {
         this.clientes = new ArrayList<>();
         this.sink = new SinkCliente(this);
@@ -99,6 +99,10 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         escuchar();
     }
 
+    /**
+     * Método para comenzar a escuchar por el servidor y estar listo para
+     * recibir al primer jugador.
+     */
     private void escuchar() {
         try {
             PatolliServer cliente1 = new PatolliServer(new ServerSocket(4444), this, this);
@@ -109,21 +113,39 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         }
     }
 
+    /**
+     * Método para obtener el número de jugadores conectados.
+     * @return Número de jugadores conectados.
+     */
     @Override
     public int getNumConectados() {
         return this.clientes.size();
     }
 
+    /**
+     * Método para saber cuando el observado tiene algo para enviar a los clientes.
+     * @param partida Instancia de la partida a enviar.
+     */
     @Override
     public void update(Partida partida) {
         enviarPartidaAClientes(partida);
     }
 
+    /**
+     * Método que se encarga de saber cuando el servidor notifica de una nueva
+     * conexión
+     * @param conexion Instancia de la conexión a agregar.
+     */
     @Override
     public void update(PatolliServer conexion) {
         accionesConexion(conexion);
     }
 
+    /**
+     * Método para agregar la conexión a la lista de clientes y preparar para recibir
+     * a más clientes.
+     * @param conexion 
+     */
     public void accionesConexion(PatolliServer conexion) {
         this.clientes.add(conexion);
         if (this.sink.getPartida().getEstado() == EstadoPartida.VACIA || this.sink.getPartida().getEstado() == EstadoPartida.CONFIGURACION) {
@@ -143,6 +165,10 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         }
     }
 
+    /**
+     * Método que se encarga de enviar la partida a los clientes conectados.
+     * @param partida Instancia de la partida a enviar.
+     */
     public void enviarPartidaAClientes(Partida partida) {
         for (PatolliServer cliente : clientes) {
             try {
@@ -153,6 +179,11 @@ public class ServerManager implements ObserverManager, ObserverConexion {
         }
     }
 
+    /**
+     * Método que se encarga de enviar a los filtros necesarios la partida
+     * que acaba de llegar al servidor.
+     * @param partida Instancia de la Partida a filtrar.
+     */
     @Override
     public void updatePartida(Partida partida) {
         System.out.println(partida);

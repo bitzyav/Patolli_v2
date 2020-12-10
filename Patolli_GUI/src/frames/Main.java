@@ -12,6 +12,7 @@ package frames;
 public class Main {
     
     /**
+     * Inicializa la interfaz gráfica del cliente.
      * @param args the command line arguments
      */
     public static void main(String[] args) {

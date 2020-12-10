@@ -10,7 +10,7 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 /**
- *
+ * Clase que indica que una casilla tiene la capacidad de dibujarse.
  * @author alfonsofelix
  */
 abstract class GraficoCasilla extends ElementoGrafico {
@@ -23,6 +23,10 @@ abstract class GraficoCasilla extends ElementoGrafico {
         this.numCasillasAspa = numCasillasAspa;
     }
 
+    /**
+     * Método para dibujar el elemento gráfico.
+     * @param g2d Instancia de Graphics2D
+     */
     @Override
     public void dibujar(Graphics2D g2d) {
         g2d.setStroke(new BasicStroke(2));

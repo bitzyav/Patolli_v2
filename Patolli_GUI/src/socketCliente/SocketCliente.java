@@ -10,12 +10,11 @@ import frames.Observer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
+ * Clase auxiliar para realizar los envíos y recibimientos de la Partida entre cliente y servidor. Lado cliente.
  * @author alfonsofelix
  */
 public class SocketCliente implements Runnable {
@@ -26,11 +25,20 @@ public class SocketCliente implements Runnable {
     private ObjectInputStream in;
     private String ip;
 
+    /**
+     * Constructor que instancia un objeto e inicializa los siguientes valores:
+     * @param ip La dirección IP del servidor.
+     */
     public SocketCliente(String ip) {
         this.ip = ip;
     }
 
-    public void conectar(String ip) throws IOException, ClassNotFoundException {
+    /**
+     * Método que se encarga de realizar la conexión con el servidor y 
+     * escuchar la llegada de los datos.
+     * @param ip La dirección IP del servidor.
+     */
+    public void conectar(String ip) throws IOException, ClassNotFoundException, ConnectException {
         if (cliente == null) {
             cliente = new Socket(ip, 4444);
             //  out = new PrintWriter(cliente.getOutputStream(), true);
@@ -49,27 +57,37 @@ public class SocketCliente implements Runnable {
                 Partida partida;
                 if ((partida = (Partida) in.readObject()) != null) {
                     notificar(partida);
-                    System.out.println("notificó");
                 }
             } catch (Exception e) {
-                System.out.println("Ocurrió un error: " + e.getMessage());
-            }
 
+            }
         }
     }
 
+    /**
+     * Método que notifica a sus observadores para indicar que algo llegó.
+     * @param partida Instancia de la Partida que llegó.
+     */
     private void notificar(Partida partida) {
         if (partida != null) {
             observer.update(partida);
         }
     }
 
+    /**
+     * Método que envía un objeto hacia el servidor.
+     * @param partida Instancia de la partida a enviar.
+     */
     public void enviar(Partida partida) throws IOException {
         if (cliente.isConnected()) {
             out.writeObject(partida);
         }
     }
 
+    /**
+     * Método que cambia al observador de esta clase.
+     * @param observer Quien se desea que sea el observador.
+     */
     public void setObserver(Observer observer) {
         this.observer = observer;
     }
@@ -86,14 +104,16 @@ public class SocketCliente implements Runnable {
         Partida p = (Partida) partida;
         return p;
     }*/
+    
+    /**
+     * Método que comienza a ejecutar lo necesario al iniciar el hilo.
+     */
     @Override
     public void run() {
         try {
             conectar(ip);
-        } catch (IOException ex) {
-            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

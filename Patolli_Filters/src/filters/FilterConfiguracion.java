@@ -1,25 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
-import dominio.Casilla;
-import dominio.CasillaPropia;
 import dominio.EstadoPartida;
-import dominio.Ficha;
 import dominio.Host;
 import dominio.Huesped;
 import dominio.Jugador;
 import dominio.Partida;
-import dominio.Tablero;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
- *
- * @author Invitado
+ * Clase encargada de ajustar el estado de la partida cuando está en proceso de configuración.
+ * @author alfonsofelix
  */
 public class FilterConfiguracion extends Filter<Partida, Partida> {
 
