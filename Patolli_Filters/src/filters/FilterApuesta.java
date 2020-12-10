@@ -49,6 +49,16 @@ public class FilterApuesta extends Filter<Partida, Partida> {
                     jugadorTurno.setApuestas(apuestas);
                     jugadorTurno.setNumFrijoles(jugadorTurno.getNumFrijoles() - partida.getValorApuesta());
                     ArrayList<Jugador> jugadores = partida.getJugadores();
+                    
+                    if (partida.PagaTodos()) {
+                        System.out.println(" paga a todos");
+                        for (int j = 0; j < jugadores.size(); j++) {
+                            if (!jugadores.get(j).equals(jugadorTurno)) {
+                                jugadores.get(j).setNumFrijoles(jugadores.get(j).getNumFrijoles() + partida.getValorApuesta());
+                            }
+                        }
+                        partida.setPagaTodos(false);
+                    }
                     jugadores.set(jugadores.indexOf(jugadorTurno), jugadorTurno);
 
                     partida.setJugadores(jugadores);

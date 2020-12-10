@@ -32,6 +32,7 @@ public class FilterDado extends Filter<Partida, Partida> {
                         partida.setCuantasApuestas(1);
                     }else{
                         partida.setCuantasApuestas(partida.getTurnos().size()-1);
+                        partida.setPagaTodos(true);
                     }
                     partida.setCuantasMueve(0);
                     partida.setCantidadDado(-1);
