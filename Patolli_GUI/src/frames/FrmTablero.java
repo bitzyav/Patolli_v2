@@ -331,6 +331,7 @@ public class FrmTablero extends FrmClienteAux {
 
             partida.setCantidadDado(tiro);
             partida.setFichaMovimiento(null);
+            partida.setRepiteTurno(false);
 
             cliente.enviar(partida);
 
@@ -421,8 +422,8 @@ public class FrmTablero extends FrmClienteAux {
             btnComenzarPartida.setVisible(false);
         }
 
-        if (partida.getJugadorTurno().equals(jugador)) {
-            if (partida.getCantidadDado() == -1) {
+        if (partida.getJugadorTurno().equals(jugador)&&partida.getEstado()!=EstadoPartida.TERMINADA) {
+            if (partida.getCantidadDado() == -1 || partida.repiteTurno()) {
                 btnTirarCanias.setEnabled(true);
             }
 
@@ -450,12 +451,14 @@ public class FrmTablero extends FrmClienteAux {
 
             if (btnTirarCanias.isEnabled()) {
                 btnMeterFicha.setEnabled(false);
+                btnPagarApuesta.setEnabled(false);
                 btnAvanzarNormal.setEnabled(false);
             }
         } else {
             btnPagarApuesta.setEnabled(false);
             btnTirarCanias.setEnabled(false);
             btnMeterFicha.setEnabled(false);
+            btnPagarApuesta.setEnabled(false);
             btnAvanzarNormal.setEnabled(false);
         }
 

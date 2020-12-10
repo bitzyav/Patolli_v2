@@ -20,6 +20,7 @@ public class Partida implements Serializable{
     private EstadoPartida estado;
     private Ficha fichaMovimiento;
     private boolean avanzaPagando;
+    private boolean repiteTurno;
     private int cuantasApuestas;
     private int numCasillasAspa;
     private int numFichasJugador;
@@ -34,6 +35,7 @@ public class Partida implements Serializable{
         this.estado=EstadoPartida.VACIA;
         this.valorApuesta=1;
         this.cantidadDado=-1;
+        this.repiteTurno=false;
     }
     
     public Tablero getTablero() {
@@ -156,6 +158,14 @@ public class Partida implements Serializable{
 
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
+    }
+
+    public boolean repiteTurno() {
+        return repiteTurno;
+    }
+
+    public void setRepiteTurno(boolean repiteTurno) {
+        this.repiteTurno = repiteTurno;
     }
     
     @Override

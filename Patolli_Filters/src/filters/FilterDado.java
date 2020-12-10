@@ -75,7 +75,7 @@ public class FilterDado extends Filter<Partida, Partida> {
 
                         }
 
-                        if (restanFichas) {
+                        if (restanFichas&&jugadorTurno.getCasillaPropia().getFicha()==null) {
                             jugadorTurno.setPuedeMeter(true);
                         }
                     }

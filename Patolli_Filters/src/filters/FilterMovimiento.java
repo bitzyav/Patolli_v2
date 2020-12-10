@@ -25,7 +25,7 @@ public class FilterMovimiento extends Filter<Partida, Partida> {
     @Override
     protected void doFilter() {
         Partida partida = input.get();
-
+        partida.setRepiteTurno(false);
         int numConectados = 0;
         for (Jugador jugadore : partida.getJugadores()) {
             if (jugadore.isAsignado()) {
@@ -147,6 +147,8 @@ public class FilterMovimiento extends Filter<Partida, Partida> {
                                         }
                                         
                                         partida.setCantidadDado(-1);
+                                    }else{
+                                        partida.setRepiteTurno(true);
                                     }
 
                                 } else {
@@ -168,6 +170,7 @@ public class FilterMovimiento extends Filter<Partida, Partida> {
                                     ArrayList<Jugador> jugadores = partida.getJugadores();
                                     jugadores.set(jugadores.indexOf(jug), jug);
                                     partida.setJugadores(jugadores);
+                                    partida.setRepiteTurno(true);
                                 }
                             } else {
                                 partida.setCantidadDado(-1);
